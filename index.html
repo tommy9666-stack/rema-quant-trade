@@ -1,0 +1,928 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rema Quant Trade</title>
+<meta name="description" content="투자 고민은 줄이고, 할 일만 받아 보세요. 열 개 부서의 AI 직원이 시장을 지켜보다가 살 때, 팔 때, 조심할 때만 알려주는 텔레그램 퀀트 운용 비서.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Rema Quant Trade">
+<meta property="og:description" content="투자 고민은 줄이고, 할 일만 받아 보세요. 텔레그램 퀀트 운용 비서와 AI 직원들이 일하는 모습.">
+<meta name="theme-color" content="#0B1F3A">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 34 34'%3E%3Crect x='1' y='1' width='32' height='32' rx='6' fill='%230B1F3A' stroke='%23C9A55A' stroke-width='2'/%3E%3Cpath d='M8 23l6-7 5 4 7-9' stroke='white' stroke-width='2.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@600;700&amp;family=IBM+Plex+Sans+KR:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@500;600&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#0F6E5A}a:hover{color:#0A4F40}
+@keyframes tqpulse{0%{box-shadow:0 0 0 0 rgba(15,110,90,.55)}70%{box-shadow:0 0 0 9px rgba(15,110,90,0)}100%{box-shadow:0 0 0 0 rgba(15,110,90,0)}}
+@keyframes tqblink{0%,49%{opacity:1}50%,100%{opacity:0}}
+@keyframes tqslide{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+@keyframes tqstripe{from{background-position:0 0}to{background-position:28px 0}}
+.tq-live{animation:tqpulse 1.6s infinite}
+.tq-caret{display:inline-block;width:7px;height:15px;background:#0F6E5A;margin-left:3px;vertical-align:-2px;animation:tqblink 1s steps(1) infinite}
+.tq-task{animation:tqslide .35s ease-out}
+.tq-bar{background-image:linear-gradient(45deg,rgba(255,255,255,.28) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.28) 50%,rgba(255,255,255,.28) 75%,transparent 75%);background-size:28px 28px;animation:tqstripe 1s linear infinite}
+@keyframes pxbob{0%,100%{transform:translateY(0)}50%{transform:translateY(1px)}}
+@keyframes pxscreen{0%,100%{opacity:1}50%{opacity:.7}}
+@keyframes pxwalk{0%{left:-48px}100%{left:100%}}
+@keyframes pxlegs{0%,49%{opacity:1}50%,100%{opacity:0}}
+@keyframes pxled{0%,60%{opacity:1}61%,100%{opacity:.2}}
+@keyframes pxbubble{from{opacity:0;transform:translate(-50%,4px)}to{opacity:1;transform:translate(-50%,0)}}
+.px-type{animation:pxbob .45s steps(1) infinite}
+.px-screen{animation:pxscreen 1.2s steps(2) infinite}
+.px-walker{position:absolute;bottom:4px;animation:pxwalk 16s linear infinite}
+.px-legA{animation:pxlegs .4s steps(1) infinite}
+.px-legB{animation:pxlegs .4s steps(1) infinite reverse}
+.px-led{animation:pxled .9s steps(1) infinite}
+.px-led2{animation:pxled 1.3s steps(1) infinite reverse}
+.px-bubble{animation:pxbubble .3s steps(3)}
+@media (prefers-reduced-motion: reduce){.tq-live,.tq-caret,.tq-task,.tq-bar,.px-type,.px-screen,.px-walker,.px-legA,.px-legB,.px-led,.px-led2,.px-bubble{animation:none}}
+</style>
+<style>button:focus-visible,a:focus-visible{outline:3px solid #C9A55A;outline-offset:2px}</style>
+</head>
+<body>
+<noscript><p style="padding:24px;font-family:sans-serif">이 페이지는 자바스크립트가 필요합니다. 텔레그램 봇: <a href="https://t.me/Rema_quant_trading_bot">@Rema_quant_trading_bot</a></p></noscript>
+<div id="app"></div>
+<template id="tpl">
+<div style="font-family: 'IBM Plex Sans KR', system-ui, sans-serif; color: #0B1F3A; background: #F5F6F8; line-height: 1.6; word-break: keep-all; min-height: 100vh">
+
+<header style="background: #0B1F3A; color: #FFFFFF; padding: 0 24px">
+<div style="max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; padding: 18px 0">
+<div style="display: flex; align-items: center; gap: 12px">
+<svg width="34" height="34" viewBox="0 0 34 34" fill="none" aria-hidden="true"><rect x="1" y="1" width="32" height="32" rx="6" stroke="#C9A55A" stroke-width="2"></rect><path d="M8 23l6-7 5 4 7-9" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+<div>
+<div style="font-family: 'Noto Serif KR', serif; font-weight: 700; font-size: 19px; letter-spacing: 0.01em">Rema Quant Trade</div>
+<div style="font-size: 12px; color: #AEBBD0; letter-spacing: 0.06em">텔레그램 퀀트 운용 비서</div>
+</div>
+</div>
+<a href="https://t.me/Rema_quant_trading_bot" style="display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 18px; border-radius: 6px; background: #FFFFFF; color: #0B1F3A; font-weight: 700; font-size: 15px; text-decoration: none">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0B1F3A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 3L2 11l7 2 2 7 4-5 5 4z"></path><path d="M9 13l13-10"></path></svg>
+봇 열기
+</a>
+</div>
+<nav aria-label="페이지 탭" style="max-width: 1200px; margin: 0 auto; display: flex; gap: 4px; overflow-x: auto">
+<sc-for list="{{tabs}}" as="tb" hint-placeholder-count="5">
+<button type="button" onClick="{{tb.pick}}" aria-pressed="{{tb.pressed}}" style="{{tb.style}}">{{tb.label}}</button>
+</sc-for>
+</nav>
+</header>
+
+<sc-if value="{{isOverview}}" hint-placeholder-val="{{true}}">
+<section style="background: #0B1F3A; color: #FFFFFF; padding: 72px 24px 88px; border-top: 1px solid #1C3354">
+<div style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 48px; align-items: end">
+<div>
+<p style="margin: 0 0 18px; font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.14em; color: #C9A55A">QUANT ASSET MANAGEMENT ON TELEGRAM</p>
+<h1 style="margin: 0; font-family: 'Noto Serif KR', serif; font-size: clamp(34px, 5vw, 58px); line-height: 1.22; font-weight: 700">투자 고민은 줄이고,<br>할 일만 받아 보세요.</h1>
+<p style="margin: 26px 0 0; font-size: 18px; color: #C8D2E1; max-width: 560px">차트를 붙잡고 있지 않아도, 뉴스를 다 찾아보지 않아도 됩니다. 열 개 부서의 AI 직원이 시장을 지켜보다가 살 때, 팔 때, 조심할 때만 알려줍니다. 모든 규칙은 과거 자료로 먼저 시험해 통과한 것만 씁니다.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px">
+<a href="https://t.me/Rema_quant_trading_bot" style="display: inline-flex; align-items: center; min-height: 48px; padding: 0 24px; border-radius: 6px; background: #C9A55A; color: #0B1F3A; font-weight: 700; text-decoration: none">텔레그램에서 시작하기</a>
+<button type="button" onClick="{{goWork}}" style="min-height: 48px; padding: 0 24px; border-radius: 6px; border: 1px solid #50678A; background: transparent; color: #FFFFFF; font: inherit; font-weight: 600; cursor: pointer">지금 일하는 모습 보기</button>
+</div>
+</div>
+<dl style="margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; background: #24406A; border: 1px solid #24406A; border-radius: 8px; overflow: hidden">
+<div style="background: #0F2747; padding: 22px"><dt style="font-size: 13px; color: #AEBBD0">부서</dt><dd style="margin: 4px 0 0; font-family: 'IBM Plex Mono', monospace; font-size: 30px; font-weight: 600">10</dd></div>
+<div style="background: #0F2747; padding: 22px"><dt style="font-size: 13px; color: #AEBBD0">명령어</dt><dd style="margin: 4px 0 0; font-family: 'IBM Plex Mono', monospace; font-size: 30px; font-weight: 600">64</dd></div>
+<div style="background: #0F2747; padding: 22px"><dt style="font-size: 13px; color: #AEBBD0">기록 중인 종이 펀드</dt><dd style="margin: 4px 0 0; font-family: 'IBM Plex Mono', monospace; font-size: 30px; font-weight: 600">3</dd></div>
+<div style="background: #0F2747; padding: 22px"><dt style="font-size: 13px; color: #AEBBD0">시험 후 접은 기법 갈래</dt><dd style="margin: 4px 0 0; font-family: 'IBM Plex Mono', monospace; font-size: 30px; font-weight: 600">12</dd></div>
+</dl>
+</div>
+</section>
+
+<section style="padding: 80px 24px; background: #FFFFFF; border-bottom: 1px solid #D9DEE5">
+<div style="max-width: 1200px; margin: 0 auto">
+<p style="margin: 0 0 8px; font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.12em; color: #0F6E5A">WHY WE EXIST</p>
+<h2 style="margin: 0 0 12px; font-family: 'Noto Serif KR', serif; font-size: clamp(26px, 3.4vw, 36px); line-height: 1.3">투자 고민은 봇이 대신하고,<br>당신은 알림이 올 때만 보면 됩니다</h2>
+<p style="margin: 0 0 40px; font-size: 17px; color: #4B5563; max-width: 760px">주식을 하면 하루 종일 차트를 보고, 뉴스를 찾고, 살까 말까 고민하게 됩니다. 그 시간을 줄이는 것이 이 봇의 목적입니다. 정해진 규칙대로 봇이 지켜보고, 행동할 때가 되면 할 일만 알려줍니다.</p>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1px; background: #D9DEE5; border: 1px solid #D9DEE5; border-radius: 8px; overflow: hidden">
+<div style="background: #FFFFFF; padding: 24px"><div style="font-size: 15px; color: #6B7280; text-decoration: line-through">"지금 사도 되나?"</div><div style="margin-top: 10px; font-weight: 700">살 때가 되면 알림</div><p style="margin: 6px 0 0; font-size: 15px; color: #374151">관심종목이 고점 대비 -10·-20·-30% 구간에 닿으면 그날 아침 리포트에 '오늘 살 종목'으로 나옵니다.</p></div>
+<div style="background: #FFFFFF; padding: 24px"><div style="font-size: 15px; color: #6B7280; text-decoration: line-through">"얼마나 사야 하지?"</div><div style="margin-top: 10px; font-weight: 700">금액까지 계산</div><p style="margin: 6px 0 0; font-size: 15px; color: #374151">투자 성향과 투자금으로 종목당 수량을 정하고, 월급날에는 이번 달 돈을 계좌별로 어디에 넣을지 알려줍니다.</p></div>
+<div style="background: #FFFFFF; padding: 24px"><div style="font-size: 15px; color: #6B7280; text-decoration: line-through">"뉴스 다 챙겨 봐야 하나?"</div><div style="margin-top: 10px; font-weight: 700">중요한 것만 골라서</div><p style="margin: 6px 0 0; font-size: 15px; color: #374151">시장·관심종목·국제정세 기사를 AI가 걸러 하루 최대 8건만. 공시는 쉬운 말 해설을 붙여 보냅니다.</p></div>
+<div style="background: #FFFFFF; padding: 24px"><div style="font-size: 15px; color: #6B7280; text-decoration: line-through">"언제 팔아야 하지?"</div><div style="margin-top: 10px; font-weight: 700">정해 둔 가격에서 알림</div><p style="margin: 6px 0 0; font-size: 15px; color: #374151">손절·목표가에 닿거나 시장 추세가 꺾이면 알려주고, 급락장에는 미리 정한 행동 수칙을 보냅니다.</p></div>
+<div style="background: #FFFFFF; padding: 24px"><div style="font-size: 15px; color: #6B7280; text-decoration: line-through">"이 방법 진짜 되는 거야?"</div><div style="margin-top: 10px; font-weight: 700">시험을 통과한 규칙만</div><p style="margin: 6px 0 0; font-size: 15px; color: #374151">유명한 기법도 과거 자료로 먼저 시험합니다. 통과 못 하면 쓰지 않고, 왜 접었는지 기록합니다.</p></div>
+<div style="background: #0B1F3A; color: #FFFFFF; padding: 24px; display: flex; flex-direction: column; justify-content: center"><div style="font-family: 'Noto Serif KR', serif; font-size: 20px; font-weight: 700; line-height: 1.45">결정은 당신이,<br>지켜보는 일은 봇이.</div><p style="margin: 10px 0 0; font-size: 14px; color: #C8D2E1">봇은 주문을 넣지 않습니다. 할 일을 알려주고, 실행은 본인이 합니다.</p></div>
+</div>
+</div>
+</section>
+
+<section style="padding: 80px 24px">
+<div style="max-width: 1200px; margin: 0 auto">
+<p style="margin: 0 0 8px; font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.12em; color: #0F6E5A">SERVICES</p>
+<h2 style="margin: 0 0 12px; font-family: 'Noto Serif KR', serif; font-size: clamp(26px, 3.4vw, 36px); line-height: 1.3">메뉴는 네 갈래, 질문은 그냥 채팅으로</h2>
+<p style="margin: 0 0 40px; font-size: 17px; color: #4B5563; max-width: 720px">"삼성전자 분석해줘", "TSLA 어때?"처럼 보내면 차트와 해설이 옵니다. 나머지는 🏠 메뉴의 네 갈래 안에 있습니다.</p>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1px; background: #D9DEE5; border: 1px solid #D9DEE5; border-radius: 8px; overflow: hidden">
+<article style="background: #FFFFFF; padding: 28px">
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #7A5A12">01</div>
+<h3 style="margin: 8px 0 12px; font-size: 20px">시장 보기</h3>
+<ul style="margin: 0; padding-left: 18px; color: #374151; display: flex; flex-direction: column; gap: 6px; font-size: 15px">
+<li>지수·변동성·환율과 200일선 추세</li><li>최근 3일 큰 경제·국제정세 사건</li><li>2주간 CPI·고용·FOMC·금통위 일정</li><li>추세 템플릿 스크리너 후보</li>
+</ul>
+</article>
+<article style="background: #FFFFFF; padding: 28px">
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #7A5A12">02</div>
+<h3 style="margin: 8px 0 12px; font-size: 20px">내 종목</h3>
+<ul style="margin: 0; padding-left: 18px; color: #374151; display: flex; flex-direction: column; gap: 6px; font-size: 15px">
+<li>이달의 플랜: 투자금을 어디에 얼마나</li><li>고점 대비 -10·-20·-30% 나눠 사기</li><li>보유종목 손절·목표가 알림</li><li>쏠림·변동성 위험 점검</li>
+</ul>
+</article>
+<article style="background: #FFFFFF; padding: 28px">
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #7A5A12">03</div>
+<h3 style="margin: 8px 0 12px; font-size: 20px">기록 · 성과</h3>
+<ul style="margin: 0; padding-left: 18px; color: #374151; display: flex; flex-direction: column; gap: 6px; font-size: 15px">
+<li>매수·매도 일지와 규칙 지키기 성적표</li><li>실제로 산 것과 놓친 알림 장부</li><li>봇 판정이 실제로 맞았는지 추적</li><li>해외주식 양도세 미리 계산</li>
+</ul>
+</article>
+<article style="background: #FFFFFF; padding: 28px">
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #7A5A12">04</div>
+<h3 style="margin: 8px 0 12px; font-size: 20px">연구소</h3>
+<ul style="margin: 0; padding-left: 18px; color: #374151; display: flex; flex-direction: column; gap: 6px; font-size: 15px">
+<li>전략 순위표와 누적 시험 수</li><li>내부자 매수·자사주·실적 공시 검증</li><li>웹 근거 심층 조사 (출처 포함)</li><li>쉬운 말 공시 해설과 용어 사전</li>
+</ul>
+</article>
+</div>
+</div>
+</section>
+
+<section style="padding: 80px 24px; background: #FFFFFF; border-top: 1px solid #D9DEE5; border-bottom: 1px solid #D9DEE5">
+<div style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 48px">
+<div>
+<p style="margin: 0 0 8px; font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.12em; color: #0F6E5A">DAILY OPERATIONS</p>
+<h2 style="margin: 0 0 12px; font-family: 'Noto Serif KR', serif; font-size: clamp(26px, 3.4vw, 36px); line-height: 1.3">찾아보지 않아도<br>필요한 때 옵니다</h2>
+<p style="margin: 0; font-size: 17px; color: #4B5563">한국 시간 기준입니다. 미국장 관련 시각은 서머타임에 맞춰 자동으로 움직입니다.</p>
+</div>
+<ol style="list-style: none; margin: 0; padding: 0">
+<li style="display: grid; grid-template-columns: 104px minmax(0, 1fr); gap: 16px; padding: 16px 0; border-bottom: 1px solid #E5E9EE"><span style="font-family: 'IBM Plex Mono', monospace; font-weight: 600; color: #0F6E5A">07:00</span><span><b>오늘·내일 경제 발표 일정</b> <span style="color: #4B5563">— 발표가 있는 날만</span></span></li>
+<li style="display: grid; grid-template-columns: 104px minmax(0, 1fr); gap: 16px; padding: 16px 0; border-bottom: 1px solid #E5E9EE"><span style="font-family: 'IBM Plex Mono', monospace; font-weight: 600; color: #0F6E5A">08:00</span><span><b>국내장 전 리포트</b> <span style="color: #4B5563">— 관심종목 포착 요약, 오늘 살 구간에 닿은 종목</span></span></li>
+<li style="display: grid; grid-template-columns: 104px minmax(0, 1fr); gap: 16px; padding: 16px 0; border-bottom: 1px solid #E5E9EE"><span style="font-family: 'IBM Plex Mono', monospace; font-weight: 600; color: #0F6E5A">15분마다</span><span><b>속보</b> <span style="color: #4B5563">— 시장·관심종목·국제정세, 중요 기사는 본문까지 읽고 판단</span></span></li>
+<li style="display: grid; grid-template-columns: 104px minmax(0, 1fr); gap: 16px; padding: 16px 0; border-bottom: 1px solid #E5E9EE"><span style="font-family: 'IBM Plex Mono', monospace; font-weight: 600; color: #0F6E5A">발표 시각</span><span><b>CPI·고용·FOMC·금통위</b> <span style="color: #4B5563">— 몇 분 안에 수치와 영향, 30분 뒤 시장 반응</span></span></li>
+<li style="display: grid; grid-template-columns: 104px minmax(0, 1fr); gap: 16px; padding: 16px 0; border-bottom: 1px solid #E5E9EE"><span style="font-family: 'IBM Plex Mono', monospace; font-weight: 600; color: #0F6E5A">수시로</span><span><b>공시·가격·급변 알림</b> <span style="color: #4B5563">— 쉬운 말 공시 해설, 손절·목표가, 유가·환율 급변</span></span></li>
+<li style="display: grid; grid-template-columns: 104px minmax(0, 1fr); gap: 16px; padding: 16px 0; border-bottom: 1px solid #E5E9EE"><span style="font-family: 'IBM Plex Mono', monospace; font-weight: 600; color: #0F6E5A">밤</span><span><b>미국장 전 리포트와 스크리너</b></span></li>
+<li style="display: grid; grid-template-columns: 104px minmax(0, 1fr); gap: 16px; padding: 16px 0"><span style="font-family: 'IBM Plex Mono', monospace; font-weight: 600; color: #0F6E5A">매달 25일</span><span><b>이달의 플랜</b> <span style="color: #4B5563">— 투자금을 계좌별로 무엇에 얼마나</span></span></li>
+</ol>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{isAnalysis}}" hint-placeholder-val="{{false}}">
+<section style="padding: 56px 24px 80px">
+<div style="max-width: 1200px; margin: 0 auto">
+<p style="margin: 0 0 8px; font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.12em; color: #0F6E5A">FLAGSHIP · STOCK ANALYSIS</p>
+<h2 style="margin: 0 0 12px; font-family: 'Noto Serif KR', serif; font-size: clamp(26px, 3.4vw, 36px); line-height: 1.3">종목 분석: 한 문장이면 됩니다</h2>
+<p style="margin: 0 0 36px; font-size: 17px; color: #4B5563; max-width: 760px">"삼성전자 분석해줘", "TSLA 지금 사도 돼?"처럼 보내면 봇이 자료를 모아 차트와 함께 정리합니다. 더 깊이 알고 싶으면 심층 조사로 웹 기사와 공시를 근거로 다시 확인합니다.</p>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 18px">
+<article style="background: #FFFFFF; border: 1px solid #D9DEE5; border-radius: 8px; padding: 28px">
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap"><h3 style="margin: 0; font-size: 21px">기본 분석</h3><span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #7A5A12">채팅으로 종목 질문</span></div>
+<p style="margin: 8px 0 18px; color: #4B5563; font-size: 15px">숫자는 코드가 계산하고, AI는 그 숫자로 해설만 씁니다. AI가 가격이나 수량을 지어내지 않게 하기 위해서입니다.</p>
+<h4 style="margin: 0 0 8px; font-size: 14px; color: #0F6E5A">모으는 자료</h4>
+<ul style="margin: 0 0 18px; padding-left: 18px; font-size: 15px; color: #374151; display: grid; gap: 4px">
+<li>일봉 차트와 이동평균·VWAP, 지수 대비 상대강도</li>
+<li>변동성·최대 낙폭으로 정한 손절·목표 가격</li>
+<li>PER·PBR·ROE, 애널리스트 목표가</li>
+<li>다음 실적 발표일, 뉴스 감성, 최근 큰 매크로·국제정세 사건</li>
+<li>시장 분위기(지수·VIX·환율)와 내 보유 평단·투자 성향</li>
+</ul>
+<h4 style="margin: 0 0 8px; font-size: 14px; color: #0F6E5A">받는 결과</h4>
+<ol style="margin: 0; padding-left: 20px; font-size: 15px; color: #374151; display: grid; gap: 4px">
+<li>가격 기준 시각과 차트 이미지</li>
+<li>결론: 신규 진입 · 보유 · 관망 · 매도 중 하나</li>
+<li>재무 평가, 차트·투심 해설, 손절·목표가</li>
+<li>성향에 맞춘 적정 수량</li>
+<li>없는 자료는 '자료 공백'으로 밝히고 확신도를 낮춤</li>
+<li>판단에 가장 영향을 준 지표 2개 쉬운 설명</li>
+</ol>
+</article>
+
+<article style="background: #FFFFFF; border: 1px solid #D9DEE5; border-radius: 8px; padding: 28px">
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap"><h3 style="margin: 0; font-size: 21px">심층 조사</h3><span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #7A5A12">/research 종목 질문</span></div>
+<p style="margin: 8px 0 18px; color: #4B5563; font-size: 15px">AI가 웹을 직접 검색해 기사·공시·실적 자료를 읽고, 근거마다 출처 링크를 붙여 정리합니다.</p>
+<dl style="margin: 0 0 18px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; background: #E5E9EE; border: 1px solid #E5E9EE; border-radius: 6px; overflow: hidden; font-size: 14px">
+<div style="background: #FFFFFF; padding: 12px 16px"><dt style="color: #6B7280">검색</dt><dd style="margin: 0; font-weight: 600">한 번에 최대 6회</dd></div>
+<div style="background: #FFFFFF; padding: 12px 16px"><dt style="color: #6B7280">출처</dt><dd style="margin: 0; font-weight: 600">근거마다 링크</dd></div>
+<div style="background: #FFFFFF; padding: 12px 16px"><dt style="color: #6B7280">이용 한도</dt><dd style="margin: 0; font-weight: 600">1인 하루 3회</dd></div>
+<div style="background: #FFFFFF; padding: 12px 16px"><dt style="color: #6B7280">이럴 때</dt><dd style="margin: 0; font-weight: 600">급등락 이유, 실적 반응</dd></div>
+</dl>
+<p style="margin: 0; font-size: 15px; color: #374151">예: <code style="font-family: 'IBM Plex Mono', monospace; background: #F1F3F6; padding: 2px 6px; border-radius: 4px">/research 삼성전자 이번 실적 반응</code></p>
+<p style="margin: 12px 0 0; font-size: 15px; color: #374151">찾지 못한 내용은 지어내지 않고 '확인 못 함'으로 남깁니다. 웹 검색 비용이 커서 하루 횟수를 제한합니다.</p>
+</article>
+</div>
+
+<h3 style="margin: 56px 0 16px; font-family: 'Noto Serif KR', serif; font-size: clamp(22px, 2.6vw, 28px)">성능: 숫자로 확인한 것과 아직 모르는 것</h3>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px">
+<div style="background: #FFFFFF; border: 1px solid #D9DEE5; border-radius: 8px; padding: 24px">
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #8A3B12; letter-spacing: 0.08em">검증 결과 · 매수 신호로는 안 씀</div>
+<div style="margin-top: 6px; font-weight: 700">차트 신호만으로는 수익 예측 못 함</div>
+<p style="margin: 8px 0 0; font-size: 15px; color: #374151">843종목 3년, 10만여 건 거래로 시험한 결과 신호가 난 날이 아무 날이나 산 것보다 낫지 않았습니다. 그래서 '강력 매수' 같은 표현을 없애고 차트 상태 표시로만 씁니다.</p>
+</div>
+<div style="background: #FFFFFF; border: 1px solid #D9DEE5; border-radius: 8px; padding: 24px">
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #7A5A12; letter-spacing: 0.08em">추적 중 · 표본 모으는 중</div>
+<div style="margin-top: 6px; font-weight: 700">AI 최종 판정의 실제 성적</div>
+<p style="margin: 8px 0 0; font-size: 15px; color: #374151">모든 분석의 판정을 기록하고 20거래일 뒤 지수와 비교합니다. 신규 진입·관망 각 30건, 전체 100건이 쌓이면 '우위 있음/차이 없음'을 판정해 /performance 에 공개합니다.</p>
+</div>
+<div style="background: #FFFFFF; border: 1px solid #D9DEE5; border-radius: 8px; padding: 24px">
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #0F6E5A; letter-spacing: 0.08em">확인됨 · 잘하는 일</div>
+<div style="margin-top: 6px; font-weight: 700">위험 관리와 정보 정리</div>
+<p style="margin: 8px 0 0; font-size: 15px; color: #374151">손절·목표가, 적정 수량, 실적 발표 임박 경고, 자료 공백 표시처럼 '실수를 줄이는' 쪽이 분석의 강점입니다. AI 비용은 분석 한 건에 몇십 원 수준입니다.</p>
+</div>
+</div>
+
+<div style="margin-top: 28px; background: #0B1F3A; color: #FFFFFF; border-radius: 8px; padding: 26px 28px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px">
+<div>
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #C9A55A; letter-spacing: 0.1em">FAQ</div>
+<div style="font-family: 'Noto Serif KR', serif; font-size: 20px; font-weight: 700; margin-top: 4px">처음 쓰던 골드만삭스식 리스크 엔진과 VWAP 신호는 없어졌나요?</div>
+</div>
+<p style="margin: 0; font-size: 15px; color: #C8D2E1">없어지지 않았습니다. 이동평균·VWAP으로 계산하는 차트 상태와, 변동성으로 손절·목표 폭을 조절하는 리스크 엔진은 지금도 모든 분석에 들어갑니다. 다만 검증 결과 차트 신호가 '살 때'를 맞히지는 못해서, 매수 추천이 아니라 차트 상태와 손절·목표가를 정하는 용도로만 씁니다.</p>
+</div>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{isWork}}" hint-placeholder-val="{{false}}">
+<section style="padding: 56px 24px 80px">
+<div style="max-width: 1200px; margin: 0 auto">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 24px; margin-bottom: 28px">
+<div>
+<p style="margin: 0 0 8px; font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.12em; color: #0F6E5A">OPERATIONS FLOOR</p>
+<h2 style="margin: 0 0 10px; font-family: 'Noto Serif KR', serif; font-size: clamp(26px, 3.4vw, 36px); line-height: 1.3">지금 일하는 모습</h2>
+<p style="margin: 0; font-size: 16px; color: #4B5563; max-width: 640px">봇의 예약 작업 하나하나가 직원이고, 맨 위층은 대표실입니다. 실제 운영 일정표대로 지금 누가 무슨 일을 하고 있는지 보여줍니다.</p>
+</div>
+<div style="background: #0B1F3A; color: #FFFFFF; border-radius: 8px; padding: 16px 22px; min-width: 260px">
+<div style="font-size: 12px; color: #AEBBD0; letter-spacing: 0.06em">한국 시간</div>
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 30px; font-weight: 600; line-height: 1.3" data-clock="1">{{clock}}</div>
+<div style="font-size: 14px; color: #C8D2E1">{{dateLabel}}</div>
+</div>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 24px">
+<div style="background: #FFFFFF; border: 1px solid #D9DEE5; border-radius: 8px; padding: 18px 20px"><div style="font-size: 13px; color: #4B5563">지금 작업 중</div><div style="font-family: 'IBM Plex Mono', monospace; font-size: 26px; font-weight: 600; color: #0F6E5A">{{workingCount}}<span style="font-size: 15px; color: #6B7280"> / {{agentCount}}명</span></div></div>
+<div style="background: #FFFFFF; border: 1px solid #D9DEE5; border-radius: 8px; padding: 18px 20px"><div style="font-size: 13px; color: #4B5563">상시 감시</div><div style="font-family: 'IBM Plex Mono', monospace; font-size: 26px; font-weight: 600">{{alwaysCount}}<span style="font-size: 15px; color: #6B7280">명</span></div></div>
+<div style="background: #FFFFFF; border: 1px solid #D9DEE5; border-radius: 8px; padding: 18px 20px; grid-column: span 2"><div style="font-size: 13px; color: #4B5563">다음 출근</div><div style="font-size: 17px; font-weight: 600">{{nextUp}}</div></div>
+</div>
+
+<div style="overflow-x: auto; border-radius: 8px; margin-bottom: 28px; border: 1px solid #1C3354">
+<div role="img" aria-label="{{sceneLabel}}" style="{{skyStyle}}">
+<div style="position: absolute; top: 28px; right: 120px; width: 36px; height: 36px; background: {{moonColor}}; box-shadow: 4px 0 0 {{moonColor}}, -4px 0 0 {{moonColor}}, 0 4px 0 {{moonColor}}, 0 -4px 0 {{moonColor}}"></div>
+<sc-for list="{{stars}}" as="st" hint-placeholder-count="12"><div style="{{st.style}}"></div></sc-for>
+<div style="{{skyline1}}"></div>
+<div style="{{skyline2}}"></div>
+<div style="{{skyline3}}"></div>
+<div style="{{skyline4}}"></div>
+<div style="position: relative; width: 1040px; margin: 0 auto; padding-top: 70px">
+<div style="margin-left: 190px; width: 840px; display: flex; align-items: flex-end; gap: 40px; padding: 0 60px; box-sizing: border-box; height: 34px">
+<div style="width: 90px; height: 26px; background: #2E333D; box-shadow: inset 0 -4px 0 #22262E"></div>
+<div style="width: 50px; height: 34px; background: #2E333D"></div>
+<div style="width: 120px; height: 20px; background: #2E333D; box-shadow: inset 0 -4px 0 #22262E"></div>
+<div style="flex: 1"></div>
+<div style="width: 14px; height: 34px; background: #2E333D"></div>
+</div>
+<sc-for list="{{floors}}" as="fl" hint-placeholder-count="6">
+<div style="display: flex; align-items: stretch">
+<button type="button" onClick="{{fl.pick}}" aria-pressed="{{fl.pressed}}" style="{{fl.labelStyle}}"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 18px; font-weight: 600">{{fl.no}}</span><span style="font-size: 13px; line-height: 1.35">{{fl.name}}</span></button>
+<div style="position: relative; width: 840px; height: 132px; background: #3A3F4A; padding: 12px 14px; box-sizing: border-box; border-bottom: 6px solid #2E333D">
+<div style="{{fl.roomStyle}}">
+<div style="{{fl.lampStyle}}"></div>
+<sc-if value="{{fl.isServer}}" hint-placeholder-val="{{false}}">
+<div style="display: flex; gap: 8px; align-items: flex-end; margin-right: 18px">
+<svg width="42" height="90" viewBox="0 0 14 30" shape-rendering="crispEdges" aria-hidden="true"><rect x="0" y="0" width="14" height="30" fill="#1B1F27"></rect><rect x="1" y="2" width="12" height="3" fill="#2E3440"></rect><rect x="1" y="7" width="12" height="3" fill="#2E3440"></rect><rect x="1" y="12" width="12" height="3" fill="#2E3440"></rect><rect x="1" y="17" width="12" height="3" fill="#2E3440"></rect><rect x="1" y="22" width="12" height="3" fill="#2E3440"></rect><rect class="px-led" x="10" y="3" width="2" height="1" fill="#5CF08A"></rect><rect class="px-led2" x="10" y="8" width="2" height="1" fill="#5CF08A"></rect><rect class="px-led" x="10" y="13" width="2" height="1" fill="#F2C46D"></rect><rect class="px-led2" x="10" y="18" width="2" height="1" fill="#5CF08A"></rect><rect class="px-led" x="10" y="23" width="2" height="1" fill="#5CF08A"></rect></svg>
+<svg width="42" height="90" viewBox="0 0 14 30" shape-rendering="crispEdges" aria-hidden="true"><rect x="0" y="0" width="14" height="30" fill="#1B1F27"></rect><rect x="1" y="2" width="12" height="3" fill="#2E3440"></rect><rect x="1" y="7" width="12" height="3" fill="#2E3440"></rect><rect x="1" y="12" width="12" height="3" fill="#2E3440"></rect><rect x="1" y="17" width="12" height="3" fill="#2E3440"></rect><rect x="1" y="22" width="12" height="3" fill="#2E3440"></rect><rect class="px-led2" x="10" y="3" width="2" height="1" fill="#5CF08A"></rect><rect class="px-led" x="10" y="8" width="2" height="1" fill="#5CF08A"></rect><rect class="px-led2" x="10" y="13" width="2" height="1" fill="#5CF08A"></rect><rect class="px-led" x="10" y="18" width="2" height="1" fill="#F2C46D"></rect><rect class="px-led2" x="10" y="23" width="2" height="1" fill="#5CF08A"></rect></svg>
+</div>
+</sc-if>
+<sc-for list="{{fl.people}}" as="p" hint-placeholder-count="2">
+<div style="position: relative; width: 96px; height: 72px; flex: none">
+<sc-if value="{{p.isWorking}}" hint-placeholder-val="{{false}}">
+<div class="px-bubble" style="position: absolute; left: 50%; bottom: 76px; transform: translateX(-50%); background: #FFFFFF; color: #0B1F3A; border: 2px solid #0B1F3A; padding: 3px 7px; font-size: 12px; font-weight: 600; white-space: nowrap; box-shadow: 3px 3px 0 rgba(11,31,58,.35); z-index: 2">{{p.task}}</div>
+</sc-if>
+<sc-if value="{{p.isIdle}}" hint-placeholder-val="{{true}}">
+<div style="position: absolute; left: 50%; bottom: 76px; transform: translateX(-50%); background: rgba(11,31,58,.78); color: #E6ECF5; padding: 1px 6px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; white-space: nowrap; z-index: 2">{{p.tag}}</div>
+</sc-if>
+<svg width="96" height="72" viewBox="0 0 32 24" shape-rendering="crispEdges" role="img" aria-label="{{p.label}}">
+<rect x="3" y="10" width="2" height="10" fill="#353B47"></rect>
+<g class="{{p.bodyClass}}">
+<rect x="5" y="2" width="8" height="3" fill="{{p.hair}}"></rect>
+<rect x="4" y="3" width="1" height="4" fill="{{p.hair}}"></rect>
+<rect x="5" y="5" width="8" height="5" fill="#F0C29A"></rect>
+<rect x="10" y="7" width="1" height="1" fill="#1E1E24"></rect>
+<rect x="7" y="7" width="1" height="1" fill="#1E1E24"></rect>
+<rect x="4" y="10" width="10" height="7" fill="{{p.shirt}}"></rect>
+<rect x="12" y="12" width="5" height="2" fill="{{p.shirt}}"></rect>
+<rect x="17" y="12" width="1" height="2" fill="#F0C29A"></rect>
+<rect x="8" y="10" width="2" height="5" fill="{{p.tie}}"></rect>
+</g>
+<rect x="19" y="5" width="12" height="9" fill="#2B2F38"></rect>
+<rect class="{{p.screenClass}}" x="20" y="6" width="10" height="7" fill="{{p.screen}}"></rect>
+<rect x="21" y="8" width="5" height="1" fill="{{p.screenLine}}"></rect>
+<rect x="21" y="10" width="7" height="1" fill="{{p.screenLine}}"></rect>
+<rect x="24" y="14" width="3" height="3" fill="#2B2F38"></rect>
+<rect x="16" y="16" width="6" height="1" fill="#C9CDD4"></rect>
+<rect x="0" y="17" width="32" height="2" fill="#8B5E34"></rect>
+<rect x="2" y="19" width="2" height="5" fill="#6B4626"></rect>
+<rect x="28" y="19" width="2" height="5" fill="#6B4626"></rect>
+</svg>
+</div>
+</sc-for>
+<div style="flex: 1"></div>
+<svg width="30" height="48" viewBox="0 0 10 16" shape-rendering="crispEdges" aria-hidden="true" style="flex: none; margin-right: 6px"><rect x="3" y="0" width="4" height="2" fill="#3F8F4E"></rect><rect x="1" y="2" width="8" height="4" fill="#4FA65E"></rect><rect x="2" y="6" width="6" height="2" fill="#3F8F4E"></rect><rect x="2" y="9" width="6" height="7" fill="#9A6A3C"></rect></svg>
+<sc-if value="{{fl.walker}}" hint-placeholder-val="{{false}}">
+<div class="px-walker" style="{{fl.walkerStyle}}">
+<svg width="36" height="66" viewBox="0 0 12 22" shape-rendering="crispEdges" aria-hidden="true">
+<rect x="3" y="0" width="6" height="3" fill="#3A2A1E"></rect>
+<rect x="3" y="3" width="6" height="4" fill="#F0C29A"></rect>
+<rect x="7" y="4" width="1" height="1" fill="#1E1E24"></rect>
+<rect x="2" y="7" width="8" height="7" fill="#C9A55A"></rect>
+<rect x="8" y="6" width="4" height="5" fill="#FFFFFF"></rect>
+<rect x="8" y="7" width="4" height="1" fill="#C8CFD9"></rect>
+<rect class="px-legA" x="3" y="14" width="2" height="7" fill="#2B2F38"></rect>
+<rect class="px-legA" x="7" y="14" width="2" height="5" fill="#2B2F38"></rect>
+<rect class="px-legB" x="3" y="14" width="2" height="5" fill="#2B2F38"></rect>
+<rect class="px-legB" x="7" y="14" width="2" height="7" fill="#2B2F38"></rect>
+</svg>
+</div>
+</sc-if>
+</div>
+<div style="position: absolute; inset: 12px 14px; background: repeating-linear-gradient(90deg, transparent 0 134px, #3A3F4A 134px 140px); pointer-events: none"></div>
+</div>
+</div>
+</sc-for>
+<div style="margin-left: 190px; width: 840px; height: 40px; background: #2E333D; display: flex; justify-content: center; align-items: flex-end">
+<div style="width: 120px; height: 34px; background: {{lobby}}; border: 4px solid #22262E; border-bottom: 0"></div>
+</div>
+</div>
+<div style="height: 26px; background: #22262E; border-top: 4px solid #3A3F4A; position: relative"></div>
+</div>
+</div>
+<p style="margin: -16px 0 24px; font-size: 13px; color: #6B7280">층 이름을 누르면 그 부서 직원만 아래에 보입니다. 불 켜진 층에서 말풍선이 뜬 직원이 지금 일하는 중입니다.</p>
+
+<div role="group" aria-label="부서 고르기" style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px">
+<sc-for list="{{depts}}" as="dp" hint-placeholder-count="6">
+<button type="button" onClick="{{dp.pick}}" aria-pressed="{{dp.pressed}}" style="{{dp.style}}">{{dp.label}}</button>
+</sc-for>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start">
+<div style="flex: 999 1 640px; min-width: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px">
+<sc-for list="{{agents}}" as="ag" hint-placeholder-count="6">
+<article style="{{ag.cardStyle}}">
+<div style="display: flex; align-items: center; gap: 12px">
+<div style="{{ag.avatarStyle}}">{{ag.initials}}</div>
+<div style="flex: 1; min-width: 0">
+<div style="font-weight: 700; font-size: 16px">{{ag.name}}</div>
+<div style="font-size: 13px; color: #4B5563">{{ag.dept}} · {{ag.role}}</div>
+</div>
+<span style="{{ag.pillStyle}}"><span class="{{ag.dotClass}}" style="{{ag.dotStyle}}"></span>{{ag.statusLabel}}</span>
+</div>
+<sc-if value="{{ag.isWorking}}" hint-placeholder-val="{{false}}">
+<div style="margin-top: 16px; background: #F1F7F5; border-radius: 6px; padding: 12px 14px">
+<div style="font-size: 12px; color: #0A4F40; font-weight: 600">{{ag.jobName}}</div>
+<div class="tq-task" style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; margin-top: 4px; color: #0B1F3A">{{ag.task}}<span class="tq-caret"></span></div>
+<div style="height: 6px; background: #D4E6E0; border-radius: 3px; margin-top: 10px; overflow: hidden"><div class="tq-bar" style="{{ag.barStyle}}"></div></div>
+</div>
+</sc-if>
+<sc-if value="{{ag.isIdle}}" hint-placeholder-val="{{true}}">
+<div style="margin-top: 16px; font-size: 14px; color: #374151; display: grid; gap: 4px">
+<div><span style="color: #6B7280">다음</span> {{ag.next}}</div>
+<div><span style="color: #6B7280">최근</span> {{ag.last}}</div>
+</div>
+</sc-if>
+<sc-if value="{{ag.isAlways}}" hint-placeholder-val="{{false}}">
+<div style="margin-top: 16px; font-size: 14px; color: #374151">{{ag.task}}</div>
+</sc-if>
+</article>
+</sc-for>
+</div>
+<aside aria-label="근무 일지" style="flex: 1 1 280px; min-width: 0; background: #FFFFFF; border: 1px solid #D9DEE5; border-radius: 8px; padding: 20px">
+<h3 style="margin: 0 0 4px; font-size: 16px">근무 일지</h3>
+<p style="margin: 0 0 14px; font-size: 13px; color: #6B7280">최근에 끝낸 작업</p>
+<ol style="list-style: none; margin: 0; padding: 0">
+<sc-for list="{{feed}}" as="fe" hint-placeholder-count="8">
+<li style="display: grid; grid-template-columns: 54px minmax(0, 1fr); gap: 10px; padding: 10px 0; border-top: 1px solid #EEF1F4; font-size: 14px">
+<span style="font-family: 'IBM Plex Mono', monospace; color: #0F6E5A">{{fe.time}}</span>
+<span><b>{{fe.who}}</b><br><span style="color: #4B5563">{{fe.what}}</span></span>
+</li>
+</sc-for>
+</ol>
+</aside>
+</div>
+<p style="margin: 24px 0 0; font-size: 13px; color: #6B7280">이 화면은 서버의 실제 예약 작업 일정표를 그대로 옮겨 시간에 맞춰 재현한 것입니다. 서버와 직접 연결된 실시간 상태는 아니며, 실제 상태는 봇의 /status 에서 확인합니다.</p>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{isStrategy}}" hint-placeholder-val="{{false}}">
+<section style="padding: 56px 24px 80px">
+<div style="max-width: 1200px; margin: 0 auto">
+<p style="margin: 0 0 8px; font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.12em; color: #0F6E5A">INVESTMENT POLICY</p>
+<h2 style="margin: 0 0 12px; font-family: 'Noto Serif KR', serif; font-size: clamp(26px, 3.4vw, 36px); line-height: 1.3">돈을 세 갈래로 나눠 굴립니다</h2>
+<p style="margin: 0 0 32px; font-size: 17px; color: #4B5563; max-width: 720px">비중은 검증 결과를 보고 대표가 결재해 정합니다. 지금 기준입니다.</p>
+<div role="img" aria-label="배분: 장기 성장 60%, 나스닥 20%, 코스피 10%, 대표 단타 10%" style="display: flex; height: 52px; border-radius: 6px; overflow: hidden; font-weight: 700; font-size: 14px">
+<div style="flex: 60; background: #0B1F3A; color: #FFFFFF; display: flex; align-items: center; padding: 0 16px">장기 성장 60%</div>
+<div style="flex: 20; background: #0F6E5A; color: #FFFFFF; display: flex; align-items: center; padding: 0 12px">나스닥 20</div>
+<div style="flex: 10; background: #7FB8A8; color: #0B1F3A; display: flex; align-items: center; padding: 0 10px">코스피 10</div>
+<div style="flex: 10; background: #E3CB92; color: #0B1F3A; display: flex; align-items: center; padding: 0 10px">단타 10</div>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1px; background: #D9DEE5; border: 1px solid #D9DEE5; border-radius: 8px; overflow: hidden; margin-top: 24px">
+<div style="background: #FFFFFF; padding: 26px"><h3 style="margin: 0 0 8px; font-size: 18px">장기 성장 60%</h3><p style="margin: 0; color: #374151; font-size: 15px">재무가 튼튼한 관심종목 10~15개를 고점 대비 -10%·-20%·-30% 세 구간에 나눠 삽니다. 한 종목은 이 몫의 10%를 넘지 않고, 추세가 꺾이거나 뉴스·실적이 나쁘면 관망합니다.</p></div>
+<div style="background: #FFFFFF; padding: 26px"><h3 style="margin: 0 0 8px; font-size: 18px">지수 엔진 30%</h3><p style="margin: 0; color: #374151; font-size: 15px">나스닥 20%는 200일 이동평균선 위에서만 보유하고 아래로 내려가면 현금으로 비킵니다. 코스피 10%는 그대로 보유합니다.</p></div>
+<div style="background: #FFFFFF; padding: 26px"><h3 style="margin: 0 0 8px; font-size: 18px">대표 단타 10%</h3><p style="margin: 0; color: #374151; font-size: 15px">비용을 넘는 단타 규칙은 검증에서 찾지 못했습니다. 그래서 회사 전략이 아니라 대표 개인 몫으로 두고, 기록만 남겨 성적을 봅니다.</p></div>
+</div>
+
+<h2 style="margin: 72px 0 12px; font-family: 'Noto Serif KR', serif; font-size: clamp(24px, 3vw, 32px); line-height: 1.3">투자위원회: 통과한 기법만 씁니다</h2>
+<p style="margin: 0 0 28px; font-size: 17px; color: #4B5563; max-width: 720px">시험 조건은 결과를 보기 전에 고정하고, 시험한 횟수만큼 통과 기준을 높입니다. 매주 월요일 위원회에서 반론 담당이 따로 검토하고, 디자인·UX팀은 이용 통계와 사용자 의견으로 쓰기 편한 봇을 위한 개선안을 올립니다.</p>
+<ol style="list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px">
+<li style="background: #FFFFFF; border: 1px solid #D9DEE5; border-radius: 6px; padding: 18px"><div style="font-family: 'IBM Plex Mono', monospace; color: #7A5A12">STEP 1</div><div style="font-weight: 600">가설 등록</div></li>
+<li style="background: #FFFFFF; border: 1px solid #D9DEE5; border-radius: 6px; padding: 18px"><div style="font-family: 'IBM Plex Mono', monospace; color: #7A5A12">STEP 2</div><div style="font-weight: 600">목표 분류</div></li>
+<li style="background: #FFFFFF; border: 1px solid #D9DEE5; border-radius: 6px; padding: 18px"><div style="font-family: 'IBM Plex Mono', monospace; color: #7A5A12">STEP 3</div><div style="font-weight: 600">같은 기준선과 시험</div></li>
+<li style="background: #FFFFFF; border: 1px solid #D9DEE5; border-radius: 6px; padding: 18px"><div style="font-family: 'IBM Plex Mono', monospace; color: #7A5A12">STEP 4</div><div style="font-weight: 600">판정</div></li>
+<li style="background: #FFFFFF; border: 1px solid #D9DEE5; border-radius: 6px; padding: 18px"><div style="font-family: 'IBM Plex Mono', monospace; color: #7A5A12">STEP 5</div><div style="font-weight: 600">종이 매매 6개월</div></li>
+<li style="background: #FFFFFF; border: 1px solid #D9DEE5; border-radius: 6px; padding: 18px"><div style="font-family: 'IBM Plex Mono', monospace; color: #7A5A12">STEP 6</div><div style="font-weight: 600">승격 또는 폐기</div></li>
+</ol>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 14px; margin-top: 28px">
+<div style="background: #0B1F3A; color: #FFFFFF; border-radius: 8px; padding: 26px"><div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #8FD3BF">확인됨</div><h3 style="margin: 6px 0 8px; font-size: 18px">대표·등기임원 장내 매수</h3><p style="margin: 0; color: #C8D2E1; font-size: 15px">2017~2026년 공시 5만 6천여 건에서 매수 뒤 60일 평균 +2.49%(t 5.9). 지금은 종이 펀드 C로 실제 성적을 쌓는 중입니다.</p></div>
+<div style="background: #0B1F3A; color: #FFFFFF; border-radius: 8px; padding: 26px"><div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #8FD3BF">쓰는 중</div><h3 style="margin: 6px 0 8px; font-size: 18px">지수 200일선 추세 추종</h3><p style="margin: 0; color: #C8D2E1; font-size: 15px">수익을 더 내는 기법이 아니라 큰 하락을 줄이는 장치입니다. 그래서 지수 엔진에만 씁니다.</p></div>
+<div style="background: #0B1F3A; color: #FFFFFF; border-radius: 8px; padding: 26px"><div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #E3CB92">접음</div><h3 style="margin: 6px 0 8px; font-size: 18px">12갈래는 다시 시험하지 않습니다</h3><p style="margin: 0; color: #C8D2E1; font-size: 15px">차트 매일 매매, 당일·3일 단타, 레버리지, 코스피 타이밍, 이상 현상 카탈로그 등은 기준선을 넘지 못했습니다. 새 자료와 결재가 있어야 다시 엽니다.</p></div>
+</div>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{isResearch}}" hint-placeholder-val="{{false}}">
+<section style="padding: 56px 24px 80px">
+<div style="max-width: 1200px; margin: 0 auto">
+<p style="margin: 0 0 8px; font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.12em; color: #0F6E5A">RESEARCH LIBRARY</p>
+<h2 style="margin: 0 0 12px; font-family: 'Noto Serif KR', serif; font-size: clamp(26px, 3.4vw, 36px); line-height: 1.3">리서치 자료실</h2>
+<p style="margin: 0 0 36px; font-size: 17px; color: #4B5563; max-width: 760px">모든 리포트는 같은 형식을 따릅니다. 한눈에 보는 기본 정보, 그리고 사실 · 강점 · 약점 세 갈래 요약. 결론보다 근거와 한계를 먼저 적습니다.</p>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 18px">
+
+<article style="background: #FFFFFF; border: 1px solid #D9DEE5; border-radius: 8px; overflow: hidden; display: flex; flex-direction: column">
+<div style="background: #0B1F3A; color: #FFFFFF; padding: 22px 24px">
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #C9A55A; letter-spacing: 0.12em">STRATEGY REPORT · 확인됨</div>
+<div style="font-family: 'Noto Serif KR', serif; font-size: 23px; font-weight: 700; margin-top: 4px">대표·등기임원 장내 매수</div>
+<div style="font-size: 14px; color: #AEBBD0; margin-top: 2px">내부자가 자기 돈으로 산 뒤 주가는 어땠나</div>
+</div>
+<dl style="margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); font-size: 14px; border-bottom: 1px solid #E5E9EE">
+<div style="padding: 12px 24px; border-right: 1px solid #E5E9EE"><dt style="color: #6B7280">전략 유형</dt><dd style="margin: 0; font-weight: 600">공시 이벤트</dd></div>
+<div style="padding: 12px 24px"><dt style="color: #6B7280">시장</dt><dd style="margin: 0; font-weight: 600">국내</dd></div>
+<div style="padding: 12px 24px; border-right: 1px solid #E5E9EE; border-top: 1px solid #E5E9EE"><dt style="color: #6B7280">검증 기간</dt><dd style="margin: 0; font-weight: 600; font-family: 'IBM Plex Mono', monospace">2017-03 ~ 2026-10</dd></div>
+<div style="padding: 12px 24px; border-top: 1px solid #E5E9EE"><dt style="color: #6B7280">표본</dt><dd style="margin: 0; font-weight: 600; font-family: 'IBM Plex Mono', monospace">56,489건</dd></div>
+</dl>
+<div style="padding: 18px 24px; font-size: 14px; color: #374151; display: grid; gap: 12px; flex: 1">
+<div><b style="color: #0B1F3A">사실</b> 대표·등기임원 장내 매수 뒤 60거래일 평균 +2.49%(t 5.9). 장내 매도 뒤는 -1.78%(t -2.9).</div>
+<div><b style="color: #0F6E5A">강점</b> 10년 가까운 공시 전체로 확인했고, 매수와 매도가 반대 방향으로 갈려 우연일 가능성이 낮음.</div>
+<div><b style="color: #8A3B12">약점</b> 건당 효과가 작아 비용·세금 뒤 몫이 줄어듦. 실제 돈으로는 아직 검증 전이라 종이 펀드 C로 기록 중.</div>
+</div>
+<div style="padding: 14px 24px; border-top: 1px solid #E5E9EE; font-size: 13px; color: #6B7280">봇에서 /insider · /paperc</div>
+</article>
+
+<article style="background: #FFFFFF; border: 1px solid #D9DEE5; border-radius: 8px; overflow: hidden; display: flex; flex-direction: column">
+<div style="background: #0B1F3A; color: #FFFFFF; padding: 22px 24px">
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #C9A55A; letter-spacing: 0.12em">STRATEGY REPORT · 사용 중</div>
+<div style="font-family: 'Noto Serif KR', serif; font-size: 23px; font-weight: 700; margin-top: 4px">코스피 200일선 추세 추종</div>
+<div style="font-size: 14px; color: #AEBBD0; margin-top: 2px">지수가 200일 평균 아래면 현금으로 비키기</div>
+</div>
+<dl style="margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); font-size: 14px; border-bottom: 1px solid #E5E9EE">
+<div style="padding: 12px 24px; border-right: 1px solid #E5E9EE"><dt style="color: #6B7280">전략 유형</dt><dd style="margin: 0; font-weight: 600">국면 · 하락 방어</dd></div>
+<div style="padding: 12px 24px"><dt style="color: #6B7280">시장</dt><dd style="margin: 0; font-weight: 600">국내 지수</dd></div>
+<div style="padding: 12px 24px; border-right: 1px solid #E5E9EE; border-top: 1px solid #E5E9EE"><dt style="color: #6B7280">검증 기간</dt><dd style="margin: 0; font-weight: 600; font-family: 'IBM Plex Mono', monospace">2016-10 ~ 2026-10</dd></div>
+<div style="padding: 12px 24px; border-top: 1px solid #E5E9EE"><dt style="color: #6B7280">비교 대상</dt><dd style="margin: 0; font-weight: 600">코스피 그냥 보유</dd></div>
+</dl>
+<div style="padding: 18px 24px; font-size: 14px; color: #374151; display: grid; gap: 12px; flex: 1">
+<div><b style="color: #0B1F3A">사실</b> 연 수익 +12.5%로 그냥 보유(+12.0%)와 비슷하고, 최대 낙폭은 -35%에서 -25%로 줄었음.</div>
+<div><b style="color: #0F6E5A">강점</b> 지수 자체로 시험해 종목 선정 편향이 없음. 수익을 버리지 않고 큰 하락만 줄임.</div>
+<div><b style="color: #8A3B12">약점</b> 월말 판단이라 급락·급반등에는 늦음. 같은 규칙이 미국 S&amp;P 500에서는 이 기간 수익을 깎았음.</div>
+</div>
+<div style="padding: 14px 24px; border-top: 1px solid #E5E9EE; font-size: 13px; color: #6B7280">봇에서 /strategy · /market</div>
+</article>
+
+<article style="background: #FFFFFF; border: 1px dashed #B7C0CC; border-radius: 8px; display: flex; flex-direction: column; justify-content: center; padding: 28px 24px">
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #7A5A12; letter-spacing: 0.12em">준비 중</div>
+<h3 style="margin: 6px 0 14px; font-family: 'Noto Serif KR', serif; font-size: 21px">같은 형식으로 늘려 갈 리포트</h3>
+<ul style="margin: 0; padding-left: 18px; color: #374151; font-size: 15px; display: grid; gap: 8px">
+<li><b>종목 리포트</b> — 관심종목별 기본 정보, 실적, 강점·약점</li>
+<li><b>디지털 자산 리포트</b> — 비트코인·이더리움·솔라나 등</li>
+<li><b>월간 운용 보고서</b> — 세 갈래 운용 성적과 결재 사항</li>
+<li><b>종이 펀드 A·B·C 기록</b> — 실제 돈 없이 규칙대로 사고판 성적</li>
+</ul>
+</article>
+</div>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{isSafety}}" hint-placeholder-val="{{false}}">
+<section style="padding: 56px 24px 80px">
+<div style="max-width: 1200px; margin: 0 auto">
+<p style="margin: 0 0 8px; font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.12em; color: #0F6E5A">RISK &amp; COMPLIANCE</p>
+<h2 style="margin: 0 0 36px; font-family: 'Noto Serif KR', serif; font-size: clamp(26px, 3.4vw, 36px); line-height: 1.3">돈과 정보는 함부로 움직이지 않게</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1px; background: #D9DEE5; border: 1px solid #D9DEE5; border-radius: 8px; overflow: hidden">
+<div style="background: #FFFFFF; padding: 24px"><b>증권사 연동은 조회 전용</b><p style="margin: 6px 0 0; color: #4B5563; font-size: 15px">잔고와 시세만 읽습니다. 주문 기능은 만들지 않았습니다.</p></div>
+<div style="background: #FFFFFF; padding: 24px"><b>승인된 사람만</b><p style="margin: 6px 0 0; color: #4B5563; font-size: 15px">처음 오는 사람은 관리자가 텔레그램에서 승인해야 쓸 수 있고, 개인 대화에서만 답합니다.</p></div>
+<div style="background: #FFFFFF; padding: 24px"><b>키는 서버에만</b><p style="margin: 6px 0 0; color: #4B5563; font-size: 15px">API 키·토큰·계좌번호는 저장소에 올리지 않고, 로그와 오류 메시지에서도 가립니다.</p></div>
+<div style="background: #FFFFFF; padding: 24px"><b>AI 비용 한도</b><p style="margin: 6px 0 0; color: #4B5563; font-size: 15px">하루 한도를 넘으면 자정까지 AI 해설을 멈추고 차트·수치만 보냅니다.</p></div>
+<div style="background: #FFFFFF; padding: 24px"><b>스스로 점검</b><p style="margin: 6px 0 0; color: #4B5563; font-size: 15px">5분마다 서버와 작업 상태를 점검하고, 매일 생존 신호를 확인해 이상하면 관리자에게 알립니다.</p></div>
+<div style="background: #FFFFFF; padding: 24px"><b>자료 없으면 없다고</b><p style="margin: 6px 0 0; color: #4B5563; font-size: 15px">뉴스·재무 자료가 비면 '자료 공백'으로 밝히고 확신도를 낮춥니다.</p></div>
+</div>
+</div>
+</section>
+</sc-if>
+
+<footer style="background: #0B1F3A; color: #C8D2E1; padding: 48px 24px">
+<div style="max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 32px">
+<div style="max-width: 560px">
+<div style="font-family: 'Noto Serif KR', serif; font-weight: 700; font-size: 18px; color: #FFFFFF">Rema Quant Trade</div>
+<p style="margin: 10px 0 18px; font-size: 15px">텔레그램에서 봇을 열고 /start 를 보내면 관리자에게 승인 요청이 갑니다. 승인 뒤 /guide 로 PDF 사용 설명서를 받을 수 있습니다. 불편한 점이나 바라는 기능은 /feedback 으로 보내주세요. 매주 디자인·UX팀이 검토해 위원회에 올립니다.</p>
+<a href="https://t.me/Rema_quant_trading_bot" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 20px; border-radius: 6px; background: #C9A55A; color: #0B1F3A; font-weight: 700; text-decoration: none">@Rema_quant_trading_bot</a>
+</div>
+<p style="margin: 0; max-width: 420px; font-size: 13px; color: #AEBBD0">개인이 만든 투자 참고 도구이며 투자자문업체가 아닙니다. 과거 검증 결과는 미래 수익을 보장하지 않고, 투자 판단과 결과의 책임은 본인에게 있습니다.</p>
+</div>
+</footer>
+
+</div>
+</template>
+<script>
+/* 소개 페이지 단독판 (GitHub Pages용)
+   원본: Claude 디자인 캔버스의 Main.dc.html — 같은 마크업({{값}}, sc-for, sc-if)을 아래 작은 렌더러가 그대로 그립니다.
+   '일하는 모습' 탭은 서버의 예약 작업 일정표를 시간에 맞춰 재현한 것이며 서버와 실시간 연결되지 않습니다. */
+class DCLogic {
+  constructor() { this.props = {}; this.state = {}; }
+  setState(patch) { Object.assign(this.state, patch); if (window.__app) window.__app.update(); }
+}
+class Component extends DCLogic {
+  constructor(...args) {
+    super(...args);
+    this.state = { tab: null, dept: '전체', focus: null, now: Date.now() };
+    this._cacheMin = -1;
+    this._sched = null;
+  }
+  componentDidMount() {
+    this._timer = setInterval(() => this.setState({ now: Date.now() }), 1000);
+  }
+  componentWillUnmount() {
+    clearInterval(this._timer);
+  }
+  fields(ms) {
+    const d = new Date(ms);
+    return { y: d.getUTCFullYear(), mo: d.getUTCMonth(), day: d.getUTCDate(), dow: d.getUTCDay(), h: d.getUTCHours(), m: d.getUTCMinutes(), s: d.getUTCSeconds() };
+  }
+  nthSunday(y, mo, n) {
+    const first = (7 - new Date(Date.UTC(y, mo, 1)).getUTCDay()) % 7;
+    return 1 + first + 7 * (n - 1);
+  }
+  usOffset(utcMs) {
+    const y = new Date(utcMs).getUTCFullYear();
+    const start = Date.UTC(y, 2, this.nthSunday(y, 2, 2), 7);
+    const end = Date.UTC(y, 10, this.nthSunday(y, 10, 1), 6);
+    return utcMs >= start && utcMs < end ? -4 : -5;
+  }
+  spec() {
+    if (this._spec) return this._spec;
+    const WD = [1, 2, 3, 4, 5];
+    const fomc = ['2026-12-09', '2027-01-27', '2027-03-17', '2027-04-28', '2027-06-09', '2027-07-28', '2027-09-15', '2027-10-27', '2027-12-08'];
+    const bok = ['2026-11-26'];
+    const events = [];
+    fomc.forEach((d) => {
+      const p = d.split('-').map(Number);
+      const guess = Date.UTC(p[0], p[1] - 1, p[2], 19);
+      const utc = Date.UTC(p[0], p[1] - 1, p[2], 14) - this.usOffset(guess) * 3600000;
+      events.push({ min: Math.floor(utc / 60000), label: 'FOMC 금리 결정' });
+    });
+    bok.forEach((d) => {
+      const p = d.split('-').map(Number);
+      events.push({ min: Math.floor(Date.UTC(p[0], p[1] - 1, p[2], 0, 50) / 60000), label: '한국은행 금리 결정' });
+    });
+    this._spec = [
+      { id: 'ceo', name: '대표', initials: 'R', dept: '대표실', role: 'Rema Quant Trade 대표', color: '#8A6416',
+        jobs: [{ name: '주간 투자위원회 주재', days: [1], at: [[11, 51]], dur: 35, done: '투자위원회 안건 결재',
+          tasks: ['반론 담당 의견 검토', '안건 결재', '다음 주 지시'] },
+          { name: '월급날 투자 실행', monthDay: 25, at: [[8, 50]], dur: 30, done: '이달 투자금 집행',
+          tasks: ['이달의 플랜 확인', '계좌별 매수 실행', '실행 장부에 기록'] },
+          { name: '아침 보고 확인', at: [[9, 23]], dur: 5, done: '서버 생존 보고 확인',
+          tasks: ['서버 생존 보고 읽기', '이상 여부 확인'] }] },
+      { id: 'uxr', name: '배서연', initials: '배', dept: '디자인·UX팀', role: 'UX 리서처', color: '#9C3F66',
+        jobs: [{ name: '주간 이용 통계 정리', days: [1], at: [[11, 0]], dur: 10, done: '기능별 사용 통계·사용자 의견 정리',
+          tasks: ['기능별 사용 횟수 집계', '한 번도 안 쓴 명령어 찾기', '/feedback 의견 모으기'] }] },
+      { id: 'uxd', name: '류지안', initials: '류', dept: '디자인·UX팀', role: 'UI 디자이너', color: '#9C3F66',
+        jobs: [{ name: '사용 편의 개선안 작성', days: [1], at: [[11, 51]], dur: 35, done: '주간 회의에 개선안 상정',
+          tasks: ['메뉴·안내 문구 살펴보기', '개선안 2개 작성', '반론 담당 의견 반영'] }] },
+      { id: 'news', name: '한서윤', initials: '한', dept: '리서치센터', role: '뉴스 애널리스트', color: '#0E5E6F',
+        jobs: [{ name: '속보 평가', every: 15, offset: 3, dur: 3, done: '속보 후보 평가·묶음 발송',
+          tasks: ['시장·관심종목·국제정세 기사 수집', '같은 사건 기사 묶기', 'AI 중요도 평가', '7점 이상 기사 본문 확인', '사용자별 묶음 발송'] }] },
+      { id: 'macro', name: '도민재', initials: '도', dept: '리서치센터', role: '매크로 애널리스트', color: '#0E5E6F',
+        jobs: [{ name: '경제지표·급변 점검', every: 30, offset: 7, dur: 2, done: '지표 발표·급변·200일선 점검',
+          tasks: ['FRED·한국은행 새 발표 확인', '유가·금·환율 급변 확인', '코스피·S&P 200일선 확인'] }] },
+      { id: 'release', name: '윤하람', initials: '윤', dept: '리서치센터', role: '발표 감시', color: '#0E5E6F',
+        jobs: [{ name: '발표 시각 집중 감시', events: events, dur: 48, done: '금리 결정 발표 감시',
+          tasks: ['공식 보도자료 2분마다 확인', '결정 내용 읽기', '주가 영향 해설 작성', '30분 뒤 시장 반응 집계'] }] },
+      { id: 'disclose', name: '정다은', initials: '정', dept: '리서치센터', role: '공시 해설', color: '#0E5E6F',
+        jobs: [{ name: '공시 확인', days: WD, hours: [7, 19], every: 20, offset: 11, dur: 2, done: '관심·보유 종목 공시 확인',
+          tasks: ['DART 새 공시 조회', '공시 종류 분류', '쉬운 말 해설 붙이기'] }] },
+      { id: 'data', name: '서지호', initials: '서', dept: '데이터센터', role: '자료 수집', color: '#4B5563',
+        jobs: [{ name: '내부자 보고 수집', days: WD, at: [[6, 50]], dur: 15, done: '임원·주요주주 매매 보고 수집',
+          tasks: ['DART 소유 보고 목록 조회', '장내 매수·매도 원문 읽기', '보고자 식별값 저장'] },
+          { name: '실적 공시 수집', at: [[1, 0]], dur: 20, done: '실적 공시 수집',
+          tasks: ['잠정 실적 공시 조회', '매출·영업이익 정리'] }] },
+      { id: 'kr', name: '김태오', initials: '김', dept: '자산운용본부', role: '국내 매니저', color: '#0B1F3A',
+        jobs: [{ name: '국내 스크리너', days: WD, at: [[7, 40]], dur: 10, done: '국내 추세 후보 발송',
+          tasks: ['코스피·코스닥 대형주 시세 수집', '추세 템플릿 조건 확인', '상대강도 순위'] },
+          { name: '국내장 전 리포트', days: WD, at: [[8, 0]], dur: 12, done: '국내장 전 리포트 발송',
+          tasks: ['관심종목 신호 계산', '나눠 사기 구간 확인', '사용자별 포착 요약 작성'] },
+          { name: '이달의 플랜', monthDay: 25, at: [[8, 0]], dur: 10, done: '이달의 플랜 발송',
+          tasks: ['계좌별 투자금 나누기', '그림 카드 그리기'] }] },
+      { id: 'us', name: '이수안', initials: '이', dept: '자산운용본부', role: '미국 매니저', color: '#0B1F3A',
+        jobs: [{ name: '미국 스크리너', tz: 'ET', days: WD, at: [[9, 0]], dur: 10, done: '미국 추세 후보 발송',
+          tasks: ['S&P 500 시세 수집', '추세 템플릿 조건 확인', '상대강도 순위'] },
+          { name: '미국장 리포트', tz: 'ET', days: WD, at: [[9, 30]], dur: 12, done: '미국장 리포트 발송',
+          tasks: ['미국 관심종목 신호 계산', '나스닥 200일선 확인', '사용자별 요약 작성'] }] },
+      { id: 'risk', name: '박준혁', initials: '박', dept: '리스크관리본부', role: '가격 감시', color: '#7A5A12',
+        jobs: [{ name: '손절·목표가 감시', every: 10, offset: 1, dur: 1, done: '손절·목표가 도달 확인',
+          tasks: ['관심·보유 종목 가격 조회', '손절·목표가와 비교'] },
+          { name: '실적 발표 임박 점검', days: WD, at: [[8, 35]], dur: 5, done: '실적 발표 3일 이내 종목 알림',
+          tasks: ['보유·관심종목 실적 달력 확인'] }] },
+      { id: 'paper', name: '최유나', initials: '최', dept: '트레이딩·결제팀', role: '종이 펀드 운용', color: '#5B3A6B',
+        jobs: [{ name: '종이 펀드 C 기록', days: WD, at: [[18, 15]], dur: 5, done: '내부자 매수 따라 사기 기록',
+          tasks: ['새 장내 매수 보고 확인', '규칙대로 가상 매수·매도', '코스피 대비 성적 기록'] },
+          { name: '미국 모멘텀 종이 매매', days: [2, 3, 4, 5, 6], at: [[7, 20]], dur: 5, done: '모멘텀 바구니 점검',
+          tasks: ['월말 종가 확인', '상위 10% 바구니 채점'] }] },
+      { id: 'perf', name: '강민서', initials: '강', dept: '성과평가팀', role: '판정 검증', color: '#0F6E5A',
+        jobs: [{ name: '주간 자동 판정', days: [1], at: [[7, 10]], dur: 40, done: '관심종목 주간 판정과 검증',
+          tasks: ['관심종목 종합 분석', '최종 판정 기록', '20거래일 뒤 성적 채점'] }] },
+      { id: 'lab', name: '오세린', initials: '오', dept: '퀀트전략연구소', role: '투자위원회 간사', color: '#0F6E5A',
+        jobs: [{ name: '주간 투자위원회', days: [1], at: [[11, 51]], dur: 35, done: '주간 투자위원회 회의록',
+          tasks: ['지난주 실적·종이 펀드 정리', '반론 담당 검토', '결재 안건 정리'] }] },
+      { id: 'it', name: '임도현', initials: '임', dept: 'IT·보안실', role: '서버 관리', color: '#4B5563',
+        jobs: [{ name: '자동 점검', every: 5, offset: 4, dur: 1, done: '서버·작업 상태 점검',
+          tasks: ['봇 프로세스 확인', '메모리·디스크 확인'] },
+          { name: '생존 신호', at: [[0, 17], [6, 17], [12, 17], [18, 17]], dur: 2, done: '생존 신호 기록',
+          tasks: ['작업 상태 요약', '생존 신호 올리기'] },
+          { name: '백업', at: [[4, 30]], dur: 5, done: '사용자 데이터 백업',
+          tasks: ['상태 파일 압축', '오래된 백업 정리'] }] },
+      { id: 'compliance', name: '남궁현', initials: '남', dept: '준법감시인', role: '상시 감시', color: '#8A3B12', always: true,
+        alwaysText: 'AI 비용 한도, 접근 승인, 키 가리기를 상시 확인' }
+    ];
+    return this._spec;
+  }
+  runs(job, i) {
+    if (job.events) return job.events.some((e) => i === e.min - 3);
+    const utc = i * 60000;
+    const off = job.tz === 'ET' ? this.usOffset(utc) * 60 : 540;
+    const f = this.fields(utc + off * 60000);
+    if (job.days && job.days.indexOf(f.dow) < 0) return false;
+    if (job.monthDay && f.day !== job.monthDay) return false;
+    if (job.hours && (f.h < job.hours[0] || f.h > job.hours[1])) return false;
+    if (job.every) return f.m % job.every === job.offset;
+    return job.at.some((t) => t[0] === f.h && t[1] === f.m);
+  }
+  hm(min) {
+    const f = this.fields(min * 60000 + 9 * 3600000);
+    return String(f.h).padStart(2, '0') + ':' + String(f.m).padStart(2, '0');
+  }
+  rel(diff, min) {
+    if (diff < 60) return this.hm(min) + ' (' + diff + '분 뒤)';
+    if (diff < 24 * 60) return this.hm(min) + ' (' + Math.round(diff / 60) + '시간 뒤)';
+    const f = this.fields(min * 60000 + 9 * 3600000);
+    return (f.mo + 1) + '/' + f.day + '(' + '일월화수목금토'[f.dow] + ') ' + this.hm(min);
+  }
+  compute(nowMin) {
+    const out = {};
+    const limit = 60 * 24 * 60;
+    this.spec().forEach((a) => {
+      if (a.always) return;
+      let active = null, next = null, last = null;
+      a.jobs.forEach((j) => {
+        for (let k = 0; k < j.dur && !active; k++) {
+          if (this.runs(j, nowMin - k)) active = { job: j, start: nowMin - k };
+        }
+        for (let d = 1; d <= limit; d++) {
+          if (next && d >= next.at - nowMin) break;
+          if (this.runs(j, nowMin + d)) { next = { job: j, at: nowMin + d }; break; }
+        }
+        for (let d = j.dur; d <= 8 * 24 * 60; d++) {
+          if (last && nowMin - d <= last.at) break;
+          if (this.runs(j, nowMin - d)) { last = { job: j, at: nowMin - d }; break; }
+        }
+      });
+      out[a.id] = { active: active, next: next, last: last };
+    });
+    return out;
+  }
+  showAgent(a) {
+    if (this.state.focus) return this.state.focus.indexOf(a.id) >= 0;
+    return this.state.dept === '전체' || this.state.dept === a.dept;
+  }
+  scene(spec, sched, nowMs, kst) {
+    const night = kst.h >= 19 || kst.h < 6;
+    const floorDefs = [
+      ['8F', '대표실', ['ceo']],
+      ['7F', '연구소 · 성과평가', ['lab', 'perf']],
+      ['6F', '디자인·UX팀', ['uxr', 'uxd']],
+      ['5F', '자산운용본부', ['kr', 'us']],
+      ['4F', '리서치센터', ['news', 'macro', 'release', 'disclose']],
+      ['3F', '리스크 · 준법감시', ['risk', 'compliance']],
+      ['2F', '트레이딩 · 데이터', ['paper', 'data']],
+      ['1F', 'IT·보안실', ['it']]
+    ];
+    const looks = { uxr: ['#3A2A1E', '#B5527A'], uxd: ['#1E1E24', '#2E8B8B'], ceo: ['#1E1E24', '#1B2A44', '#C9A55A'], lab: ['#2B1D14', '#6B4FA0'], perf: ['#1E1E24', '#0F6E5A'], kr: ['#2B1D14', '#1E3A5F'], us: ['#7A4A28', '#24508A'],
+      news: ['#1E1E24', '#0E5E6F'], macro: ['#3A2A1E', '#2F7A8A'], release: ['#7A3B2A', '#3D6E9E'], disclose: ['#1E1E24', '#5E8A3A'],
+      risk: ['#2B1D14', '#9A7420'], compliance: ['#55555E', '#8A3B12'], paper: ['#7A4A28', '#5B3A6B'], data: ['#1E1E24', '#5A6575'], it: ['#2B1D14', '#3A4A5A'] };
+    const byId = {};
+    spec.forEach((a) => { byId[a.id] = a; });
+    let busy = 0;
+    const floors = floorDefs.map((fd) => {
+      const people = fd[2].map((id) => {
+        const a = byId[id];
+        const s = a.always ? null : sched[id];
+        const lk = looks[id];
+        const active = !!(a.always || (s && s.active));
+        let task = '', tag = '';
+        if (a.always) task = '비용·접근 상시 감시';
+        else if (s.active) { const j = s.active.job; task = j.tasks[Math.floor(nowMs / 3500) % j.tasks.length]; }
+        else if (s.next) {
+          const nowMin = Math.floor(nowMs / 60000);
+          const f = this.fields(s.next.at * 60000 + 9 * 3600000);
+          tag = '다음 ' + (s.next.at - nowMin < 18 * 60 ? '' : (f.mo + 1) + '/' + f.day + ' ') + this.hm(s.next.at);
+        } else tag = '대기';
+        if (active && !a.always) busy++;
+        return { label: a.name + ' ' + a.role + (active ? ' 작업 중' : ' 대기'), hair: lk[0], shirt: lk[1], tie: lk[2] || lk[1],
+          isWorking: active, isIdle: !active, task: task, tag: tag,
+          bodyClass: active ? 'px-type' : '', screenClass: active ? 'px-screen' : '',
+          screen: active ? '#8FE3FF' : '#1C2230', screenLine: active ? '#2A6F8F' : '#262D3C' };
+      });
+      const working = people.some((p) => p.isWorking);
+      const lit = working || !night;
+      const focus = this.state.focus;
+      const on = !!focus && focus.join() === fd[2].join();
+      return { no: fd[0], name: fd[1], people: people, isServer: fd[0] === '1F', walker: working,
+        walkerStyle: 'animation-delay: -' + (((nowMs / 1000) + fd[2].length * 4) % 16).toFixed(2) + 's',
+        pressed: on ? 'true' : 'false', pick: () => this.setState({ focus: on ? null : fd[2], dept: '전체' }),
+        labelStyle: 'width: 180px; margin-right: 10px; flex: none; display: flex; flex-direction: column; justify-content: center; align-items: flex-end; text-align: right; gap: 2px; padding: 0 14px; border: 0; border-right: 4px solid ' + (working ? '#C9A55A' : '#3A3F4A') + '; background: ' + (on ? '#2B4A75' : 'rgba(11,31,58,.86)') + '; color: #FFFFFF; font: inherit; cursor: pointer; margin-bottom: 6px',
+        roomStyle: 'position: relative; height: 102px; overflow: hidden; display: flex; align-items: flex-end; gap: 22px; padding: 0 16px 0 22px; background: ' + (working ? '#E8B866' : (lit ? '#B39B74' : '#1E2430')) + '; transition: background .6s',
+        lampStyle: 'position: absolute; top: 0; left: 0; right: 0; height: 8px; background: repeating-linear-gradient(90deg, transparent 0 60px, ' + (working ? '#FFF1C9' : (lit ? '#D6C49F' : '#2A3140')) + ' 60px 76px, transparent 76px 140px)' };
+    });
+    const win = night ? '#E9B866' : '#7F9DB5';
+    const sk = (side, pos, w, h) => 'position: absolute; bottom: 26px; ' + side + ': ' + pos + 'px; width: ' + w + 'px; height: ' + h + 'px; background-color: #262C3A; background-image: repeating-linear-gradient(0deg, #262C3A 0 9px, transparent 9px 19px), repeating-linear-gradient(90deg, ' + win + ' 0 8px, #262C3A 8px 18px)';
+    const stars = [];
+    if (night) {
+      const pts = [[4, 22], [11, 60], [17, 34], [26, 14], [33, 48], [41, 26], [52, 12], [58, 40], [66, 20], [73, 54], [79, 30], [88, 16], [94, 44], [98, 70]];
+      pts.forEach((p, i) => stars.push({ style: 'position: absolute; left: ' + p[0] + '%; top: ' + p[1] + 'px; width: 3px; height: 3px; background: #E8ECF7; opacity: ' + (i % 3 === 0 ? 1 : 0.6) }));
+    }
+    return {
+      floors: floors, stars: stars,
+      sceneLabel: '사옥 단면 그림: 지금 작업 중인 직원 ' + busy + '명',
+      skyStyle: 'position: relative; overflow: hidden; min-width: 1040px; background: ' + (night ? 'linear-gradient(#10162B 0 35%, #18213D 35% 65%, #222C4E 65%)' : 'linear-gradient(#8DBBE0 0 35%, #A3C9E7 35% 65%, #BAD6EC 65%)'),
+      moonColor: night ? '#F4E7B5' : '#FFE08A',
+      skyline1: sk('left', 0, 120, 430), skyline2: sk('left', 110, 90, 300),
+      skyline3: sk('right', 0, 130, 470), skyline4: sk('right', 120, 80, 320),
+      lobby: night ? '#E8B866' : '#9FB7C9'
+    };
+  }
+  renderVals() {
+    const tab = this.state.tab || this.props.startTab || 'overview';
+    const nowMs = this.state.now;
+    const nowMin = Math.floor(nowMs / 60000);
+    if (nowMin !== this._cacheMin) { this._sched = this.compute(nowMin); this._cacheMin = nowMin; }
+    const sched = this._sched;
+    const kst = this.fields(nowMs + 9 * 3600000);
+    const pad = (n) => String(n).padStart(2, '0');
+    const tabDefs = [['overview', '개요'], ['analysis', '종목 분석'], ['work', '일하는 모습'], ['strategy', '운용 원칙 · 검증'], ['research', '리서치 자료실'], ['safety', '안전장치']];
+    const tabs = tabDefs.map((t) => {
+      const on = t[0] === tab;
+      return { label: t[1], pressed: on ? 'true' : 'false', pick: () => this.setState({ tab: t[0] }),
+        style: 'min-height: 48px; padding: 0 18px; border: 0; border-bottom: 3px solid ' + (on ? '#C9A55A' : 'transparent') + '; background: transparent; color: ' + (on ? '#FFFFFF' : '#AEBBD0') + '; font: inherit; font-size: 15px; font-weight: ' + (on ? '700' : '500') + '; cursor: pointer; white-space: nowrap' };
+    });
+    const spec = this.spec();
+    const deptNames = ['전체'].concat(spec.map((a) => a.dept).filter((d, i, arr) => arr.indexOf(d) === i));
+    const depts = deptNames.map((d) => {
+      const on = !this.state.focus && d === this.state.dept;
+      return { label: d, pressed: on ? 'true' : 'false', pick: () => this.setState({ dept: d, focus: null }),
+        style: 'min-height: 44px; padding: 0 16px; border-radius: 999px; border: 1px solid ' + (on ? '#0B1F3A' : '#C8CFD9') + '; background: ' + (on ? '#0B1F3A' : '#FFFFFF') + '; color: ' + (on ? '#FFFFFF' : '#0B1F3A') + '; font: inherit; font-size: 14px; font-weight: 600; cursor: pointer' };
+    });
+    let working = 0, always = 0, soonest = null;
+    const agents = spec.map((a) => {
+      const base = { name: a.name, initials: a.initials, dept: a.dept, role: a.role,
+        avatarStyle: 'width: 44px; height: 44px; border-radius: 50%; background: ' + a.color + '; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 17px; flex: none' };
+      if (a.always) {
+        always++;
+        return Object.assign(base, { isWorking: false, isIdle: false, isAlways: true, task: a.alwaysText, statusLabel: '상시',
+          pillStyle: 'display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 999px; background: #F6EEDC; color: #6B4E0E',
+          dotClass: '', dotStyle: 'width: 8px; height: 8px; border-radius: 50%; background: #B8892E',
+          cardStyle: 'background: #FFFFFF; border: 1px solid #D9DEE5; border-radius: 8px; padding: 18px', show: this.showAgent(a) });
+      }
+      const s = sched[a.id];
+      if (s.next && (!soonest || s.next.at < soonest.at)) soonest = { at: s.next.at, who: a.name, job: s.next.job.name };
+      if (s.active) {
+        working++;
+        const j = s.active.job;
+        const elapsed = (nowMs / 60000) - s.active.start;
+        const pct = Math.max(4, Math.min(100, (elapsed / j.dur) * 100));
+        const ti = Math.floor(nowMs / 3500) % j.tasks.length;
+        return Object.assign(base, { isWorking: true, isIdle: false, isAlways: false, jobName: j.name, task: j.tasks[ti],
+          statusLabel: '작업 중', barStyle: 'height: 100%; width: ' + pct.toFixed(1) + '%; background: #0F6E5A; border-radius: 3px; transition: width 1s linear',
+          pillStyle: 'display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 999px; background: #DDF0EA; color: #0A4F40',
+          dotClass: 'tq-live', dotStyle: 'width: 8px; height: 8px; border-radius: 50%; background: #0F6E5A',
+          cardStyle: 'background: #FFFFFF; border: 1px solid #0F6E5A; border-radius: 8px; padding: 18px; box-shadow: 0 2px 10px rgba(11,31,58,.08)', show: this.showAgent(a) });
+      }
+      return Object.assign(base, { isWorking: false, isIdle: true, isAlways: false,
+        next: s.next ? this.rel(s.next.at - nowMin, s.next.at) + ' · ' + s.next.job.name : '예정 없음',
+        last: s.last ? this.hm(s.last.at) + ' · ' + s.last.job.done : '기록 없음',
+        statusLabel: '대기', pillStyle: 'display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 999px; background: #EEF1F4; color: #4B5563',
+        dotClass: '', dotStyle: 'width: 8px; height: 8px; border-radius: 50%; background: #9AA4B2',
+        cardStyle: 'background: #FFFFFF; border: 1px solid #D9DEE5; border-radius: 8px; padding: 18px', show: this.showAgent(a) });
+    });
+    const feed = [];
+    spec.forEach((a) => {
+      if (a.always) return;
+      const s = sched[a.id];
+      if (s.last) feed.push({ at: s.last.at, time: this.hm(s.last.at), who: a.name + ' · ' + a.role, what: s.last.job.done });
+    });
+    feed.sort((x, y) => y.at - x.at);
+    const sc = this.scene(spec, sched, nowMs, kst);
+    return {
+      floors: sc.floors, stars: sc.stars, sceneLabel: sc.sceneLabel, skyStyle: sc.skyStyle, moonColor: sc.moonColor,
+      skyline1: sc.skyline1, skyline2: sc.skyline2, skyline3: sc.skyline3, skyline4: sc.skyline4, lobby: sc.lobby,
+      tabs: tabs,
+      isOverview: tab === 'overview', isAnalysis: tab === 'analysis', isWork: tab === 'work', isStrategy: tab === 'strategy', isResearch: tab === 'research', isSafety: tab === 'safety',
+      goWork: () => this.setState({ tab: 'work' }),
+      clock: pad(kst.h) + ':' + pad(kst.m) + ':' + pad(kst.s),
+      dateLabel: kst.y + '년 ' + (kst.mo + 1) + '월 ' + kst.day + '일 ' + '일월화수목금토'[kst.dow] + '요일',
+      depts: depts,
+      agents: agents.filter((a) => a.show),
+      agentCount: spec.length,
+      workingCount: working,
+      alwaysCount: always,
+      nextUp: soonest ? this.rel(soonest.at - nowMin, soonest.at) + ' · ' + soonest.who + ' — ' + soonest.job : '-',
+      feed: feed.slice(0, 9)
+    };
+  }
+}
+
+(function () {
+  var HOLE = /\{\{\s*([^}]+?)\s*\}\}/g;
+  var ONE = /^\{\{\s*([^}]+?)\s*\}\}$/;
+  function get(scope, path) {
+    path = path.trim();
+    if (path === 'true') return true;
+    if (path === 'false') return false;
+    if (/^-?\d+(\.\d+)?$/.test(path)) return Number(path);
+    var parts = path.split('.'), v = scope[parts[0]];
+    for (var i = 1; i < parts.length; i++) { if (v == null) return undefined; v = v[parts[i]]; }
+    return v;
+  }
+  function interp(str, scope) {
+    var m = str.match(ONE);
+    if (m) return get(scope, m[1]);
+    return str.replace(HOLE, function (_, p) { var v = get(scope, p); return v == null ? '' : String(v); });
+  }
+  function draw(node, scope, out) {
+    if (node.nodeType === 3) { var t = interp(node.nodeValue, scope); out.appendChild(document.createTextNode(t == null ? '' : String(t))); return; }
+    if (node.nodeType !== 1) return;
+    var tag = node.localName;
+    if (tag === 'sc-for') {
+      var list = interp(node.getAttribute('list'), scope) || [], as = node.getAttribute('as');
+      list.forEach(function (item, i) {
+        var s = Object.create(scope); s[as] = item; s.$index = i;
+        node.childNodes.forEach(function (c) { draw(c, s, out); });
+      });
+      return;
+    }
+    if (tag === 'sc-if') { if (interp(node.getAttribute('value'), scope)) node.childNodes.forEach(function (c) { draw(c, scope, out); }); return; }
+    var el = document.createElementNS(node.namespaceURI, tag);
+    for (var k = 0; k < node.attributes.length; k++) {
+      var a = node.attributes[k];
+      if (a.name.indexOf('hint-') === 0) continue;
+      var v = interp(a.value, scope);
+      if (a.name.indexOf('on') === 0 && typeof v === 'function') { el.addEventListener(a.name.slice(2), v); continue; }
+      if (v === undefined || v === null || v === false) continue;
+      el.setAttribute(a.name, v);
+    }
+    node.childNodes.forEach(function (c) { draw(c, scope, el); });
+    out.appendChild(el);
+  }
+  var root = document.getElementById('app');
+  var tpl = document.getElementById('tpl').content;
+  var comp = new Component({});
+  var hash = (location.hash || '').replace('#', '');
+  if (['overview', 'analysis', 'work', 'strategy', 'research', 'safety'].indexOf(hash) >= 0) comp.state.tab = hash;
+  var last = null, lastTab = comp.state.tab;
+  window.__app = {
+    update: function () {
+      var vals = comp.renderVals();
+      var tab = comp.state.tab || 'overview';
+      var now = comp.state.now;
+      var sig = JSON.stringify([tab, comp.state.dept, comp.state.focus, Math.floor(now / 60000), tab === 'work' ? Math.floor(now / 3500) : 0]);
+      if (sig !== last) {
+        last = sig;
+        var frag = document.createDocumentFragment();
+        tpl.childNodes.forEach(function (c) { draw(c, vals, frag); });
+        root.replaceChildren(frag);
+        if (tab !== lastTab) { lastTab = tab; history.replaceState(null, '', '#' + tab); window.scrollTo(0, 0); }
+      } else {
+        var clock = root.querySelector('[data-clock]');
+        if (clock) clock.textContent = vals.clock;
+      }
+    }
+  };
+  window.__app.update();
+  comp.componentDidMount();
+})();
+</script>
+</body>
+</html>
