@@ -1345,7 +1345,7 @@ class Component extends DCLogic {
         var frag = document.createDocumentFragment();
         tpl.childNodes.forEach(function (c) { draw(c, vals, frag); });
         root.replaceChildren(frag);
-        if (tab !== lastTab) { lastTab = tab; history.replaceState(null, '', '#' + tab); window.scrollTo(0, 0); }
+        if (tab !== lastTab) { lastTab = tab; try { history.replaceState(null, '', '#' + tab); } catch (e) {} window.scrollTo(0, 0); }
       } else {
         var clock = root.querySelector('[data-clock]');
         if (clock) clock.textContent = vals.clock;
