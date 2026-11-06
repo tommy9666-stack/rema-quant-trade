@@ -85,7 +85,7 @@ a{color:#0F6E5A}a:hover{color:#0A4F40}
 <div>
 <p style="margin: 0 0 18px; font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.14em; color: #C9A55A">QUANT ASSET MANAGEMENT ON TELEGRAM</p>
 <h1 style="margin: 0; font-family: 'Noto Serif KR', serif; font-size: clamp(34px, 5vw, 58px); line-height: 1.22; font-weight: 700">투자 고민은 줄이고,<br>할 일만 받아 보세요.</h1>
-<p style="margin: 26px 0 0; font-size: 18px; color: #C8D2E1; max-width: 560px">차트를 붙잡고 있지 않아도, 뉴스를 다 찾아보지 않아도 됩니다. 열한 개 부서의 AI 직원이 시장을 지켜보다가 살 때, 팔 때, 조심할 때만 알려줍니다. 모든 규칙은 과거 자료로 먼저 시험해 통과한 것만 씁니다.</p>
+<p style="margin: 26px 0 0; font-size: 18px; color: #C8D2E1; max-width: 560px">차트를 붙잡고 있지 않아도, 뉴스를 다 찾아보지 않아도 됩니다. 열한 개 부서의 AI 직원이 시장을 지켜보다가 살 때, 팔 때, 조심할 때만 알려줍니다. 매매 규칙은 과거 자료로 먼저 시험해 통과한 것만 쓰고, 아직 확정되지 않은 신호는 '참고'로 표시합니다.</p>
 <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px">
 <a href="https://t.me/Rema_quant_trading_bot" style="display: inline-flex; align-items: center; min-height: 48px; padding: 0 24px; border-radius: 6px; background: #C9A55A; color: #0B1F3A; font-weight: 700; text-decoration: none">텔레그램에서 시작하기</a>
 <button type="button" onClick="{{goWork}}" style="min-height: 48px; padding: 0 24px; border-radius: 6px; border: 1px solid #50678A; background: transparent; color: #FFFFFF; font: inherit; font-weight: 600; cursor: pointer">지금 일하는 모습 보기</button>
@@ -716,7 +716,18 @@ a{color:#0F6E5A}a:hover{color:#0A4F40}
 </figure>
 </div>
 
-<h2 style="margin: 72px 0 12px; font-family: 'Noto Serif KR', serif; font-size: clamp(24px, 3vw, 32px); line-height: 1.3">투자위원회: 통과한 기법만 씁니다</h2>
+<h2 style="margin: 72px 0 12px; font-family: 'Noto Serif KR', serif; font-size: clamp(24px, 3vw, 32px); line-height: 1.3">검증 성적표</h2>
+<p style="margin: 0 0 20px; font-size: 17px; color: #4B5563; max-width: 760px">봇이 시험한 방식을 네 칸으로 나눴습니다. 좋게 나온 것만 고르지 않도록 손해였던 것과 접은 것도 함께 적습니다.</p>
+<div style="background: #0B1F3A; color: #FFFFFF; border-radius: 8px; padding: 22px 26px; margin-bottom: 14px"><p style="margin: 0; font-size: 16px; color: #E8EDF4">비용을 빼고도 지수 그냥 보유를 <b style="color: #E3CB92">통계적으로 확실히</b> 이긴 종목 고르기 규칙은 아직 없습니다. 그래서 스크리너 후보와 내부자 신호는 '참고'로만 보내고, 실제 돈을 쓰기 전에 종이 펀드로 기록합니다.</p></div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: 14px">
+<div style="background: #FFFFFF; border: 1px solid #D9DEE5; border-radius: 8px; padding: 24px"><div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #0F6E5A">① 쓰는 중</div><h3 style="margin: 6px 0 12px; font-size: 18px">지금 쓰는 것과 그 이유</h3><ul style="margin: 0; padding-left: 18px; font-size: 15px; color: #374151"><li style="margin: 0 0 10px"><b>나스닥 200일선</b> — 2022년 하락(-33% → -7%)처럼 긴 하락장에서 낙폭을 줄이는 장치입니다. 수익을 더 내는 장치는 아니라서 지수 엔진의 나스닥 몫에만 씁니다.</li><li style="margin: 0 0 10px"><b>장투 나눠 사기</b>(고점 대비 -10/-20/-30%마다 1/3, 1년 안에 다 쓰기) — 3년 성적은 한 번에 사기와 비슷했습니다(미국 +39% vs +41%). 더 벌어서가 아니라 단순하고 지키기 쉬워서 골랐습니다.</li></ul></div>
+<div style="background: #FFFFFF; border: 1px solid #D9DEE5; border-radius: 8px; padding: 24px"><div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #8A3B12">② 손해</div><h3 style="margin: 6px 0 12px; font-size: 18px">검증상 손해였던 것</h3><ul style="margin: 0; padding-left: 18px; font-size: 15px; color: #374151"><li style="margin: 0 0 10px"><b>큰 공급계약 공시 다음 날 시가에 사서 5일 안에 정리</b> — 건당 -1.4%, 11년 중 플러스인 해가 없었습니다.</li><li style="margin: 0 0 10px"><b>당일·3일 단타 규칙</b> — 비용(왕복 0.35%) 뒤 모두 손해. 국내 수익은 대부분 밤사이에 났습니다(장중만 보면 연 -8%).</li><li style="margin: 0 0 10px"><b>차트 매수 신호</b>(골든크로스·RSI·눌림목) — 비슷한 종목을 아무 날이나 산 것과 차이가 없었습니다.</li></ul></div>
+<div style="background: #FFFFFF; border: 1px solid #D9DEE5; border-radius: 8px; padding: 24px"><div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #7A5A12">③ 참고</div><h3 style="margin: 6px 0 12px; font-size: 18px">신호는 있지만 '사는 신호'는 아닌 것</h3><ul style="margin: 0; padding-left: 18px; font-size: 15px; color: #374151"><li style="margin: 0 0 10px"><b>내부자 장내 매수</b> — 비슷한 종목보다 60일 +2.49%(t 5.9). 다만 신호마다 따라 사는 포트폴리오는 코스피보다 확실히 낫지 않아 종이 펀드 C로 기록 중입니다.</li><li style="margin: 0 0 10px"><b>내부자 장내 매도</b> — 60일 -1.78%(t -2.9)로 통과 기준에는 못 미칩니다. 사기 전에 이유를 확인하라는 표시로만 씁니다.</li><li style="margin: 0 0 10px"><b>스크리너 아침 후보</b> — 순위 방식이 아직 확정되지 않아 종이 펀드 A·D로 기록 중입니다.</li></ul></div>
+<div style="background: #FFFFFF; border: 1px solid #D9DEE5; border-radius: 8px; padding: 24px"><div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #4B5563">④ 접음</div><h3 style="margin: 6px 0 12px; font-size: 18px">다시 시험하지 않을 13갈래</h3><ul style="margin: 0; padding-left: 18px; font-size: 15px; color: #374151"><li style="margin: 0 0 10px">차트 신호로 매일 사고팔기, 당일·3일 단타, 장투 매수 미루기, 코스피 타이밍(200일선 포함), 국내 집중·소형 저평가 바구니, 자사주 공시 뒤 사기, 레버리지(나스닥·코스피 2배), 미국 지수 엔진 대체안, 공개 이상 현상 54개, 미국 종목 매수 타이밍, 스크리너 순위 변형, 내부자 매수 + F-점수, 국내 머신러닝 종목 고르기. 새 종류의 자료와 결재가 있어야 다시 엽니다.</li></ul></div>
+</div>
+<p style="margin: 14px 0 0; font-size: 13px; color: #4B5563">검증 방식: 상장폐지 종목까지 포함 · 그날 알 수 있던 정보만 사용 · 거래 비용 포함 · 시험한 횟수만큼 통과 기준을 높임. 과거 결과는 미래 수익을 보장하지 않습니다. 투자 판단과 주문은 본인이 직접 합니다.</p>
+
+<h2 style="margin: 72px 0 12px; font-family: 'Noto Serif KR', serif; font-size: clamp(24px, 3vw, 32px); line-height: 1.3">투자위원회: 통과한 기법만 매매 규칙으로</h2>
 <p style="margin: 0 0 28px; font-size: 17px; color: #4B5563; max-width: 720px">시험 조건은 결과를 보기 전에 고정하고, 시험한 횟수만큼 통과 기준을 높입니다. 매주 월요일 위원회에서 반론 담당이 따로 검토하고, 디자인·UX팀은 이용 통계와 사용자 의견으로 쓰기 편한 봇을 위한 개선안을 올립니다.</p>
 <ol style="list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(150px, 100%), 1fr)); gap: 10px">
 <li style="background: #FFFFFF; border: 1px solid #D9DEE5; border-radius: 6px; padding: 18px"><div style="font-family: 'IBM Plex Mono', monospace; color: #7A5A12">STEP 1</div><div style="font-weight: 600">가설 등록</div></li>
@@ -726,10 +737,6 @@ a{color:#0F6E5A}a:hover{color:#0A4F40}
 <li style="background: #FFFFFF; border: 1px solid #D9DEE5; border-radius: 6px; padding: 18px"><div style="font-family: 'IBM Plex Mono', monospace; color: #7A5A12">STEP 5</div><div style="font-weight: 600">종이 매매 6개월</div></li>
 <li style="background: #FFFFFF; border: 1px solid #D9DEE5; border-radius: 6px; padding: 18px"><div style="font-family: 'IBM Plex Mono', monospace; color: #7A5A12">STEP 6</div><div style="font-weight: 600">승격 또는 폐기</div></li>
 </ol>
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 14px; margin-top: 28px">
-<div style="background: #0B1F3A; color: #FFFFFF; border-radius: 8px; padding: 26px"><div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #8FD3BF">확인됨</div><h3 style="margin: 6px 0 8px; font-size: 18px">대표·등기임원 장내 매수</h3><p style="margin: 0; color: #C8D2E1; font-size: 15px">2017~2026년 공시 5만 6천여 건에서 매수 뒤 60일 평균 +2.49%(t 5.9). 지금은 종이 펀드 C로 실제 성적을 쌓는 중입니다.</p></div>
-<div style="background: #0B1F3A; color: #FFFFFF; border-radius: 8px; padding: 26px"><div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #8FD3BF">쓰는 중</div><h3 style="margin: 6px 0 8px; font-size: 18px">지수 200일선 추세 추종</h3><p style="margin: 0; color: #C8D2E1; font-size: 15px">수익을 더 내는 기법이 아니라 큰 하락을 줄이는 장치입니다. 그래서 지수 엔진에만 씁니다.</p></div>
-<div style="background: #0B1F3A; color: #FFFFFF; border-radius: 8px; padding: 26px"><div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #E3CB92">접음</div><h3 style="margin: 6px 0 8px; font-size: 18px">13갈래는 다시 시험하지 않습니다</h3><p style="margin: 0; color: #C8D2E1; font-size: 15px">차트 매일 매매, 당일·3일 단타, 레버리지, 코스피 타이밍, 이상 현상 카탈로그 등은 기준선을 넘지 못했습니다. 새 자료와 결재가 있어야 다시 엽니다.</p></div>
 <h2 style="margin: 72px 0 12px; font-family: 'Noto Serif KR', serif; font-size: clamp(24px, 3vw, 32px); line-height: 1.3">실제 돈 전에, 종이 펀드로 먼저</h2>
 <p style="margin: 0 0 24px; font-size: 17px; color: #4B5563; max-width: 760px">검증을 통과했거나 지켜볼 만한 방식은 실제 돈 없이 규칙대로 사고판 기록부터 쌓습니다. 규칙은 시작 전에 고정하고, 정한 건수가 쌓이기 전에는 좋다 나쁘다 판단하지 않습니다.</p>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 14px">
@@ -737,7 +744,6 @@ a{color:#0F6E5A}a:hover{color:#0A4F40}
 <div style="background: #FFFFFF; border: 1px solid #D9DEE5; border-radius: 8px; padding: 22px"><div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #0F6E5A">B</div><h3 style="margin: 6px 0 6px; font-size: 17px">미국 모멘텀</h3><p style="margin: 0; font-size: 15px; color: #374151">미국 대형주 중 최근 상승이 강한 상위 10% 바구니를 월말마다 채점합니다.</p></div>
 <div style="background: #FFFFFF; border: 1px solid #D9DEE5; border-radius: 8px; padding: 22px"><div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #0F6E5A">C · /paperc</div><h3 style="margin: 6px 0 6px; font-size: 17px">내부자 매수 따라 사기</h3><p style="margin: 0; font-size: 15px; color: #374151">대표·등기임원 장내 매수 공시 다음 날 종가에 사서 60거래일 보유. 끝난 기록 30건 전에는 판단하지 않습니다.</p></div>
 <div style="background: #FFFFFF; border: 1px solid #D9DEE5; border-radius: 8px; padding: 22px"><div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #0F6E5A">D · /paperd <span style="margin-left: 6px; background: #FF5D8F; color: #FFFFFF; padding: 1px 5px; border-radius: 3px; font-size: 11px">NEW</span></div><h3 style="margin: 6px 0 6px; font-size: 17px">스크리너 아침 후보 따라 사기</h3><p style="margin: 0; font-size: 15px; color: #374151">매일 아침 알림으로 받는 스크리너 후보를 그대로 따라 그날 종가에 사서 20거래일 보유(비용 왕복 국내 0.35%·미국 0.2%). 시장별 끝난 60건과 20주가 쌓이기 전에는 판단하지 않습니다. 2026-11-06 시작이라 아직 성적은 없습니다.</p></div>
-</div>
 </div>
 </div>
 </section>
@@ -754,7 +760,7 @@ a{color:#0F6E5A}a:hover{color:#0A4F40}
 
 <article style="background: #FFFFFF; border: 1px solid #D9DEE5; border-radius: 8px; overflow: hidden; display: flex; flex-direction: column">
 <div style="background: #0B1F3A; color: #FFFFFF; padding: 22px 24px">
-<div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #C9A55A; letter-spacing: 0.12em">STRATEGY REPORT · 확인됨</div>
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #C9A55A; letter-spacing: 0.12em">STRATEGY REPORT · 참고 신호</div>
 <div style="font-family: 'Noto Serif KR', serif; font-size: 23px; font-weight: 700; margin-top: 4px">대표·등기임원 장내 매수</div>
 <div style="font-size: 14px; color: #AEBBD0; margin-top: 2px">내부자가 자기 돈으로 산 뒤 주가는 어땠나</div>
 </div>
@@ -767,29 +773,29 @@ a{color:#0F6E5A}a:hover{color:#0A4F40}
 <div style="padding: 18px 24px; font-size: 14px; color: #374151; display: grid; gap: 12px; flex: 1">
 <div><b style="color: #0B1F3A">사실</b> 대표·등기임원 장내 매수 뒤 60거래일 평균 +2.49%(t 5.9). 장내 매도 뒤는 -1.78%(t -2.9).</div>
 <div><b style="color: #0F6E5A">강점</b> 10년 가까운 공시 전체로 확인했고, 매수와 매도가 반대 방향으로 갈려 우연일 가능성이 낮음.</div>
-<div><b style="color: #8A3B12">약점</b> 건당 효과가 작아 비용·세금 뒤 몫이 줄어듦. 실제 돈으로는 아직 검증 전이라 종이 펀드 C로 기록 중.</div>
+<div><b style="color: #8A3B12">약점</b> 신호마다 따라 사는 포트폴리오는 코스피보다 확실히 낫지 않았음(t 1.1~1.3). 건당 효과가 작아 비용·세금 뒤 몫이 줄어듦. 그래서 사는 신호가 아니라 참고 신호이고, 종이 펀드 C로 기록 중.</div>
 </div>
 <div style="padding: 14px 24px; border-top: 1px solid #E5E9EE; font-size: 13px; color: #6B7280">봇에서 /insider · /paperc</div>
 </article>
 
 <article style="background: #FFFFFF; border: 1px solid #D9DEE5; border-radius: 8px; overflow: hidden; display: flex; flex-direction: column">
 <div style="background: #0B1F3A; color: #FFFFFF; padding: 22px 24px">
-<div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #C9A55A; letter-spacing: 0.12em">STRATEGY REPORT · 사용 중</div>
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #C9A55A; letter-spacing: 0.12em">STRATEGY REPORT · 접음</div>
 <div style="font-family: 'Noto Serif KR', serif; font-size: 23px; font-weight: 700; margin-top: 4px">코스피 200일선 추세 추종</div>
 <div style="font-size: 14px; color: #AEBBD0; margin-top: 2px">지수가 200일 평균 아래면 현금으로 비키기</div>
 </div>
 <dl style="margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); font-size: 14px; border-bottom: 1px solid #E5E9EE">
 <div style="padding: 12px 24px; border-right: 1px solid #E5E9EE"><dt style="color: #6B7280">전략 유형</dt><dd style="margin: 0; font-weight: 600">국면 · 하락 방어</dd></div>
 <div style="padding: 12px 24px"><dt style="color: #6B7280">시장</dt><dd style="margin: 0; font-weight: 600">국내 지수</dd></div>
-<div style="padding: 12px 24px; border-right: 1px solid #E5E9EE; border-top: 1px solid #E5E9EE"><dt style="color: #6B7280">검증 기간</dt><dd style="margin: 0; font-weight: 600; font-family: 'IBM Plex Mono', monospace">2016-10 ~ 2026-10</dd></div>
+<div style="padding: 12px 24px; border-right: 1px solid #E5E9EE; border-top: 1px solid #E5E9EE"><dt style="color: #6B7280">검증 기간</dt><dd style="margin: 0; font-weight: 600; font-family: 'IBM Plex Mono', monospace">2001 ~ 2026</dd></div>
 <div style="padding: 12px 24px; border-top: 1px solid #E5E9EE"><dt style="color: #6B7280">비교 대상</dt><dd style="margin: 0; font-weight: 600">코스피 그냥 보유</dd></div>
 </dl>
 <div style="padding: 18px 24px; font-size: 14px; color: #374151; display: grid; gap: 12px; flex: 1">
-<div><b style="color: #0B1F3A">사실</b> 연 수익 +12.5%로 그냥 보유(+12.0%)와 비슷하고, 최대 낙폭은 -35%에서 -25%로 줄었음.</div>
-<div><b style="color: #0F6E5A">강점</b> 지수 자체로 시험해 종목 선정 편향이 없음. 수익을 버리지 않고 큰 하락만 줄임.</div>
-<div><b style="color: #8A3B12">약점</b> 월말 판단이라 급락·급반등에는 늦음. 같은 규칙이 미국 S&amp;P 500에서는 이 기간 수익을 깎았음.</div>
+<div><b style="color: #0B1F3A">사실</b> 200일선·10개월선·경기+추세 등 코스피 타이밍 규칙 6개 중 5개가 그냥 보유보다 나빴고 1개는 차이 없었음. 200일선은 최대 낙폭을 -47%에서 -34%로 줄였지만 수익을 연 3.6%p 포기했음.</div>
+<div><b style="color: #0F6E5A">강점</b> 지수 자체로 시험해 종목 선정 편향이 없음. 하락 폭은 실제로 줄였음.</div>
+<div><b style="color: #8A3B12">약점</b> 줄인 낙폭보다 포기한 수익이 커서 접었음. 그래서 코스피 몫은 그냥 보유하고, 200일선은 나스닥 몫에만 씀.</div>
 </div>
-<div style="padding: 14px 24px; border-top: 1px solid #E5E9EE; font-size: 13px; color: #6B7280">봇에서 /strategy · /market</div>
+<div style="padding: 14px 24px; border-top: 1px solid #E5E9EE; font-size: 13px; color: #6B7280">봇에서 /kospi · /lab</div>
 </article>
 
 <article style="background: #FFFFFF; border: 1px dashed #B7C0CC; border-radius: 8px; display: flex; flex-direction: column; justify-content: center; padding: 28px 24px">
