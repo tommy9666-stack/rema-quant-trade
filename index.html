@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Rema Quant Trade</title>
-<meta name="description" content="투자 고민은 줄이고, 할 일만 받아 보세요. 열두 개 부서의 AI 직원이 시장을 지켜보다가 살 때, 팔 때, 조심할 때만 알려주는 텔레그램 퀀트 운용 비서.">
+<meta name="description" content="투자 고민은 줄이고, 할 일만 받아 보세요. 열세 개 부서의 AI 직원이 시장을 지켜보다가 살 때, 팔 때, 조심할 때만 알려주는 텔레그램 퀀트 운용 비서.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Rema Quant Trade">
 <meta property="og:description" content="투자 고민은 줄이고, 할 일만 받아 보세요. 텔레그램 퀀트 운용 비서와 AI 직원들이 일하는 모습.">
@@ -85,7 +85,7 @@ a{color:#0F6E5A}a:hover{color:#0A4F40}
 <div>
 <p style="margin: 0 0 18px; font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.14em; color: #C9A55A">QUANT ASSET MANAGEMENT ON TELEGRAM</p>
 <h1 style="margin: 0; font-family: 'Noto Serif KR', serif; font-size: clamp(34px, 5vw, 58px); line-height: 1.22; font-weight: 700">투자 고민은 줄이고,<br>할 일만 받아 보세요.</h1>
-<p style="margin: 26px 0 0; font-size: 18px; color: #C8D2E1; max-width: 560px">차트를 붙잡고 있지 않아도, 뉴스를 다 찾아보지 않아도 됩니다. 열두 개 부서의 AI 직원이 시장을 지켜보다가 살 때, 팔 때, 조심할 때만 알려줍니다. 매매 규칙은 과거 자료로 먼저 시험해 통과한 것만 쓰고, 아직 확정되지 않은 신호는 '참고'로 표시합니다.</p>
+<p style="margin: 26px 0 0; font-size: 18px; color: #C8D2E1; max-width: 560px">차트를 붙잡고 있지 않아도, 뉴스를 다 찾아보지 않아도 됩니다. 열세 개 부서의 AI 직원이 시장을 지켜보다가 살 때, 팔 때, 조심할 때만 알려줍니다. 매매 규칙은 과거 자료로 먼저 시험해 통과한 것만 쓰고, 아직 확정되지 않은 신호는 '참고'로 표시합니다.</p>
 <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px">
 <a href="https://t.me/Rema_quant_trading_bot" style="display: inline-flex; align-items: center; min-height: 48px; padding: 0 24px; border-radius: 6px; background: #C9A55A; color: #0B1F3A; font-weight: 700; text-decoration: none">텔레그램에서 시작하기</a>
 <button type="button" onClick="{{goWork}}" style="min-height: 48px; padding: 0 24px; border-radius: 6px; border: 1px solid #50678A; background: transparent; color: #FFFFFF; font: inherit; font-weight: 600; cursor: pointer">지금 일하는 모습 보기</button>
@@ -133,14 +133,14 @@ a{color:#0F6E5A}a:hover{color:#0A4F40}
 <div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #7A5A12">02</div>
 <h3 style="margin: 8px 0 12px; font-size: 20px">내 종목</h3>
 <ul style="margin: 0; padding-left: 18px; color: #374151; display: flex; flex-direction: column; gap: 6px; font-size: 15px">
-<li>이달의 플랜: 투자금을 어디에 얼마나</li><li>고점 대비 -10·-20·-30% 나눠 사기</li><li>보유종목 손절·목표가 알림</li><li>쏠림·변동성 위험 점검</li>
+<li>이달의 플랜: 투자금을 어디에 얼마나</li><li>고점 대비 -10·-20·-30% 나눠 사기</li><li>종목 카드: 그 종목의 사실만 한 장(점수는 검증 뒤)</li><li>보유종목 손절·목표가 알림</li><li>쏠림·변동성 위험 점검</li>
 </ul>
 </article>
 <article style="background: #FFFFFF; padding: 28px">
 <div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #7A5A12">03</div>
 <h3 style="margin: 8px 0 12px; font-size: 20px">기록 · 성과</h3>
 <ul style="margin: 0; padding-left: 18px; color: #374151; display: flex; flex-direction: column; gap: 6px; font-size: 15px">
-<li>매수·매도 일지와 규칙 지키기 성적표</li><li>실제로 산 것과 놓친 알림 장부</li><li>봇 판정이 실제로 맞았는지 추적</li><li>해외주식 양도세 미리 계산</li>
+<li>매수·매도 일지와 규칙 지키기 성적표</li><li>매달·매년 오는 내 매매 리포트</li><li>실제로 산 것과 놓친 알림 장부</li><li>봇 판정이 실제로 맞았는지 추적</li><li>해외주식 양도세 미리 계산</li>
 </ul>
 </article>
 <article style="background: #FFFFFF; padding: 28px">
@@ -975,6 +975,16 @@ class Component extends DCLogic {
       { id: 'dops', name: '염시우', initials: '염', dept: '설계·운영 개선팀', role: '관리 개선 담당', color: '#4B3F8A',
         jobs: [{ name: '지적 처리 추적', days: [1], at: [[11, 51]], dur: 25, done: '열린 지적·CI·재발 점검 보고',
           tasks: ['열린 지적과 커밋 대조', '재발 막는 테스트 확인', 'CI 초록불 확인', '실패를 삼키는 코드 찾기', '기능 지도 최신 확인'] }] },
+      { id: 'cs1', name: '백서진', initials: '백', dept: '고객자산관리팀', role: '팀장 · 고객 리포트', color: '#1F6B50',
+        jobs: [{ name: '월간 매매 리포트 발송', firstWeekday: true, at: [[9, 35]], dur: 10, done: '지난달 개인 매매 리포트 발송',
+          tasks: ['지난달 기록 있는 고객 찾기', '실현손익·승률 계산', '🔔 알림대로 샀는지 대조', '규칙 지키기 점검', '고객별 리포트 발송'] },
+          { name: '연간 매매 리포트 발송', firstWeekday: true, months: [1], at: [[9, 45]], dur: 10, done: '지난해 연간 리포트 발송',
+          tasks: ['1년 기록 모으기', '월별 손익 정리', '미국 주식 예상 양도세', '고객별 연간 리포트 발송'] }] },
+      { id: 'cs2', name: '노은찬', initials: '노', dept: '고객자산관리팀', role: '매매 일지 관리', color: '#1F6B50',
+        jobs: [{ name: '주간 일지 점검', days: [1], at: [[11, 35]], dur: 10, done: '일지 기록·보유 수량 어긋남 점검',
+          tasks: ['지난주 일지 기록 세기', '일지와 보유 수량 대조', '리포트 끈 고객 수 확인', '회의 자료에 개수만 적기'] },
+          { name: '주간 투자위원회 참석', days: [1], at: [[11, 51]], dur: 25, done: '고객자산관리팀 보고',
+          tasks: ['고객 리포트 지표 보고', '일지 어긋남 원인 정리', '다른 팀 제안에 의견'] }] },
       { id: 'help', name: '하윤슬', initials: '하', dept: '디자인·UX팀', role: '상담 데스크', color: '#9C3F66', always: true,
         alwaysText: '채팅 질문에 바로 답하고, 사용자 제안을 투자위원회로', alwaysTask: '채팅 질문에 답하는 중' },
       { id: 'news', name: '한서윤', initials: '한', dept: '리서치센터', role: '뉴스 애널리스트', color: '#0E5E6F',
@@ -989,11 +999,13 @@ class Component extends DCLogic {
       { id: 'disclose', name: '정다은', initials: '정', dept: '리서치센터', role: '공시 해설', color: '#0E5E6F',
         jobs: [{ name: '공시 확인', days: WD, hours: [7, 19], every: 20, offset: 11, dur: 2, done: '관심·보유 종목 공시 확인',
           tasks: ['DART 새 공시 조회', '공시 종류 분류', '쉬운 말 해설 붙이기'] }] },
-      { id: 'desk', name: '구본우', initials: '구', dept: '리서치센터', role: '외부 의견 데스크(내부용)', color: '#0E5E6F',
+      { id: 'desk', name: '구본우', initials: '구', dept: '리서치센터', role: '외부 의견 · 리서치 자료실(내부용)', color: '#0E5E6F',
         jobs: [{ name: '외부 의견 새 글 기록', at: [[8, 26], [11, 26], [14, 26], [17, 26], [20, 26], [23, 26]], dur: 6, done: '팔로업 계정 새 글 기록',
           tasks: ['팔로업 계정 새 글 받기', '글마다 요지·종목 방향 기록', '의견 적중 채점', '대표에게 새 글 요약'] },
           { name: '계정별 프로필 카드 갱신', days: [0], at: [[20, 26]], dur: 15, done: '계정별 프로필 카드 갱신',
-          tasks: ['한 주 의견 모으기', '관점 변화 정리', '프로필 카드 다시 쓰기'] }] },
+          tasks: ['한 주 의견 모으기', '관점 변화 정리', '프로필 카드 다시 쓰기'] },
+          { name: '리서치 자료실 현황', days: [1], at: [[11, 35]], dur: 5, done: '자료실 건수·요약 대기 정리',
+          tasks: ['새로 넣은 리포트 세기', '요약 대기 파일 확인', '회의 자료에 개수만 적기'] }] },
       { id: 'data', name: '서지호', initials: '서', dept: '데이터센터', role: '자료 수집', color: '#4B5563',
         jobs: [{ name: '내부자 보고 수집', days: WD, at: [[6, 50]], dur: 15, done: '임원·주요주주 매매 보고 수집',
           tasks: ['DART 소유 보고 목록 조회', '장내 매수·매도 원문 읽기', '보고자 식별값 저장'] },
@@ -1037,7 +1049,11 @@ class Component extends DCLogic {
           tasks: ['살아 있음 신호 올리기'] }] },
       { id: 'perf', name: '강민서', initials: '강', dept: '성과평가팀', role: '판정 검증', color: '#0F6E5A',
         jobs: [{ name: '주간 자동 판정', days: [1], at: [[7, 10]], dur: 40, done: '관심종목 주간 판정과 검증',
-          tasks: ['관심종목 종합 분석', '최종 판정 기록', '20거래일 뒤 성적 채점'] }] },
+          tasks: ['관심종목 종합 분석', '최종 판정 기록', '20거래일 뒤 성적 채점'] },
+          { name: '종목 카드 점수 기록', days: WD, at: [[8, 0]], dur: 5, done: '관심종목 카드 점수 기록(검증 전, 기록만)',
+          tasks: ['관심종목 카드 사실 모으기', '미리 정한 공식으로 점수 기록', '28일 지난 기록 채점'] },
+          { name: '참고 타점 채점', days: [1], at: [[11, 35]], dur: 5, done: '/chart 참고 타점 성적 채점',
+          tasks: ['끝난 참고 타점 찾기', '진입·손절·목표 판정', '50건 관문 확인'] }] },
       { id: 'lab', name: '오세린', initials: '오', dept: '퀀트전략연구소', role: '투자위원회 간사', color: '#0F6E5A',
         jobs: [{ name: '주간 투자위원회', days: [1], at: [[11, 51]], dur: 35, done: '주간 투자위원회 회의록',
           tasks: ['지난주 실적·종이 펀드 정리', '반론 담당 검토', '결재 안건 정리'] }] },
@@ -1063,6 +1079,8 @@ class Component extends DCLogic {
     const f = this.fields(utc + off * 60000);
     if (job.days && job.days.indexOf(f.dow) < 0) return false;
     if (job.monthDay && f.day !== job.monthDay) return false;
+    if (job.months && job.months.indexOf(f.mo + 1) < 0) return false;
+    if (job.firstWeekday && !(f.dow >= 1 && f.dow <= 5 && (f.day === 1 || (f.dow === 1 && f.day <= 3)))) return false;
     if (job.hours && (f.h < job.hours[0] || f.h > job.hours[1])) return false;
     if (job.every) return f.m % job.every === job.offset;
     return job.at.some((t) => t[0] === f.h && t[1] === f.m);
@@ -1107,7 +1125,8 @@ class Component extends DCLogic {
   scene(spec, sched, nowMs, kst) {
     const night = kst.h >= 19 || kst.h < 6;
     const floorDefs = [
-      ['10F', '대표실', ['ceo']],
+      ['11F', '대표실', ['ceo']],
+      ['10F', '고객자산관리팀', ['cs1', 'cs2']],
       ['9F', '설계·운영 개선팀', ['dlead', 'dops']],
       ['8F', '연구소 · 성과평가', ['lab', 'qa', 'perf', 'pclab']],
       ['7F', '디지털자산팀', ['clead', 'cdata', 'crisk']],
@@ -1118,7 +1137,7 @@ class Component extends DCLogic {
       ['2F', '트레이딩 · 데이터', ['paper', 'exe', 'data']],
       ['1F', 'IT·보안실', ['it']]
     ];
-    const looks = this._looks = { qa: ['#1E1E24', '#2F8F6A'], exe: ['#2B1D14', '#7A4FA0'], desk: ['#3A2A1E', '#1F7F8F'], help: ['#2B1D14', '#D06A92'], pclab: ['#2B1D14', '#C46A1A'], uxr: ['#3A2A1E', '#B5527A'], uxd: ['#1E1E24', '#2E8B8B'], clead: ['#1E1E24', '#C46A12'], cdata: ['#3A2A1E', '#B8862A'], crisk: ['#2B1D14', '#8A5A1C'], dlead: ['#1E1E24', '#4B3F8A'], dops: ['#2B1D14', '#6A5ACD'], ceo: ['#1E1E24', '#1B2A44', '#C9A55A'], lab: ['#2B1D14', '#6B4FA0'], perf: ['#1E1E24', '#0F6E5A'], kr: ['#2B1D14', '#1E3A5F'], us: ['#7A4A28', '#24508A'],
+    const looks = this._looks = { cs1: ['#2B1D14', '#2FA37A'], cs2: ['#1E1E24', '#3E8F6E'], qa: ['#1E1E24', '#2F8F6A'], exe: ['#2B1D14', '#7A4FA0'], desk: ['#3A2A1E', '#1F7F8F'], help: ['#2B1D14', '#D06A92'], pclab: ['#2B1D14', '#C46A1A'], uxr: ['#3A2A1E', '#B5527A'], uxd: ['#1E1E24', '#2E8B8B'], clead: ['#1E1E24', '#C46A12'], cdata: ['#3A2A1E', '#B8862A'], crisk: ['#2B1D14', '#8A5A1C'], dlead: ['#1E1E24', '#4B3F8A'], dops: ['#2B1D14', '#6A5ACD'], ceo: ['#1E1E24', '#1B2A44', '#C9A55A'], lab: ['#2B1D14', '#6B4FA0'], perf: ['#1E1E24', '#0F6E5A'], kr: ['#2B1D14', '#1E3A5F'], us: ['#7A4A28', '#24508A'],
       news: ['#1E1E24', '#0E5E6F'], macro: ['#3A2A1E', '#2F7A8A'], release: ['#7A3B2A', '#3D6E9E'], disclose: ['#1E1E24', '#5E8A3A'],
       risk: ['#2B1D14', '#9A7420'], compliance: ['#55555E', '#8A3B12'], paper: ['#7A4A28', '#5B3A6B'], data: ['#1E1E24', '#5A6575'], it: ['#2B1D14', '#3A4A5A'] };
     const byId = {};
@@ -1182,20 +1201,21 @@ class Component extends DCLogic {
       news: [40, R2], macro: [140, R2], release: [240, R2], disclose: [340, R2], kr: [480, R2], us: [590, R2], risk: [760, R2], compliance: [880, R2],
       paper: [60, R3], data: [170, R3], pclab: [484, R3], it: [760, R3],
       exe: [280, R3], desk: [100, R4], help: [800, R4],
-      clead: [380, R4], cdata: [490, R4], crisk: [600, R4], dlead: [380, R5], dops: [490, R5] };
+      clead: [380, R4], cdata: [490, R4], crisk: [600, R4], dlead: [380, R5], dops: [490, R5], cs1: [760, R5], cs2: [870, R5] };
     const tags = { ceo: 'CEO', lab: 'LAB_AGENT', perf: 'PERF_AGENT', uxr: 'UX_RESEARCH', uxd: 'UI_DESIGN', news: 'NEWS_AGENT', macro: 'MACRO_AGENT',
       release: 'RELEASE_WATCH', disclose: 'DART_AGENT', kr: 'KR_PM', us: 'US_PM', risk: 'RISK_AGENT', compliance: 'COMPLIANCE',
       paper: 'PAPER_FUND', data: 'DATA_AGENT', it: 'IT_SEC', pclab: 'REMOTE_LAB',
       qa: 'QA_AUDIT', exe: 'EXEC_DESK', desk: 'OPINION_DESK', help: 'HELP_DESK',
-      clead: 'CRYPTO_LEAD', cdata: 'CRYPTO_DATA', crisk: 'CRYPTO_RISK', dlead: 'DESIGN_REVIEW', dops: 'OPS_IMPROVE' };
+      clead: 'CRYPTO_LEAD', cdata: 'CRYPTO_DATA', crisk: 'CRYPTO_RISK', dlead: 'DESIGN_REVIEW', dops: 'OPS_IMPROVE', cs1: 'CLIENT_REPORT', cs2: 'JOURNAL_DESK' };
     const tint = { '대표실': '#FFD45C', '퀀트전략연구소': '#3FBF8F', '성과평가팀': '#3FBF8F', '디자인·UX팀': '#FF7EB0', '리서치센터': '#3FD0E4',
-      '자산운용본부': '#7DA6FF', '리스크관리본부': '#F2B544', '준법감시인': '#F2B544', '트레이딩·결제팀': '#C29BF0', '데이터센터': '#B8C2CF', 'IT·보안실': '#B8C2CF', '디지털자산팀': '#FFB347', '설계·운영 개선팀': '#B3A6FF' };
+      '자산운용본부': '#7DA6FF', '리스크관리본부': '#F2B544', '준법감시인': '#F2B544', '트레이딩·결제팀': '#C29BF0', '데이터센터': '#B8C2CF', 'IT·보안실': '#B8C2CF', '디지털자산팀': '#FFB347', '설계·운영 개선팀': '#B3A6FF', '고객자산관리팀': '#7FE0B0' };
     const zoneDefs = [
       ['연구소 · 성과평가', ['lab', 'qa', 'perf'], '#2F5D4E', 0], ['대표실', ['ceo'], '#6B4E1E', 0], ['디자인·UX팀', ['uxr', 'uxd'], '#6B3050', 0],
       ['리서치센터', ['news', 'macro', 'release', 'disclose'], '#1E5560', 0], ['자산운용본부', ['kr', 'us'], '#24406E', 0], ['리스크 · 준법감시', ['risk', 'compliance'], '#6B5320', 0],
       ['트레이딩 · 데이터', ['paper', 'data', 'exe'], '#4A3566', 0], ['보조 PC 연구실', ['pclab'], '#6B3A16', 0], ['IT·보안실', ['it'], '#3A4252', 130],
       ['디지털자산팀', ['clead', 'cdata', 'crisk'], '#6B4210', 0],
-      ['설계·운영 개선팀', ['dlead', 'dops'], '#3A2E5C', 0, true],
+      ['설계·운영 개선팀', ['dlead', 'dops'], '#3A2E5C', 0],
+      ['고객자산관리팀', ['cs1', 'cs2'], '#1F5A46', 0, true],
       ['외부 의견 데스크(내부용)', ['desk'], '#1E5560', 60], ['상담 데스크', ['help'], '#6B3050', 0]
     ];
     const state = {};
@@ -1218,7 +1238,7 @@ class Component extends DCLogic {
       return { pos: 'position: absolute; left: ' + p[0] + 'px; top: ' + p[1] + 'px; width: 72px; height: 54px; z-index: 2',
         tag: tags[a.id], tagStyle: 'position: absolute; left: 50%; top: -22px; transform: translateX(-50%); background: #111827; color: ' + col + '; border: 2px solid ' + col + '; padding: 3px 5px; font-family: \'Press Start 2P\', monospace; font-size: 8px; white-space: nowrap; box-shadow: 2px 2px 0 rgba(0,0,0,.45); opacity: ' + (active ? 1 : 0.8),
         hasBubble: hasBubble, bubble: bubble, bubbleClass: bubbleClass, bubbleStyle: bubbleStyle,
-        isNew: ['dlead', 'dops'].indexOf(a.id) >= 0,
+        isNew: ['cs1', 'cs2'].indexOf(a.id) >= 0,
         glow: active ? 'position: absolute; left: 4px; right: 4px; bottom: -2px; height: 8px; background: rgba(255,212,92,.25)' : 'display: none',
         glowClass: active ? 'of-live' : '',
         label: a.name + ' ' + a.role + (active ? ' 작업 중: ' + bubble : ' 대기' + nextTxt),
@@ -1243,7 +1263,8 @@ class Component extends DCLogic {
       ['compliance', 'it', '키·접근 점검', '#F2B544'], ['it', 'pclab', '서버 점검', '#B8C2CF'],
       ['cdata', 'clead', '코인 자료', '#FFB347'], ['clead', 'lab', '코인 실험 결과', '#FFB347'], ['crisk', 'risk', '코인 위험 보고', '#FFB347'],
       ['qa', 'lab', '검수 결과', '#3FBF8F'], ['exe', 'ceo', '주문 체크리스트', '#C29BF0'], ['desk', 'ceo', '외부 의견 요약', '#3FD0E4'], ['help', 'lab', '사용자 제안', '#FF7EB0'],
-      ['dlead', 'ceo', '설계 점검 지적', '#B3A6FF'], ['dops', 'it', 'CI·재발 점검', '#B3A6FF'], ['help', 'dlead', '반복 문의', '#FF7EB0']
+      ['dlead', 'ceo', '설계 점검 지적', '#B3A6FF'], ['dops', 'it', 'CI·재발 점검', '#B3A6FF'], ['help', 'dlead', '반복 문의', '#FF7EB0'],
+      ['cs2', 'cs1', '일지 점검', '#7FE0B0'], ['cs1', 'lab', '고객 리포트 지표', '#7FE0B0'], ['cs2', 'dops', '일지·보유 어긋남', '#7FE0B0'], ['help', 'cs2', '일지 문의', '#FF7EB0']
     ];
     const offFlows = [], offMoving = [];
     const t = nowMs / 1000;
