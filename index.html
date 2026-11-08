@@ -277,6 +277,58 @@ a{color:#0F6E5A}a:hover{color:#0A4F40}
 </section>
 </sc-if>
 
+<sc-if value="{{isStart}}" hint-placeholder-val="{{false}}">
+<section style="padding: 56px 24px 80px">
+<div style="max-width: 1000px; margin: 0 auto">
+<p style="margin: 0 0 8px; font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.12em; color: #0F6E5A">START HERE · 한 페이지 안내</p>
+<h2 style="margin: 0 0 12px; font-family: 'Noto Serif KR', serif; font-size: clamp(26px, 3.4vw, 36px); line-height: 1.3">처음이라면 이 한 페이지만</h2>
+<p style="margin: 0 0 28px; font-size: 17px; color: #4B5563; max-width: 760px">Rema는 <b>직접 고른 종목을 언제 살지</b>와 <b>지금 얼마나 위험한지</b>를 텔레그램으로 알려 주는 도우미입니다. 주문은 넣지 않고, 종목을 골라 주지도 않습니다. 사고파는 결정과 주문은 본인이 합니다.</p>
+
+<h3 style="margin: 0 0 12px; font-size: 20px">1. 돈은 세 칸으로 나눕니다</h3>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 12px; margin-bottom: 8px">
+<div style="background: #FFFFFF; border: 1px solid #D9DEE5; border-radius: 8px; padding: 20px"><div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #0F6E5A">기본 40%</div><h4 style="margin: 4px 0 6px; font-size: 17px">🪜 장투</h4><p style="margin: 0; font-size: 15px; color: #374151">직접 고른 종목을 고점 대비 -10 / -20 / -30%에 닿을 때마다 1/3씩 삽니다. 1년 안에 다 쓰고, 규칙상 팔지 않습니다.</p></div>
+<div style="background: #FFFFFF; border: 1px solid #D9DEE5; border-radius: 8px; padding: 20px"><div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #0F6E5A">기본 50%</div><h4 style="margin: 4px 0 6px; font-size: 17px">📈 지수 엔진</h4><p style="margin: 0; font-size: 15px; color: #374151">나스닥 2 : 코스피 1. 나스닥이 200일 평균 아래로 끝나면 그 몫만 단기채로 옮겼다가, 위로 돌아오면 다시 삽니다.</p></div>
+<div style="background: #FFFFFF; border: 1px solid #D9DEE5; border-radius: 8px; padding: 20px"><div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #0F6E5A">기본 10% · 선택</div><h4 style="margin: 4px 0 6px; font-size: 17px">⚡ 단타</h4><p style="margin: 0; font-size: 15px; color: #374151">직접 하는 짧은 매매입니다. 검증상 비용을 넘는 규칙이 없어 몫을 작게 두고, 기록해서 실제 성적을 봅니다.</p></div>
+</div>
+<p style="margin: 0 0 32px; font-size: 14px; color: #4B5563">비율은 직접 정합니다. 봇에서 <code>/month 비율 60 30 10</code>처럼 바꿀 수 있습니다.</p>
+
+<h3 style="margin: 0 0 12px; font-size: 20px">2. 관심종목은 장투·단타로 나뉩니다</h3>
+<div style="overflow-x: auto; margin-bottom: 32px"><table style="width: 100%; border-collapse: collapse; font-size: 15px; min-width: 560px">
+<tr style="background: #0B1F3A; color: #FFFFFF"><th style="text-align: left; padding: 10px 12px"></th><th style="text-align: left; padding: 10px 12px">🪜 장투</th><th style="text-align: left; padding: 10px 12px">⚡ 단타</th></tr>
+<tr style="border-bottom: 1px solid #D9DEE5"><td style="padding: 10px 12px; font-weight: 700">사는 방법</td><td style="padding: 10px 12px">정한 구간에서 1/3씩(🔔 알림)</td><td style="padding: 10px 12px">직접 판단</td></tr>
+<tr style="border-bottom: 1px solid #D9DEE5"><td style="padding: 10px 12px; font-weight: 700">파는 규칙</td><td style="padding: 10px 12px">없음 — 팔지 않음</td><td style="padding: 10px 12px">직접 정한 손절가(<code>/stop</code>)</td></tr>
+<tr style="border-bottom: 1px solid #D9DEE5"><td style="padding: 10px 12px; font-weight: 700">손절·목표가 알림</td><td style="padding: 10px 12px">오지 않음</td><td style="padding: 10px 12px">정한 가격에서 한 번</td></tr>
+<tr><td style="padding: 10px 12px; font-weight: 700">처음 들어가는 곳</td><td style="padding: 10px 12px">종목 분석 결과의 ➕</td><td style="padding: 10px 12px">스크리너 후보의 ➕ · 바꾸기 <code>/style</code></td></tr>
+</table></div>
+
+<h3 style="margin: 0 0 12px; font-size: 20px">3. 첫날 다섯 단계</h3>
+<ol style="margin: 0 0 32px; padding-left: 22px; font-size: 16px; color: #374151">
+<li style="margin-bottom: 8px">봇에 "안녕"을 보내고 승인 메시지를 기다립니다.</li>
+<li style="margin-bottom: 8px">"삼성전자 분석해줘"처럼 관심 있는 종목 하나를 물어봅니다.</li>
+<li style="margin-bottom: 8px">길게 볼 종목이면 결과 아래 ➕로 관심종목(🪜 장투)에 담습니다.</li>
+<li style="margin-bottom: 8px"><code>/month</code>로 이달 넣을 돈을 내 비율대로 나눠 봅니다.</li>
+<li>실제로 샀으면 "매수 삼성전자 70000 10"처럼 기록합니다. 성적과 위험 점검이 여기서 시작됩니다.</li>
+</ol>
+
+<h3 style="margin: 0 0 12px; font-size: 20px">4. 알림이 오면 이렇게</h3>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); gap: 1px; background: #D9DEE5; border: 1px solid #D9DEE5; border-radius: 8px; overflow: hidden; margin-bottom: 32px">
+<div style="background: #FFFFFF; padding: 18px"><b>🔔 장투 구간 도달</b><p style="margin: 4px 0 0; font-size: 15px; color: #4B5563">그 종목 몫의 1/3을 증권사 앱에서 직접 사고, ✅ 샀음을 눌러 기록합니다.</p></div>
+<div style="background: #FFFFFF; padding: 18px"><b>🚦 지수 200일선 · 급락 수칙</b><p style="margin: 4px 0 0; font-size: 15px; color: #4B5563">나스닥 몫만 규칙대로 옮깁니다. 장투 종목은 그대로 두고, 대기 자금을 한꺼번에 쓰지 않습니다.</p></div>
+<div style="background: #FFFFFF; padding: 18px"><b>🔻 단기 기준선 · 손절가</b><p style="margin: 4px 0 0; font-size: 15px; color: #4B5563">⚡ 단타 종목에만 옵니다. 미리 정한 대로 대응합니다.</p></div>
+<div style="background: #FFFFFF; padding: 18px"><b>📰 속보 · 공시 · 🚀 급등 경고</b><p style="margin: 4px 0 0; font-size: 15px; color: #4B5563">참고 정보입니다. 뉴스를 보고 따라 사거나 겁나서 팔지 않습니다.</p></div>
+</div>
+
+<h3 style="margin: 0 0 12px; font-size: 20px">5. 더 알고 싶으면</h3>
+<ul style="margin: 0 0 24px; padding-left: 22px; font-size: 16px; color: #374151">
+<li style="margin-bottom: 6px"><code>/learn</code> — 검증 숫자로 배우는 짧은 강의 12개와 퀴즈</li>
+<li style="margin-bottom: 6px"><code>/help</code> · <code>/guide</code> — 명령어 안내와 전체 설명서(PDF)</li>
+<li><code>/inquiry</code> — 궁금한 점이나 이상한 알림 문의</li>
+</ul>
+<p style="margin: 0; font-size: 13px; color: #4B5563">이 봇은 투자 판단을 돕는 정보 도구이며 투자 자문이 아닙니다. 과거 결과는 미래 수익을 보장하지 않습니다.</p>
+</div>
+</section>
+</sc-if>
+
 <sc-if value="{{isAnalysis}}" hint-placeholder-val="{{false}}">
 <section style="padding: 56px 24px 80px">
 <div style="max-width: 1200px; margin: 0 auto">
@@ -644,7 +696,7 @@ a{color:#0F6E5A}a:hover{color:#0A4F40}
 <div style="max-width: 1200px; margin: 0 auto">
 <p style="margin: 0 0 8px; font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.12em; color: #0F6E5A">INVESTMENT POLICY</p>
 <h2 style="margin: 0 0 12px; font-family: 'Noto Serif KR', serif; font-size: clamp(26px, 3.4vw, 36px); line-height: 1.3">세 갈래로 나눠 굴립니다 — 비율은 내가 정합니다</h2>
-<p style="margin: 0 0 12px; font-size: 17px; color: #4B5563; max-width: 780px">장투 · 지수 엔진 · 단타의 비율은 사람마다 다릅니다. 기본은 <b>60 · 30 · 10</b>이고, 텔레그램에서 <code style="font-family: 'IBM Plex Mono', monospace; background: #F1F3F6; padding: 2px 6px; border-radius: 4px">/month 비율 70 30 0</code>처럼 보내면 그 비율대로 월급날 '이달의 플랜'이 나옵니다. 바꿔도 이미 산 것은 팔지 않고, 다음 월급날부터 새 돈으로 맞춰 갑니다.</p>
+<p style="margin: 0 0 12px; font-size: 17px; color: #4B5563; max-width: 780px">장투 · 지수 엔진 · 단타의 비율은 사람마다 다릅니다. 기본은 <b>40 · 50 · 10</b>이고(2026-11-08부터, 가장 큰 몫이 가장 크게 흔들리는 개별 종목이던 구조를 줄임), 텔레그램에서 <code style="font-family: 'IBM Plex Mono', monospace; background: #F1F3F6; padding: 2px 6px; border-radius: 4px">/month 비율 70 30 0</code>처럼 보내면 그 비율대로 월급날 '이달의 플랜'이 나옵니다. 바꿔도 이미 산 것은 팔지 않고, 다음 월급날부터 새 돈으로 맞춰 갑니다.</p>
 <p style="margin: 0 0 24px; font-size: 14px; color: #6B7280">합 100 · 5% 단위 · 단타는 20%까지(비용을 넘는 단타 규칙이 검증되지 않아 상한을 둡니다). 아래 버튼으로 예시를 눌러 보세요.</p>
 <div role="group" aria-label="비율 예시 고르기" style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px">
 <sc-for list="{{mixPresets}}" as="mp" hint-placeholder-count="4">
@@ -1226,7 +1278,7 @@ class Component extends DCLogic {
       internStyle: 'animation-delay: -' + (t % 48).toFixed(2) + 's; z-index: 5' };
   }
   extras(spec, kst) {
-    const presets = [['base', '기본 60 · 30 · 10', 60, 30, 10], ['safe', '단타 없이 70 · 30 · 0', 70, 30, 0],
+    const presets = [['base', '기본 40 · 50 · 10', 40, 50, 10], ['long', '장투 위주 60 · 30 · 10', 60, 30, 10],
       ['index', '지수 위주 40 · 60 · 0', 40, 60, 0], ['active', '적극 50 · 30 · 20', 50, 30, 20]];
     const cur = presets.find((p) => p[0] === this.state.mix) || presets[0];
     const L = cur[2], E = cur[3], S = cur[4];
@@ -1244,7 +1296,7 @@ class Component extends DCLogic {
     const mixRows = segs.filter((g) => g[1] > 0).map((g) => ({ label: g[0], man: g[3],
       dot: 'width: 14px; height: 14px; border-radius: 3px; flex: none; background: ' + g[2] }));
     const notes = { base: '처음 쓰는 분께 권하는 기본값입니다. 따로 정하지 않으면 이 비율로 나옵니다.',
-      safe: '단타를 하지 않는 분. 남는 10%는 장투 대기 자금으로 갑니다.',
+      long: '예전 기본값(11-08 전)입니다. 종목을 직접 고르는 몫이 커서 큰 하락을 그대로 견딜 수 있는 분께 맞습니다.',
       index: '종목 고르기를 줄이고 싶은 분. 지수 엔진이 크면 관심종목 알림은 줄고 200일선 알림이 중요해집니다.',
       active: '단타를 직접 하는 분의 상한입니다(20%). 봇은 단타 종목을 고르지 않고 기록만 봅니다.' };
     // 지수 엔진 vs 보유 (live_track BACKTEST: 2017-02~2026-09, 엔진 = 나스닥+200일선 50 · 코스피 50)
@@ -1305,7 +1357,7 @@ class Component extends DCLogic {
     const sched = this._sched;
     const kst = this.fields(nowMs + 9 * 3600000);
     const pad = (n) => String(n).padStart(2, '0');
-    const tabDefs = [['overview', '개요'], ['analysis', '종목 분석'], ['work', '일하는 모습'], ['strategy', '운용 원칙 · 검증'], ['research', '리서치 자료실'], ['safety', '안전장치']];
+    const tabDefs = [['overview', '개요'], ['start', '처음이라면'], ['analysis', '종목 분석'], ['work', '일하는 모습'], ['strategy', '운용 원칙 · 검증'], ['research', '리서치 자료실'], ['safety', '안전장치']];
     const tabs = tabDefs.map((t) => {
       const on = t[0] === tab;
       return { label: t[1], pressed: on ? 'true' : 'false', pick: () => this.setState({ tab: t[0] }),
@@ -1373,7 +1425,7 @@ class Component extends DCLogic {
       floors: sc.floors, stars: sc.stars, sceneLabel: sc.sceneLabel, skyStyle: sc.skyStyle, moonColor: sc.moonColor,
       skyline1: sc.skyline1, skyline2: sc.skyline2, skyline3: sc.skyline3, skyline4: sc.skyline4, lobby: sc.lobby,
       tabs: tabs,
-      isOverview: tab === 'overview', isAnalysis: tab === 'analysis', isWork: tab === 'work', isStrategy: tab === 'strategy', isResearch: tab === 'research', isSafety: tab === 'safety',
+      isOverview: tab === 'overview', isStart: tab === 'start', isAnalysis: tab === 'analysis', isWork: tab === 'work', isStrategy: tab === 'strategy', isResearch: tab === 'research', isSafety: tab === 'safety',
       goWork: () => this.setState({ tab: 'work' }),
       clock: pad(kst.h) + ':' + pad(kst.m) + ':' + pad(kst.s),
       dateLabel: kst.y + '년 ' + (kst.mo + 1) + '월 ' + kst.day + '일 ' + '일월화수목금토'[kst.dow] + '요일',
