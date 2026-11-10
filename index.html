@@ -8,6 +8,12 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="Rema Quant Trade">
 <meta property="og:description" content="검증된 규칙만 남깁니다. 텔레그램 퀀트 운용 비서와 AI 직원들이 일하는 모습.">
+<meta property="og:url" content="https://tommy9666-stack.github.io/rema-quant-trade/">
+<meta property="og:image" content="https://tommy9666-stack.github.io/rema-quant-trade/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#0B1F3A">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 34 34'%3E%3Crect x='1' y='1' width='32' height='32' rx='6' fill='%230B1F3A' stroke='%23C9A55A' stroke-width='2'/%3E%3Cpath d='M8 23l6-7 5 4 7-9' stroke='white' stroke-width='2.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -169,7 +175,7 @@ a{color:#0F6E5A}a:hover{color:#0A4F40}
 <h2 style="margin: 0 0 10px; font-family: 'Noto Serif KR', serif; font-size: clamp(26px, 3.4vw, 36px); line-height: 1.3">AI 직원 {{agentCount}}명이 나눠 맡습니다</h2>
 <p style="margin: 0 0 30px; font-size: 16px; color: #C8D2E1; max-width: 720px">뉴스를 읽는 직원, 경제지표 발표를 지키는 직원, 손절가를 감시하는 직원, 실험을 돌리는 원격 연구원까지 — 봇의 예약 작업 하나하나가 한 명의 직원입니다. 지금 이 순간 누가 일하는지는 '일하는 모습' 탭에서 보입니다.</p>
 <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(150px, 100%), 1fr)); gap: 12px">
-<sc-for list="{{team}}" as="tm" hint-placeholder-count="8">
+<sc-for list="{{teamShown}}" as="tm" hint-placeholder-count="8">
 <div style="background: #0B1A30; border: 2px solid #24406A; border-radius: 6px; padding: 14px 12px; display: flex; flex-direction: column; align-items: center; gap: 8px">
 <svg width="48" height="54" viewBox="0 0 16 18" shape-rendering="crispEdges" role="img" aria-label="{{tm.aria}}"><rect x="4" y="0" width="8" height="3" fill="{{tm.hair}}"></rect><rect x="3" y="1" width="1" height="4" fill="{{tm.hair}}"></rect><rect x="4" y="3" width="8" height="5" fill="#F0C29A"></rect><rect x="6" y="5" width="1" height="1" fill="#1E1E24"></rect><rect x="9" y="5" width="1" height="1" fill="#1E1E24"></rect><rect x="3" y="8" width="10" height="7" fill="{{tm.shirt}}"></rect><rect x="7" y="8" width="2" height="5" fill="{{tm.tie}}"></rect><rect x="4" y="15" width="3" height="3" fill="#2B2F38"></rect><rect x="9" y="15" width="3" height="3" fill="#2B2F38"></rect></svg>
 <div style="{{tm.tagStyle}}">{{tm.tag}}</div>
@@ -177,6 +183,9 @@ a{color:#0F6E5A}a:hover{color:#0A4F40}
 </div>
 </sc-for>
 </div>
+<sc-if value="{{teamMore}}" hint-placeholder-val="{{false}}">
+<button type="button" onClick="{{toggleTeam}}" aria-expanded="{{allTeam}}" style="margin-top: 14px; width: 100%; min-height: 48px; border-radius: 6px; border: 2px solid #24406A; background: #0B1A30; color: #FFFFFF; font: inherit; font-weight: 700; cursor: pointer">{{teamToggleLabel}}</button>
+</sc-if>
 <button type="button" onClick="{{goWork}}" style="margin-top: 24px; min-height: 48px; padding: 0 22px; border-radius: 6px; border: 2px solid #FFD45C; background: transparent; color: #FFD45C; font: inherit; font-weight: 700; cursor: pointer">지금 누가 일하는지 보기</button>
 </div>
 </section>
@@ -447,7 +456,7 @@ a{color:#0F6E5A}a:hover{color:#0A4F40}
 <div>
 <p style="margin: 0 0 8px; font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.12em; color: #0F6E5A">OPERATIONS FLOOR</p>
 <h2 style="margin: 0 0 10px; font-family: 'Noto Serif KR', serif; font-size: clamp(26px, 3.4vw, 36px); line-height: 1.3">지금 일하는 모습</h2>
-<p style="margin: 0; font-size: 16px; color: #4B5563; max-width: 640px">봇의 예약 작업 하나하나가 직원이고, 맨 위층은 대표실입니다. 실제 운영 일정표대로 지금 누가 무슨 일을 하고 있는지 보여줍니다.</p>
+<p style="margin: 0; font-size: 16px; color: #4B5563; max-width: 640px">봇의 예약 작업 하나하나가 직원입니다. 실제 운영 일정표대로 지금 누가 무슨 일을 하고 있는지 보여줍니다.</p>
 </div>
 <div style="background: #0B1F3A; color: #FFFFFF; border-radius: 8px; padding: 16px 22px; min-width: 260px">
 <div style="font-size: 12px; color: #AEBBD0; letter-spacing: 0.06em">한국 시간</div>
@@ -462,12 +471,13 @@ a{color:#0F6E5A}a:hover{color:#0A4F40}
 <div style="background: #FFFFFF; border: 1px solid #D9DEE5; border-radius: 8px; padding: 18px 20px; grid-column: span 2"><div style="font-size: 13px; color: #4B5563">다음 출근</div><div style="font-size: 17px; font-weight: 600">{{nextUp}}</div></div>
 </div>
 
-<div role="group" aria-label="보기 고르기" style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px">
-<sc-for list="{{views}}" as="vw" hint-placeholder-count="2">
-<button type="button" onClick="{{vw.pick}}" aria-pressed="{{vw.pressed}}" style="{{vw.style}}">{{vw.label}}</button>
-</sc-for>
-</div>
 <sc-if value="{{isOffice}}" hint-placeholder-val="{{true}}">
+<sc-if value="{{officeNarrow}}" hint-placeholder-val="{{false}}">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin-bottom: 10px">
+<button type="button" onClick="{{toggleOfficeFit}}" aria-pressed="{{officeZoomPressed}}" style="min-height: 44px; padding: 0 16px; border-radius: 6px; border: 2px solid #0B1F3A; background: #0B1F3A; color: #FFD45C; font: inherit; font-size: 14px; font-weight: 700; cursor: pointer">{{officeFitLabel}}</button>
+<span style="font-size: 13px; color: #4B5563">{{officeFitHint}}</span>
+</div>
+</sc-if>
 <div style="overflow-x: auto; border-radius: 8px; margin-bottom: 12px; border: 4px solid #1B1F27; background: #1B1F27">
 <div role="img" aria-label="{{officeLabel}}" style="{{officeStyle}}">
 <div style="position: absolute; left: 0; top: 0; right: 0; height: 76px; background: #2E3A52; border-bottom: 6px solid #1B2436"></div>
@@ -553,100 +563,6 @@ a{color:#0F6E5A}a:hover{color:#0A4F40}
 </div>
 </div>
 <p style="margin: 0 0 24px; font-size: 13px; color: #6B7280">움직이는 화살표와 봉투는 지금 오가는 업무입니다. 말풍선은 하는 일, 물음표는 다음 일을 기다리며 생각 중, Zz는 퇴근 시간입니다. 시간에 맞춰 실제 예약 작업 일정표대로 움직입니다.</p>
-</sc-if>
-<sc-if value="{{isBuilding}}" hint-placeholder-val="{{false}}">
-<div style="overflow-x: auto; border-radius: 8px; margin-bottom: 28px; border: 1px solid #1C3354">
-<div role="img" aria-label="{{sceneLabel}}" style="{{skyStyle}}">
-<div style="position: absolute; top: 28px; right: 120px; width: 36px; height: 36px; background: {{moonColor}}; box-shadow: 4px 0 0 {{moonColor}}, -4px 0 0 {{moonColor}}, 0 4px 0 {{moonColor}}, 0 -4px 0 {{moonColor}}"></div>
-<sc-for list="{{stars}}" as="st" hint-placeholder-count="12"><div style="{{st.style}}"></div></sc-for>
-<div style="{{skyline1}}"></div>
-<div style="{{skyline2}}"></div>
-<div style="{{skyline3}}"></div>
-<div style="{{skyline4}}"></div>
-<div style="position: relative; width: 1040px; margin: 0 auto; padding-top: 70px">
-<div style="margin-left: 190px; width: 840px; display: flex; align-items: flex-end; gap: 40px; padding: 0 60px; box-sizing: border-box; height: 34px">
-<div style="width: 90px; height: 26px; background: #2E333D; box-shadow: inset 0 -4px 0 #22262E"></div>
-<div style="width: 50px; height: 34px; background: #2E333D"></div>
-<div style="width: 120px; height: 20px; background: #2E333D; box-shadow: inset 0 -4px 0 #22262E"></div>
-<div style="flex: 1"></div>
-<div style="width: 14px; height: 34px; background: #2E333D"></div>
-</div>
-<sc-for list="{{floors}}" as="fl" hint-placeholder-count="6">
-<div style="display: flex; align-items: stretch">
-<button type="button" onClick="{{fl.pick}}" aria-pressed="{{fl.pressed}}" style="{{fl.labelStyle}}"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 18px; font-weight: 600">{{fl.no}}</span><span style="font-size: 13px; line-height: 1.35">{{fl.name}}</span></button>
-<div style="position: relative; width: 840px; height: 132px; background: #3A3F4A; padding: 12px 14px; box-sizing: border-box; border-bottom: 6px solid #2E333D">
-<div style="{{fl.roomStyle}}">
-<div style="{{fl.lampStyle}}"></div>
-<sc-if value="{{fl.isServer}}" hint-placeholder-val="{{false}}">
-<div style="display: flex; gap: 8px; align-items: flex-end; margin-right: 18px">
-<svg width="42" height="90" viewBox="0 0 14 30" shape-rendering="crispEdges" aria-hidden="true"><rect x="0" y="0" width="14" height="30" fill="#1B1F27"></rect><rect x="1" y="2" width="12" height="3" fill="#2E3440"></rect><rect x="1" y="7" width="12" height="3" fill="#2E3440"></rect><rect x="1" y="12" width="12" height="3" fill="#2E3440"></rect><rect x="1" y="17" width="12" height="3" fill="#2E3440"></rect><rect x="1" y="22" width="12" height="3" fill="#2E3440"></rect><rect class="px-led" x="10" y="3" width="2" height="1" fill="#5CF08A"></rect><rect class="px-led2" x="10" y="8" width="2" height="1" fill="#5CF08A"></rect><rect class="px-led" x="10" y="13" width="2" height="1" fill="#F2C46D"></rect><rect class="px-led2" x="10" y="18" width="2" height="1" fill="#5CF08A"></rect><rect class="px-led" x="10" y="23" width="2" height="1" fill="#5CF08A"></rect></svg>
-<svg width="42" height="90" viewBox="0 0 14 30" shape-rendering="crispEdges" aria-hidden="true"><rect x="0" y="0" width="14" height="30" fill="#1B1F27"></rect><rect x="1" y="2" width="12" height="3" fill="#2E3440"></rect><rect x="1" y="7" width="12" height="3" fill="#2E3440"></rect><rect x="1" y="12" width="12" height="3" fill="#2E3440"></rect><rect x="1" y="17" width="12" height="3" fill="#2E3440"></rect><rect x="1" y="22" width="12" height="3" fill="#2E3440"></rect><rect class="px-led2" x="10" y="3" width="2" height="1" fill="#5CF08A"></rect><rect class="px-led" x="10" y="8" width="2" height="1" fill="#5CF08A"></rect><rect class="px-led2" x="10" y="13" width="2" height="1" fill="#5CF08A"></rect><rect class="px-led" x="10" y="18" width="2" height="1" fill="#F2C46D"></rect><rect class="px-led2" x="10" y="23" width="2" height="1" fill="#5CF08A"></rect></svg>
-</div>
-</sc-if>
-<sc-for list="{{fl.people}}" as="p" hint-placeholder-count="2">
-<div style="position: relative; width: 96px; height: 72px; flex: none">
-<sc-if value="{{p.isWorking}}" hint-placeholder-val="{{false}}">
-<div class="px-bubble" style="position: absolute; left: 50%; bottom: 76px; transform: translateX(-50%); background: #FFFFFF; color: #0B1F3A; border: 2px solid #0B1F3A; padding: 3px 7px; font-size: 12px; font-weight: 600; white-space: nowrap; box-shadow: 3px 3px 0 rgba(11,31,58,.35); z-index: 2">{{p.task}}</div>
-</sc-if>
-<sc-if value="{{p.isIdle}}" hint-placeholder-val="{{true}}">
-<div style="position: absolute; left: 50%; bottom: 76px; transform: translateX(-50%); background: rgba(11,31,58,.78); color: #E6ECF5; padding: 1px 6px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; white-space: nowrap; z-index: 2">{{p.tag}}</div>
-</sc-if>
-<svg width="96" height="72" viewBox="0 0 32 24" shape-rendering="crispEdges" role="img" aria-label="{{p.label}}">
-<rect x="3" y="10" width="2" height="10" fill="#353B47"></rect>
-<g class="{{p.bodyClass}}">
-<rect x="5" y="2" width="8" height="3" fill="{{p.hair}}"></rect>
-<rect x="4" y="3" width="1" height="4" fill="{{p.hair}}"></rect>
-<rect x="5" y="5" width="8" height="5" fill="#F0C29A"></rect>
-<rect x="10" y="7" width="1" height="1" fill="#1E1E24"></rect>
-<rect x="7" y="7" width="1" height="1" fill="#1E1E24"></rect>
-<rect x="4" y="10" width="10" height="7" fill="{{p.shirt}}"></rect>
-<rect x="12" y="12" width="5" height="2" fill="{{p.shirt}}"></rect>
-<rect x="17" y="12" width="1" height="2" fill="#F0C29A"></rect>
-<rect x="8" y="10" width="2" height="5" fill="{{p.tie}}"></rect>
-</g>
-<rect x="19" y="5" width="12" height="9" fill="#2B2F38"></rect>
-<rect class="{{p.screenClass}}" x="20" y="6" width="10" height="7" fill="{{p.screen}}"></rect>
-<rect x="21" y="8" width="5" height="1" fill="{{p.screenLine}}"></rect>
-<rect x="21" y="10" width="7" height="1" fill="{{p.screenLine}}"></rect>
-<rect x="24" y="14" width="3" height="3" fill="#2B2F38"></rect>
-<rect x="16" y="16" width="6" height="1" fill="#C9CDD4"></rect>
-<rect x="0" y="17" width="32" height="2" fill="#8B5E34"></rect>
-<rect x="2" y="19" width="2" height="5" fill="#6B4626"></rect>
-<rect x="28" y="19" width="2" height="5" fill="#6B4626"></rect>
-</svg>
-</div>
-</sc-for>
-<div style="flex: 1"></div>
-<svg width="30" height="48" viewBox="0 0 10 16" shape-rendering="crispEdges" aria-hidden="true" style="flex: none; margin-right: 6px"><rect x="3" y="0" width="4" height="2" fill="#3F8F4E"></rect><rect x="1" y="2" width="8" height="4" fill="#4FA65E"></rect><rect x="2" y="6" width="6" height="2" fill="#3F8F4E"></rect><rect x="2" y="9" width="6" height="7" fill="#9A6A3C"></rect></svg>
-<sc-if value="{{fl.walker}}" hint-placeholder-val="{{false}}">
-<div class="px-walker" style="{{fl.walkerStyle}}">
-<svg width="36" height="66" viewBox="0 0 12 22" shape-rendering="crispEdges" aria-hidden="true">
-<rect x="3" y="0" width="6" height="3" fill="#3A2A1E"></rect>
-<rect x="3" y="3" width="6" height="4" fill="#F0C29A"></rect>
-<rect x="7" y="4" width="1" height="1" fill="#1E1E24"></rect>
-<rect x="2" y="7" width="8" height="7" fill="#C9A55A"></rect>
-<rect x="8" y="6" width="4" height="5" fill="#FFFFFF"></rect>
-<rect x="8" y="7" width="4" height="1" fill="#C8CFD9"></rect>
-<rect class="px-legA" x="3" y="14" width="2" height="7" fill="#2B2F38"></rect>
-<rect class="px-legA" x="7" y="14" width="2" height="5" fill="#2B2F38"></rect>
-<rect class="px-legB" x="3" y="14" width="2" height="5" fill="#2B2F38"></rect>
-<rect class="px-legB" x="7" y="14" width="2" height="7" fill="#2B2F38"></rect>
-</svg>
-</div>
-</sc-if>
-</div>
-<div style="position: absolute; inset: 12px 14px; background: repeating-linear-gradient(90deg, transparent 0 134px, #3A3F4A 134px 140px); pointer-events: none"></div>
-</div>
-</div>
-</sc-for>
-<div style="margin-left: 190px; width: 840px; height: 40px; background: #2E333D; display: flex; justify-content: center; align-items: flex-end">
-<div style="width: 120px; height: 34px; background: {{lobby}}; border: 4px solid #22262E; border-bottom: 0"></div>
-</div>
-</div>
-<div style="height: 26px; background: #22262E; border-top: 4px solid #3A3F4A; position: relative"></div>
-</div>
-</div>
-<p style="margin: -16px 0 24px; font-size: 13px; color: #6B7280">층 이름을 누르면 그 부서 직원만 아래에 보입니다. 불 켜진 층에서 말풍선이 뜬 직원이 지금 일하는 중입니다.</p>
 </sc-if>
 
 <div role="group" aria-label="부서 고르기" style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px">
@@ -905,6 +821,14 @@ a{color:#0F6E5A}a:hover{color:#0A4F40}
 <p style="margin: 0; max-width: 420px; font-size: 13px; color: #AEBBD0">개인이 만든 투자 참고 도구이며 투자자문업체가 아닙니다. 과거 검증 결과는 미래 수익을 보장하지 않고, 투자 판단과 결과의 책임은 본인에게 있습니다.</p>
 </div>
 </footer>
+<sc-if value="{{isNarrow}}" hint-placeholder-val="{{false}}">
+<div style="height: 76px"></div>
+<nav aria-label="빠른 메뉴" style="position: fixed; left: 0; right: 0; bottom: 0; z-index: 50; display: flex; gap: 8px; padding: 10px 12px calc(10px + env(safe-area-inset-bottom)); background: rgba(11,31,58,.96); border-top: 1px solid #24406A">
+<a href="https://t.me/Rema_quant_trading_bot" style="flex: 1; display: flex; align-items: center; justify-content: center; min-height: 48px; border-radius: 6px; background: #C9A55A; color: #0B1F3A; font-weight: 700; text-decoration: none">텔레그램에서 시작</a>
+<button type="button" onClick="{{onShare}}" style="min-width: 88px; min-height: 48px; padding: 0 12px; border-radius: 6px; border: 1px solid #5A7299; background: transparent; color: #FFFFFF; font: inherit; font-weight: 600; cursor: pointer">{{shareLabel}}</button>
+<button type="button" onClick="{{goTop}}" aria-label="맨 위로" style="min-width: 48px; min-height: 48px; border-radius: 6px; border: 1px solid #5A7299; background: transparent; color: #FFFFFF; font: inherit; font-size: 18px; cursor: pointer">↑</button>
+</nav>
+</sc-if>
 
 </div>
 </template>
@@ -919,15 +843,18 @@ class DCLogic {
 class Component extends DCLogic {
   constructor(...args) {
     super(...args);
-    this.state = { tab: null, dept: '전체', focus: null, view: 'office', mix: 'base', now: Date.now() };
+    this.state = { tab: null, dept: '전체', focus: null, mix: 'base', now: Date.now(), officeFit: null, allTeam: false, vw: (typeof window !== 'undefined' ? window.innerWidth : 1280), copied: 0 };
     this._cacheMin = -1;
     this._sched = null;
   }
   componentDidMount() {
     this._timer = setInterval(() => this.setState({ now: Date.now() }), 1000);
+    this._onResize = () => { if (window.innerWidth !== this.state.vw) this.setState({ vw: window.innerWidth }); };
+    window.addEventListener('resize', this._onResize);
   }
   componentWillUnmount() {
     clearInterval(this._timer);
+    window.removeEventListener('resize', this._onResize);
   }
   fields(ms) {
     const d = new Date(ms);
@@ -1138,82 +1065,15 @@ class Component extends DCLogic {
     if (this.state.focus) return this.state.focus.indexOf(a.id) >= 0;
     return this.state.dept === '전체' || this.state.dept === a.dept;
   }
-  scene(spec, sched, nowMs, kst) {
+  office(spec, sched, nowMs, kst) {
     const night = kst.h >= 19 || kst.h < 6;
-    const floorDefs = [
-      ['11F', '대표실', ['ceo']],
-      ['10F', '고객자산관리팀', ['cs1', 'cs2']],
-      ['9F', '설계·운영 개선팀', ['dlead', 'dops']],
-      ['8F', '연구소 · 성과평가', ['lab', 'qa', 'scout', 'perf', 'pclab']],
-      ['7F', '디지털자산팀', ['clead', 'cdata', 'crisk']],
-      ['6F', '디자인·UX팀', ['uxr', 'uxd', 'help']],
-      ['5F', '자산운용본부', ['kr', 'us']],
-      ['4F', '리서치센터', ['news', 'macro', 'release', 'disclose', 'desk']],
-      ['3F', '리스크 · 준법감시', ['risk', 'compliance']],
-      ['2F', '트레이딩 · 데이터', ['paper', 'exe', 'data']],
-      ['1F', 'IT·보안실', ['it']]
-    ];
-    const looks = this._looks = { cs1: ['#2B1D14', '#2FA37A'], cs2: ['#1E1E24', '#3E8F6E'], qa: ['#1E1E24', '#2F8F6A'], scout: ['#3A2A1E', '#3F7F5A'], exe: ['#2B1D14', '#7A4FA0'], desk: ['#3A2A1E', '#1F7F8F'], help: ['#2B1D14', '#D06A92'], pclab: ['#2B1D14', '#C46A1A'], uxr: ['#3A2A1E', '#B5527A'], uxd: ['#1E1E24', '#2E8B8B'], clead: ['#1E1E24', '#C46A12'], cdata: ['#3A2A1E', '#B8862A'], crisk: ['#2B1D14', '#8A5A1C'], dlead: ['#1E1E24', '#4B3F8A'], dops: ['#2B1D14', '#6A5ACD'], ceo: ['#1E1E24', '#1B2A44', '#C9A55A'], lab: ['#2B1D14', '#6B4FA0'], perf: ['#1E1E24', '#0F6E5A'], kr: ['#2B1D14', '#1E3A5F'], us: ['#7A4A28', '#24508A'],
+    const looks = { cs1: ['#2B1D14', '#2FA37A'], cs2: ['#1E1E24', '#3E8F6E'], qa: ['#1E1E24', '#2F8F6A'], scout: ['#3A2A1E', '#3F7F5A'], exe: ['#2B1D14', '#7A4FA0'], desk: ['#3A2A1E', '#1F7F8F'], help: ['#2B1D14', '#D06A92'], pclab: ['#2B1D14', '#C46A1A'], uxr: ['#3A2A1E', '#B5527A'], uxd: ['#1E1E24', '#2E8B8B'], clead: ['#1E1E24', '#C46A12'], cdata: ['#3A2A1E', '#B8862A'], crisk: ['#2B1D14', '#8A5A1C'], dlead: ['#1E1E24', '#4B3F8A'], dops: ['#2B1D14', '#6A5ACD'], ceo: ['#1E1E24', '#1B2A44', '#C9A55A'], lab: ['#2B1D14', '#6B4FA0'], perf: ['#1E1E24', '#0F6E5A'], kr: ['#2B1D14', '#1E3A5F'], us: ['#7A4A28', '#24508A'],
       news: ['#1E1E24', '#0E5E6F'], macro: ['#3A2A1E', '#2F7A8A'], release: ['#7A3B2A', '#3D6E9E'], disclose: ['#1E1E24', '#5E8A3A'],
       risk: ['#2B1D14', '#9A7420'], compliance: ['#55555E', '#8A3B12'], paper: ['#7A4A28', '#5B3A6B'], data: ['#1E1E24', '#5A6575'], it: ['#2B1D14', '#3A4A5A'] };
     const byId = {};
     spec.forEach((a) => { byId[a.id] = a; });
-    let busy = 0;
-    const floors = floorDefs.map((fd) => {
-      const people = fd[2].map((id) => {
-        const a = byId[id];
-        const s = a.always ? null : sched[id];
-        const lk = looks[id];
-        const active = !!(a.always || (s && s.active));
-        let task = '', tag = '';
-        if (a.always) task = a.alwaysTask || '비용·접근 상시 감시';
-        else if (s.active) { const j = s.active.job; task = j.tasks[Math.floor(nowMs / 3500) % j.tasks.length]; }
-        else if (s.next) {
-          const nowMin = Math.floor(nowMs / 60000);
-          const f = this.fields(s.next.at * 60000 + 9 * 3600000);
-          tag = '다음 ' + (s.next.at - nowMin < 18 * 60 ? '' : (f.mo + 1) + '/' + f.day + ' ') + this.hm(s.next.at);
-        } else tag = '대기';
-        if (active && !a.always) busy++;
-        return { label: a.name + ' ' + a.role + (active ? ' 작업 중' : ' 대기'), hair: lk[0], shirt: lk[1], tie: lk[2] || lk[1],
-          isWorking: active, isIdle: !active, task: task, tag: tag,
-          bodyClass: active ? 'px-type' : '', screenClass: active ? 'px-screen' : '',
-          screen: active ? '#8FE3FF' : '#1C2230', screenLine: active ? '#2A6F8F' : '#262D3C' };
-      });
-      const working = people.some((p) => p.isWorking);
-      const lit = working || !night;
-      const focus = this.state.focus;
-      const on = !!focus && focus.join() === fd[2].join();
-      return { no: fd[0], name: fd[1], people: people, isServer: fd[0] === '1F', walker: working,
-        walkerStyle: 'animation-delay: -' + (((nowMs / 1000) + fd[2].length * 4) % 16).toFixed(2) + 's',
-        pressed: on ? 'true' : 'false', pick: () => this.setState({ focus: on ? null : fd[2], dept: '전체' }),
-        labelStyle: 'width: 180px; margin-right: 10px; flex: none; display: flex; flex-direction: column; justify-content: center; align-items: flex-end; text-align: right; gap: 2px; padding: 0 14px; border: 0; border-right: 4px solid ' + (working ? '#C9A55A' : '#3A3F4A') + '; background: ' + (on ? '#2B4A75' : 'rgba(11,31,58,.86)') + '; color: #FFFFFF; font: inherit; cursor: pointer; margin-bottom: 6px',
-        roomStyle: 'position: relative; height: 102px; overflow: hidden; display: flex; align-items: flex-end; gap: 22px; padding: 0 16px 0 22px; background: ' + (working ? '#E8B866' : (lit ? '#B39B74' : '#1E2430')) + '; transition: background .6s',
-        lampStyle: 'position: absolute; top: 0; left: 0; right: 0; height: 8px; background: repeating-linear-gradient(90deg, transparent 0 60px, ' + (working ? '#FFF1C9' : (lit ? '#D6C49F' : '#2A3140')) + ' 60px 76px, transparent 76px 140px)' };
-    });
-    const win = night ? '#E9B866' : '#7F9DB5';
-    const sk = (side, pos, w, h) => 'position: absolute; bottom: 26px; ' + side + ': ' + pos + 'px; width: ' + w + 'px; height: ' + h + 'px; background-color: #262C3A; background-image: repeating-linear-gradient(0deg, #262C3A 0 9px, transparent 9px 19px), repeating-linear-gradient(90deg, ' + win + ' 0 8px, #262C3A 8px 18px)';
-    const stars = [];
-    if (night) {
-      const pts = [[4, 22], [11, 60], [17, 34], [26, 14], [33, 48], [41, 26], [52, 12], [58, 40], [66, 20], [73, 54], [79, 30], [88, 16], [94, 44], [98, 70]];
-      pts.forEach((p, i) => stars.push({ style: 'position: absolute; left: ' + p[0] + '%; top: ' + p[1] + 'px; width: 3px; height: 3px; background: #E8ECF7; opacity: ' + (i % 3 === 0 ? 1 : 0.6) }));
-    }
-    return {
-      floors: floors, stars: stars,
-      sceneLabel: '사옥 단면 그림: 지금 작업 중인 직원 ' + busy + '명',
-      skyStyle: 'position: relative; overflow: hidden; min-width: 1040px; background: ' + (night ? 'linear-gradient(#10162B 0 35%, #18213D 35% 65%, #222C4E 65%)' : 'linear-gradient(#8DBBE0 0 35%, #A3C9E7 35% 65%, #BAD6EC 65%)'),
-      moonColor: night ? '#F4E7B5' : '#FFE08A',
-      skyline1: sk('left', 0, 120, 430), skyline2: sk('left', 110, 90, 300),
-      skyline3: sk('right', 0, 130, 470), skyline4: sk('right', 120, 80, 320),
-      lobby: night ? '#E8B866' : '#9FB7C9'
-    };
-  }
-  office(spec, sched, nowMs, kst) {
-    const night = kst.h >= 19 || kst.h < 6;
-    const looks = this._looks;
-    const byId = {};
-    spec.forEach((a) => { byId[a.id] = a; });
     const R1 = 128, R2 = 318, R3 = 510, R4 = 700, R5 = 890;
-    const pos = { lab: [60, R1], qa: [170, R1], perf: [280, R1], ceo: [484, R1], uxr: [800, R1], uxd: [910, R1],
+    const pos = { lab: [30, R1], qa: [120, R1], scout: [210, R1], perf: [300, R1], ceo: [484, R1], uxr: [800, R1], uxd: [910, R1],
       news: [40, R2], macro: [140, R2], release: [240, R2], disclose: [340, R2], kr: [480, R2], us: [590, R2], risk: [760, R2], compliance: [880, R2],
       paper: [60, R3], data: [170, R3], pclab: [484, R3], it: [760, R3],
       exe: [280, R3], desk: [100, R4], help: [800, R4],
@@ -1446,21 +1306,35 @@ class Component extends DCLogic {
       if (s.last) feed.push({ at: s.last.at, time: this.hm(s.last.at), who: a.name + ' · ' + a.role, what: s.last.job.done });
     });
     feed.sort((x, y) => y.at - x.at);
-    const sc = this.scene(spec, sched, nowMs, kst);
     const of = this.office(spec, sched, nowMs, kst);
     const ex = this.extras(spec, kst);
-    const view = this.state.view || 'office';
-    const views = [['office', '오피스 (함께 일하는 모습)'], ['building', '사옥 단면 (층별)']].map((v) => {
-      const on = v[0] === view;
-      return { label: v[1], pressed: on ? 'true' : 'false', pick: () => this.setState({ view: v[0] }),
-        style: 'min-height: 44px; padding: 0 16px; border-radius: 6px; border: 2px solid #0B1F3A; background: ' + (on ? '#0B1F3A' : '#FFFFFF') + '; color: ' + (on ? '#FFD45C' : '#0B1F3A') + '; font: inherit; font-size: 14px; font-weight: 700; cursor: pointer' };
-    });
+    const vw = this.state.vw || 1280;
+    const narrowOffice = vw < 1100;
+    const fit = this.state.officeFit === null ? narrowOffice : this.state.officeFit;
+    const officeZoom = (narrowOffice && fit) ? Math.max(0.3, Math.min(1, (vw - 56) / 1048)) : 1;
+    const narrow = vw < 760;
+    const shareUrl = (typeof location !== 'undefined' ? String(location.href).split('#')[0] : '');
     return Object.assign(ex, {
-      views: views, isOffice: view === 'office', isBuilding: view === 'building',
+      isNarrow: narrow,
+      teamMore: narrow && ex.team.length > 8, allTeam: this.state.allTeam ? 'true' : 'false',
+      teamShown: (narrow && !this.state.allTeam) ? ex.team.slice(0, 8) : ex.team,
+      teamToggleLabel: this.state.allTeam ? '접기' : '직원 ' + ex.team.length + '명 모두 보기',
+      toggleTeam: () => this.setState({ allTeam: !this.state.allTeam }),
+      shareLabel: (Date.now() - (this.state.copied || 0) < 2500) ? '링크 복사됨 ✓' : '공유',
+      onShare: () => {
+        const data = { title: 'Rema Quant Trade', text: '검증된 규칙만 남기는 텔레그램 퀀트 운용 비서', url: shareUrl };
+        if (typeof navigator !== 'undefined' && navigator.share) { navigator.share(data).catch(() => {}); return; }
+        if (typeof navigator !== 'undefined' && navigator.clipboard) navigator.clipboard.writeText(shareUrl).then(() => this.setState({ copied: Date.now() })).catch(() => {});
+      },
+      goTop: () => { try { window.scrollTo({ top: 0, behavior: 'smooth' }); } catch (e) { window.scrollTo(0, 0); } },
+      isOffice: true,
       offAgents: of.offAgents, offZones: of.offZones, offFlows: of.offFlows, offMoving: of.offMoving, offWindows: of.offWindows,
-      officeNight: of.officeNight, officeLabel: of.officeLabel, officeStyle: of.officeStyle, internStyle: of.internStyle,
-      floors: sc.floors, stars: sc.stars, sceneLabel: sc.sceneLabel, skyStyle: sc.skyStyle, moonColor: sc.moonColor,
-      skyline1: sc.skyline1, skyline2: sc.skyline2, skyline3: sc.skyline3, skyline4: sc.skyline4, lobby: sc.lobby,
+      officeNight: of.officeNight, officeLabel: of.officeLabel, internStyle: of.internStyle,
+      officeStyle: of.officeStyle + (officeZoom < 1 ? '; zoom: ' + officeZoom.toFixed(3) : ''),
+      officeNarrow: narrowOffice, officeZoomPressed: officeZoom < 1 ? 'false' : 'true',
+      officeFitLabel: officeZoom < 1 ? '🔍 크게 보기' : '↔ 화면에 맞추기',
+      officeFitHint: officeZoom < 1 ? '사무실 전체를 한눈에 — 크게 보면 옆으로 밀어서 봅니다' : '← 옆으로 밀어서 사무실을 둘러보세요 →',
+      toggleOfficeFit: () => this.setState({ officeFit: officeZoom < 1 ? false : true }),
       tabs: tabs,
       isOverview: tab === 'overview', isStart: tab === 'start', isAnalysis: tab === 'analysis', isWork: tab === 'work', isStrategy: tab === 'strategy', isResearch: tab === 'research', isSafety: tab === 'safety',
       goWork: () => this.setState({ tab: 'work' }),
@@ -1524,14 +1398,14 @@ class Component extends DCLogic {
   var tpl = document.getElementById('tpl').content;
   var comp = new Component({});
   var hash = (location.hash || '').replace('#', '');
-  if (['overview', 'analysis', 'work', 'strategy', 'research', 'safety'].indexOf(hash) >= 0) comp.state.tab = hash;
+  if (['overview', 'start', 'analysis', 'work', 'strategy', 'research', 'safety'].indexOf(hash) >= 0) comp.state.tab = hash;
   var last = null, lastTab = comp.state.tab;
   window.__app = {
     update: function () {
       var vals = comp.renderVals();
       var tab = comp.state.tab || 'overview';
       var now = comp.state.now;
-      var sig = JSON.stringify([tab, comp.state.dept, comp.state.focus, comp.state.view, comp.state.mix, Math.floor(now / 60000), tab === 'work' ? Math.floor(now / 3500) : 0]);
+      var sig = JSON.stringify([tab, comp.state.dept, comp.state.focus, comp.state.mix, comp.state.officeFit, comp.state.allTeam, comp.state.vw, comp.state.copied, Math.floor(now / 60000), tab === 'work' ? Math.floor(now / 3500) : 0]);
       if (sig !== last) {
         last = sig;
         var frag = document.createDocumentFragment();
