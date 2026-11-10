@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Rema Quant Trade</title>
-<meta name="description" content="투자 고민은 줄이고, 할 일만 받아 보세요. 열세 개 부서의 AI 직원이 시장을 지켜보다가 살 때, 팔 때, 조심할 때만 알려주는 텔레그램 퀀트 운용 비서.">
+<meta name="description" content="검증된 규칙만 남깁니다. 열세 개 부서의 AI 직원이 시장을 지켜보다가 살 때, 팔 때, 조심할 때만 알려주는 텔레그램 퀀트 운용 비서.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Rema Quant Trade">
-<meta property="og:description" content="투자 고민은 줄이고, 할 일만 받아 보세요. 텔레그램 퀀트 운용 비서와 AI 직원들이 일하는 모습.">
+<meta property="og:description" content="검증된 규칙만 남깁니다. 텔레그램 퀀트 운용 비서와 AI 직원들이 일하는 모습.">
 <meta name="theme-color" content="#0B1F3A">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 34 34'%3E%3Crect x='1' y='1' width='32' height='32' rx='6' fill='%230B1F3A' stroke='%23C9A55A' stroke-width='2'/%3E%3Cpath d='M8 23l6-7 5 4 7-9' stroke='white' stroke-width='2.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -81,22 +81,31 @@ a{color:#0F6E5A}a:hover{color:#0A4F40}
 
 <sc-if value="{{isOverview}}" hint-placeholder-val="{{true}}">
 <section style="background: #0B1F3A; color: #FFFFFF; padding: 72px 24px 88px; border-top: 1px solid #1C3354">
-<div style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: 48px; align-items: end">
+<div style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(360px, 100%), 1fr)); gap: 56px; align-items: center">
 <div>
-<p style="margin: 0 0 18px; font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.14em; color: #C9A55A">QUANT ASSET MANAGEMENT ON TELEGRAM</p>
-<h1 style="margin: 0; font-family: 'Noto Serif KR', serif; font-size: clamp(34px, 5vw, 58px); line-height: 1.22; font-weight: 700">투자 고민은 줄이고,<br>할 일만 받아 보세요.</h1>
-<p style="margin: 26px 0 0; font-size: 18px; color: #C8D2E1; max-width: 560px">차트를 붙잡고 있지 않아도, 뉴스를 다 찾아보지 않아도 됩니다. 열세 개 부서의 AI 직원이 시장을 지켜보다가 살 때, 팔 때, 조심할 때만 알려줍니다. 매매 규칙은 과거 자료로 먼저 시험해 통과한 것만 쓰고, 아직 확정되지 않은 신호는 '참고'로 표시합니다.</p>
-<div style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px">
+<p style="margin: 0 0 22px; display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border: 1px solid #2E4B78; border-radius: 999px; font-size: 13px; color: #C8D2E1"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C9A55A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"></path></svg>텔레그램 퀀트 운용 비서 · 열세 개 부서</p>
+<h1 style="margin: 0; font-family: 'Noto Serif KR', serif; font-size: clamp(36px, 5.4vw, 64px); line-height: 1.18; font-weight: 700">검증된 규칙만<br>남깁니다.</h1>
+<p style="margin: 26px 0 0; font-size: 18px; color: #C8D2E1; max-width: 560px">시험해 보고, 통과한 것만 쓰고, 실패한 것은 접어서 기록해 둡니다. 열세 개 부서의 AI 직원이 시장을 지켜보다가 살 때, 팔 때, 조심할 때만 알려주고, 아직 확정되지 않은 신호는 '참고'로 표시합니다.</p>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 36px">
 <a href="https://t.me/Rema_quant_trading_bot" style="display: inline-flex; align-items: center; min-height: 48px; padding: 0 24px; border-radius: 6px; background: #C9A55A; color: #0B1F3A; font-weight: 700; text-decoration: none">텔레그램에서 시작하기</a>
-<button type="button" onClick="{{goWork}}" style="min-height: 48px; padding: 0 24px; border-radius: 6px; border: 1px solid #50678A; background: transparent; color: #FFFFFF; font: inherit; font-weight: 600; cursor: pointer">지금 일하는 모습 보기</button>
+<button type="button" onClick="{{goStart}}" style="min-height: 48px; padding: 0 24px; border-radius: 6px; border: 1px solid #50678A; background: transparent; color: #FFFFFF; font: inherit; font-weight: 600; cursor: pointer">처음이라면 3분 안내</button>
 </div>
+<button type="button" onClick="{{goWork}}" style="margin-top: 18px; min-height: 44px; padding: 0; border: 0; background: transparent; color: #C8D2E1; font: inherit; font-size: 15px; text-decoration: underline; text-underline-offset: 4px; cursor: pointer">지금 일하는 모습 보기 →</button>
 </div>
-<dl style="margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; background: #24406A; border: 1px solid #24406A; border-radius: 8px; overflow: hidden">
-<div style="background: #0F2747; padding: 22px"><dt style="font-size: 13px; color: #AEBBD0">부서</dt><dd style="margin: 4px 0 0; font-family: 'IBM Plex Mono', monospace; font-size: 30px; font-weight: 600">13</dd></div>
-<div style="background: #0F2747; padding: 22px"><dt style="font-size: 13px; color: #AEBBD0">명령어</dt><dd style="margin: 4px 0 0; font-family: 'IBM Plex Mono', monospace; font-size: 30px; font-weight: 600">78</dd></div>
-<div style="background: #0F2747; padding: 22px"><dt style="font-size: 13px; color: #AEBBD0">기록 중인 종이 펀드</dt><dd style="margin: 4px 0 0; font-family: 'IBM Plex Mono', monospace; font-size: 30px; font-weight: 600">4</dd></div>
-<div style="background: #0F2747; padding: 22px"><dt style="font-size: 13px; color: #AEBBD0">시험 후 접은 기법 갈래</dt><dd style="margin: 4px 0 0; font-family: 'IBM Plex Mono', monospace; font-size: 30px; font-weight: 600">13</dd></div>
-</dl>
+<div style="background: #0F2747; border: 1px solid #24406A; border-radius: 14px; padding: 24px 26px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 6px 16px; padding-bottom: 14px">
+<h2 style="margin: 0; font-size: 18px; font-weight: 700">봇이 매일 지켜보는 규칙</h2>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #AEBBD0">일봉 종가 기준</span>
+</div>
+<ul style="margin: 0; padding: 0; list-style: none">
+<li style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 15px 0; border-top: 1px solid #24406A"><div><div style="font-size: 15px; font-weight: 600">지수 엔진 · 나스닥 200일선</div><div style="margin-top: 2px; font-size: 13px; color: #AEBBD0">위면 보유, 아래면 그달 몫은 현금 쪽으로</div></div><span style="flex: none; padding: 6px 12px; border-radius: 8px; background: #17345E; font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 600">매일 종가</span></li>
+<li style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 15px 0; border-top: 1px solid #24406A"><div><div style="font-size: 15px; font-weight: 600">월 배분</div><div style="margin-top: 2px; font-size: 13px; color: #AEBBD0">기본 장투 40 · 지수 엔진 50 · 단타 10</div></div><span style="flex: none; padding: 6px 12px; border-radius: 8px; background: #17345E; font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 600">월급날 1번</span></li>
+<li style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 15px 0; border-top: 1px solid #24406A"><div><div style="font-size: 15px; font-weight: 600">장투 나눠 사기</div><div style="margin-top: 2px; font-size: 13px; color: #AEBBD0">관심종목 고점 대비 −10 · −20 · −30%</div></div><span style="flex: none; padding: 6px 12px; border-radius: 8px; background: #17345E; font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 600">1/3씩</span></li>
+<li style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 15px 0; border-top: 1px solid #24406A"><div><div style="font-size: 15px; font-weight: 600">검증 기록</div><div style="margin-top: 2px; font-size: 13px; color: #AEBBD0">통과 못 한 기법은 접고 공개</div></div><span style="flex: none; padding: 6px 12px; border-radius: 8px; background: #17345E; font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 600">접음 13</span></li>
+</ul>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 16px; padding-top: 14px; border-top: 1px solid #24406A; font-size: 13px; color: #C8D2E1"><span style="font-family: 'IBM Plex Mono', monospace">부서 13 · 명령어 78 · 종이 펀드 4</span><span>오늘 상태는 봇의 /month</span></div>
+<p style="margin: 8px 0 0; font-size: 12px; color: #AEBBD0">투자 권유가 아닌 규칙 안내입니다.</p>
+</div>
 </div>
 </section>
 
@@ -1064,6 +1073,9 @@ class Component extends DCLogic {
       { id: 'qa', name: '방소율', initials: '방', dept: '퀀트전략연구소', role: '검수 담당', color: '#0F6E5A',
         jobs: [{ name: '새 검증 결과 검수', days: [1], at: [[11, 51]], dur: 35, done: '새 결과 계산 검수(✅·⚠️·❌)',
           tasks: ['기간·종목 풀 확인', '스냅샷 여부 확인', '평균 비중·거래 수 상식 점검', '시험 수 대조', '핵심 숫자 재현'] }] },
+      { id: 'scout', name: '진하랑', initials: '진', dept: '퀀트전략연구소', role: '전략 탐색 담당', color: '#0F6E5A',
+        jobs: [{ name: '외부 인기 전략 탐색', days: [1], at: [[11, 51]], dur: 35, done: '외부 전략 후보 3개 이하 선별',
+          tasks: ['GitHub·논문·전략 사이트 인기 전략 찾기', '접은 갈래·170개 목록과 겹침 확인', '새 자료·비용·정책 금지 점검', '검토 후보로 회의 상정'] }] },
       { id: 'it', name: '임도현', initials: '임', dept: 'IT·보안실', role: '서버 관리', color: '#4B5563',
         jobs: [{ name: '자동 점검', every: 5, offset: 1, dur: 1, done: '서버·작업 상태 점검',
           tasks: ['봇 프로세스 확인', '메모리·디스크 확인'] },
@@ -1132,7 +1144,7 @@ class Component extends DCLogic {
       ['11F', '대표실', ['ceo']],
       ['10F', '고객자산관리팀', ['cs1', 'cs2']],
       ['9F', '설계·운영 개선팀', ['dlead', 'dops']],
-      ['8F', '연구소 · 성과평가', ['lab', 'qa', 'perf', 'pclab']],
+      ['8F', '연구소 · 성과평가', ['lab', 'qa', 'scout', 'perf', 'pclab']],
       ['7F', '디지털자산팀', ['clead', 'cdata', 'crisk']],
       ['6F', '디자인·UX팀', ['uxr', 'uxd', 'help']],
       ['5F', '자산운용본부', ['kr', 'us']],
@@ -1141,7 +1153,7 @@ class Component extends DCLogic {
       ['2F', '트레이딩 · 데이터', ['paper', 'exe', 'data']],
       ['1F', 'IT·보안실', ['it']]
     ];
-    const looks = this._looks = { cs1: ['#2B1D14', '#2FA37A'], cs2: ['#1E1E24', '#3E8F6E'], qa: ['#1E1E24', '#2F8F6A'], exe: ['#2B1D14', '#7A4FA0'], desk: ['#3A2A1E', '#1F7F8F'], help: ['#2B1D14', '#D06A92'], pclab: ['#2B1D14', '#C46A1A'], uxr: ['#3A2A1E', '#B5527A'], uxd: ['#1E1E24', '#2E8B8B'], clead: ['#1E1E24', '#C46A12'], cdata: ['#3A2A1E', '#B8862A'], crisk: ['#2B1D14', '#8A5A1C'], dlead: ['#1E1E24', '#4B3F8A'], dops: ['#2B1D14', '#6A5ACD'], ceo: ['#1E1E24', '#1B2A44', '#C9A55A'], lab: ['#2B1D14', '#6B4FA0'], perf: ['#1E1E24', '#0F6E5A'], kr: ['#2B1D14', '#1E3A5F'], us: ['#7A4A28', '#24508A'],
+    const looks = this._looks = { cs1: ['#2B1D14', '#2FA37A'], cs2: ['#1E1E24', '#3E8F6E'], qa: ['#1E1E24', '#2F8F6A'], scout: ['#3A2A1E', '#3F7F5A'], exe: ['#2B1D14', '#7A4FA0'], desk: ['#3A2A1E', '#1F7F8F'], help: ['#2B1D14', '#D06A92'], pclab: ['#2B1D14', '#C46A1A'], uxr: ['#3A2A1E', '#B5527A'], uxd: ['#1E1E24', '#2E8B8B'], clead: ['#1E1E24', '#C46A12'], cdata: ['#3A2A1E', '#B8862A'], crisk: ['#2B1D14', '#8A5A1C'], dlead: ['#1E1E24', '#4B3F8A'], dops: ['#2B1D14', '#6A5ACD'], ceo: ['#1E1E24', '#1B2A44', '#C9A55A'], lab: ['#2B1D14', '#6B4FA0'], perf: ['#1E1E24', '#0F6E5A'], kr: ['#2B1D14', '#1E3A5F'], us: ['#7A4A28', '#24508A'],
       news: ['#1E1E24', '#0E5E6F'], macro: ['#3A2A1E', '#2F7A8A'], release: ['#7A3B2A', '#3D6E9E'], disclose: ['#1E1E24', '#5E8A3A'],
       risk: ['#2B1D14', '#9A7420'], compliance: ['#55555E', '#8A3B12'], paper: ['#7A4A28', '#5B3A6B'], data: ['#1E1E24', '#5A6575'], it: ['#2B1D14', '#3A4A5A'] };
     const byId = {};
@@ -1209,12 +1221,12 @@ class Component extends DCLogic {
     const tags = { ceo: 'CEO', lab: 'LAB_AGENT', perf: 'PERF_AGENT', uxr: 'UX_RESEARCH', uxd: 'UI_DESIGN', news: 'NEWS_AGENT', macro: 'MACRO_AGENT',
       release: 'RELEASE_WATCH', disclose: 'DART_AGENT', kr: 'KR_PM', us: 'US_PM', risk: 'RISK_AGENT', compliance: 'COMPLIANCE',
       paper: 'PAPER_FUND', data: 'DATA_AGENT', it: 'IT_SEC', pclab: 'REMOTE_LAB',
-      qa: 'QA_AUDIT', exe: 'EXEC_DESK', desk: 'OPINION_DESK', help: 'HELP_DESK',
+      qa: 'QA_AUDIT', scout: 'STRATEGY_SCOUT', exe: 'EXEC_DESK', desk: 'OPINION_DESK', help: 'HELP_DESK',
       clead: 'CRYPTO_LEAD', cdata: 'CRYPTO_DATA', crisk: 'CRYPTO_RISK', dlead: 'DESIGN_REVIEW', dops: 'OPS_IMPROVE', cs1: 'CLIENT_REPORT', cs2: 'JOURNAL_DESK' };
     const tint = { '대표실': '#FFD45C', '퀀트전략연구소': '#3FBF8F', '성과평가팀': '#3FBF8F', '디자인·UX팀': '#FF7EB0', '리서치센터': '#3FD0E4',
       '자산운용본부': '#7DA6FF', '리스크관리본부': '#F2B544', '준법감시인': '#F2B544', '트레이딩·결제팀': '#C29BF0', '데이터센터': '#B8C2CF', 'IT·보안실': '#B8C2CF', '디지털자산팀': '#FFB347', '설계·운영 개선팀': '#B3A6FF', '고객자산관리팀': '#7FE0B0' };
     const zoneDefs = [
-      ['연구소 · 성과평가', ['lab', 'qa', 'perf'], '#2F5D4E', 0], ['대표실', ['ceo'], '#6B4E1E', 0], ['디자인·UX팀', ['uxr', 'uxd'], '#6B3050', 0],
+      ['연구소 · 성과평가', ['lab', 'qa', 'scout', 'perf'], '#2F5D4E', 0], ['대표실', ['ceo'], '#6B4E1E', 0], ['디자인·UX팀', ['uxr', 'uxd'], '#6B3050', 0],
       ['리서치센터', ['news', 'macro', 'release', 'disclose'], '#1E5560', 0], ['자산운용본부', ['kr', 'us'], '#24406E', 0], ['리스크 · 준법감시', ['risk', 'compliance'], '#6B5320', 0],
       ['트레이딩 · 데이터', ['paper', 'data', 'exe'], '#4A3566', 0], ['보조 PC 연구실', ['pclab'], '#6B3A16', 0], ['IT·보안실', ['it'], '#3A4252', 130],
       ['디지털자산팀', ['clead', 'cdata', 'crisk'], '#6B4210', 0],
@@ -1266,7 +1278,7 @@ class Component extends DCLogic {
       ['uxd', 'ceo', '개선안', '#FF7EB0'], ['paper', 'perf', '종이 펀드 성적', '#C29BF0'], ['pclab', 'lab', '실험 결과', '#FF9F43'],
       ['compliance', 'it', '키·접근 점검', '#F2B544'], ['it', 'pclab', '서버 점검', '#B8C2CF'],
       ['cdata', 'clead', '코인 자료', '#FFB347'], ['clead', 'lab', '코인 실험 결과', '#FFB347'], ['crisk', 'risk', '코인 위험 보고', '#FFB347'],
-      ['qa', 'lab', '검수 결과', '#3FBF8F'], ['exe', 'ceo', '주문 체크리스트', '#C29BF0'], ['desk', 'ceo', '외부 의견 요약', '#3FD0E4'], ['help', 'lab', '사용자 제안', '#FF7EB0'],
+      ['qa', 'lab', '검수 결과', '#3FBF8F'], ['scout', 'lab', '외부 전략 후보', '#3FBF8F'], ['exe', 'ceo', '주문 체크리스트', '#C29BF0'], ['desk', 'ceo', '외부 의견 요약', '#3FD0E4'], ['help', 'lab', '사용자 제안', '#FF7EB0'],
       ['dlead', 'ceo', '설계 점검 지적', '#B3A6FF'], ['dops', 'it', 'CI·재발 점검', '#B3A6FF'], ['help', 'dlead', '반복 문의', '#FF7EB0'],
       ['cs2', 'cs1', '일지 점검', '#7FE0B0'], ['cs1', 'lab', '고객 리포트 지표', '#7FE0B0'], ['cs2', 'dops', '일지·보유 어긋남', '#7FE0B0'], ['help', 'cs2', '일지 문의', '#FF7EB0']
     ];
@@ -1452,6 +1464,7 @@ class Component extends DCLogic {
       tabs: tabs,
       isOverview: tab === 'overview', isStart: tab === 'start', isAnalysis: tab === 'analysis', isWork: tab === 'work', isStrategy: tab === 'strategy', isResearch: tab === 'research', isSafety: tab === 'safety',
       goWork: () => this.setState({ tab: 'work' }),
+      goStart: () => this.setState({ tab: 'start' }),
       clock: pad(kst.h) + ':' + pad(kst.m) + ':' + pad(kst.s),
       dateLabel: kst.y + '년 ' + (kst.mo + 1) + '월 ' + kst.day + '일 ' + '일월화수목금토'[kst.dow] + '요일',
       depts: depts,
