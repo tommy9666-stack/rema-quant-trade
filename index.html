@@ -51,7 +51,7 @@ a{color:#0F6E5A}a:hover{color:#0A4F40}
 @keyframes ofglow{0%,100%{box-shadow:0 0 0 3px rgba(255,212,92,.55)}50%{box-shadow:0 0 0 6px rgba(255,212,92,.15)}}
 .of-flow{animation:ofdash .5s linear infinite}
 .of-carry{position:absolute;left:0;top:0;offset-rotate:0deg;animation:ofcarry 2.4s linear infinite}
-.of-intern{position:absolute;left:0;top:0;offset-rotate:0deg;offset-path:path('M 18 250 L 1012 250 L 1012 440 L 18 440 Z');animation:ofcarry 48s linear infinite}
+.of-intern{position:absolute;left:0;top:0;offset-rotate:0deg;animation:ofcarry 48s linear infinite}
 .of-spark{animation:ofspark .9s steps(3) infinite}
 .of-think{animation:ofbob 1.2s steps(2) infinite}
 .of-live{animation:ofglow 1.4s steps(4) infinite}
@@ -516,41 +516,34 @@ details>summary{list-style:none}details>summary::-webkit-details-marker{display:
 </sc-if>
 <div style="overflow-x: auto; border-radius: 8px; margin-bottom: 12px; border: 4px solid #1B1F27; background: #1B1F27">
 <div role="img" aria-label="{{officeLabel}}" style="{{officeStyle}}">
-<div style="position: absolute; left: 0; top: 0; right: 0; height: 76px; background: #2E3A52; border-bottom: 6px solid #1B2436"></div>
-<sc-for list="{{offWindows}}" as="wd" hint-placeholder-count="6"><div style="{{wd.style}}"></div></sc-for>
-<div style="position: absolute; left: 0; right: 0; top: 12px; text-align: center; font-family: 'Press Start 2P', monospace; font-size: 22px; color: #FFD45C; letter-spacing: 2px; text-shadow: 3px 3px 0 #8A3B12, -2px -2px 0 #1B2436">REMA QUANT OFFICE</div>
-<div style="position: absolute; left: 0; right: 0; top: 46px; text-align: center; font-size: 13px; font-weight: 700; color: #9FE8FF; letter-spacing: 0.02em">AI 직원들이 생각하고, 일하고, 함께 일하는 모습 · 실제 운영 일정표대로</div>
+<div style="{{officeTopStyle}}"></div>
+<div style="position: absolute; left: 0; right: 0; top: 12px; text-align: center; font-family: 'Press Start 2P', monospace; font-size: {{officeTitleSize}}; color: #FFD45C; letter-spacing: 2px; text-shadow: 3px 3px 0 #8A3B12, -2px -2px 0 #1B2436">REMA QUANT OFFICE</div>
+<div style="position: absolute; left: 0; right: 0; top: {{officeSubTop}}; text-align: center; font-size: 13px; font-weight: 700; color: #9FE8FF; letter-spacing: 0.02em">{{officeSub}}</div>
 <sc-for list="{{offZones}}" as="zn" hint-placeholder-count="9">
-<div style="{{zn.rug}}"></div>
-<div style="{{zn.chip}}">{{zn.name}}<sc-if value="{{zn.isNew}}" hint-placeholder-val="{{false}}"><span style="margin-left: 6px; background: #FF5D8F; color: #FFFFFF; padding: 1px 4px; font-family: 'Press Start 2P', monospace; font-size: 7px">NEW</span></sc-if></div>
-</sc-for>
-<svg width="66" height="78" viewBox="0 0 22 26" shape-rendering="crispEdges" aria-hidden="true" style="position: absolute; left: 392px; top: 112px"><rect x="5" y="0" width="12" height="2" fill="#9AA4B2"></rect><rect x="10" y="2" width="2" height="3" fill="#9AA4B2"></rect><rect x="3" y="5" width="16" height="11" fill="#C8D0DB"></rect><rect x="5" y="8" width="4" height="3" fill="#2FB3C8" class="px-led"></rect><rect x="13" y="8" width="4" height="3" fill="#2FB3C8" class="px-led2"></rect><rect x="7" y="13" width="8" height="1" fill="#5A6575"></rect><rect x="5" y="16" width="12" height="8" fill="#9AA4B2"></rect><rect x="7" y="18" width="8" height="4" fill="#3FBF8F" class="px-screen"></rect><rect x="1" y="17" width="4" height="2" fill="#9AA4B2"></rect><rect x="17" y="17" width="4" height="2" fill="#9AA4B2"></rect></svg>
-<div style="position: absolute; left: 376px; top: 192px; background: #111827; color: #9FE8FF; border: 2px solid #2FB3C8; padding: 3px 5px; font-family: 'Press Start 2P', monospace; font-size: 7px; white-space: nowrap">MEMORY · 시험 장부</div>
-<svg width="48" height="72" viewBox="0 0 16 24" shape-rendering="crispEdges" aria-hidden="true" style="position: absolute; left: 400px; top: 500px"><rect x="2" y="0" width="12" height="24" fill="#5A6575"></rect><rect x="4" y="2" width="8" height="6" fill="#2B2F38"></rect><rect x="5" y="3" width="6" height="2" fill="#E46F3A" class="px-led"></rect><rect x="5" y="11" width="6" height="7" fill="#C8D0DB"></rect><rect x="6" y="13" width="4" height="3" fill="#8B5E34"></rect><rect x="3" y="20" width="10" height="2" fill="#2B2F38"></rect></svg>
-<div style="position: absolute; left: 396px; top: 576px; background: #111827; color: #FFD45C; border: 2px solid #8B5E34; padding: 3px 5px; font-family: 'Press Start 2P', monospace; font-size: 7px">COFFEE</div>
-<svg width="42" height="54" viewBox="0 0 14 18" shape-rendering="crispEdges" aria-hidden="true" style="position: absolute; left: 4px; top: 90px"><rect x="4" y="0" width="6" height="3" fill="#3F8F4E"></rect><rect x="1" y="3" width="12" height="5" fill="#4FA65E"></rect><rect x="3" y="8" width="8" height="2" fill="#3F8F4E"></rect><rect x="3" y="11" width="8" height="7" fill="#9A6A3C"></rect></svg>
-<svg width="42" height="54" viewBox="0 0 14 18" shape-rendering="crispEdges" aria-hidden="true" style="position: absolute; right: 4px; top: 90px"><rect x="4" y="0" width="6" height="3" fill="#3F8F4E"></rect><rect x="1" y="3" width="12" height="5" fill="#4FA65E"></rect><rect x="3" y="8" width="8" height="2" fill="#3F8F4E"></rect><rect x="3" y="11" width="8" height="7" fill="#9A6A3C"></rect></svg>
-<svg width="42" height="54" viewBox="0 0 14 18" shape-rendering="crispEdges" aria-hidden="true" style="position: absolute; left: 640px; top: 520px"><rect x="4" y="0" width="6" height="3" fill="#3F8F4E"></rect><rect x="1" y="3" width="12" height="5" fill="#4FA65E"></rect><rect x="3" y="8" width="8" height="2" fill="#3F8F4E"></rect><rect x="3" y="11" width="8" height="7" fill="#9A6A3C"></rect></svg>
-<div style="position: absolute; left: 878px; top: 486px; display: flex; gap: 6px">
-<svg width="36" height="84" viewBox="0 0 12 28" shape-rendering="crispEdges" aria-hidden="true"><rect x="0" y="0" width="12" height="28" fill="#1B1F27"></rect><rect x="1" y="2" width="10" height="3" fill="#2E3440"></rect><rect x="1" y="7" width="10" height="3" fill="#2E3440"></rect><rect x="1" y="12" width="10" height="3" fill="#2E3440"></rect><rect x="1" y="17" width="10" height="3" fill="#2E3440"></rect><rect x="1" y="22" width="10" height="3" fill="#2E3440"></rect><rect class="px-led" x="8" y="3" width="2" height="1" fill="#5CF08A"></rect><rect class="px-led2" x="8" y="8" width="2" height="1" fill="#5CF08A"></rect><rect class="px-led" x="8" y="13" width="2" height="1" fill="#F2C46D"></rect><rect class="px-led2" x="8" y="18" width="2" height="1" fill="#5CF08A"></rect><rect class="px-led" x="8" y="23" width="2" height="1" fill="#5CF08A"></rect></svg>
-<svg width="36" height="84" viewBox="0 0 12 28" shape-rendering="crispEdges" aria-hidden="true"><rect x="0" y="0" width="12" height="28" fill="#1B1F27"></rect><rect x="1" y="2" width="10" height="3" fill="#2E3440"></rect><rect x="1" y="7" width="10" height="3" fill="#2E3440"></rect><rect x="1" y="12" width="10" height="3" fill="#2E3440"></rect><rect x="1" y="17" width="10" height="3" fill="#2E3440"></rect><rect x="1" y="22" width="10" height="3" fill="#2E3440"></rect><rect class="px-led2" x="8" y="3" width="2" height="1" fill="#5CF08A"></rect><rect class="px-led" x="8" y="8" width="2" height="1" fill="#F2C46D"></rect><rect class="px-led2" x="8" y="13" width="2" height="1" fill="#5CF08A"></rect><rect class="px-led" x="8" y="18" width="2" height="1" fill="#5CF08A"></rect><rect class="px-led2" x="8" y="23" width="2" height="1" fill="#5CF08A"></rect></svg>
-<svg width="36" height="84" viewBox="0 0 12 28" shape-rendering="crispEdges" aria-hidden="true"><rect x="0" y="0" width="12" height="28" fill="#1B1F27"></rect><rect x="1" y="2" width="10" height="3" fill="#2E3440"></rect><rect x="1" y="7" width="10" height="3" fill="#2E3440"></rect><rect x="1" y="12" width="10" height="3" fill="#2E3440"></rect><rect x="1" y="17" width="10" height="3" fill="#2E3440"></rect><rect x="1" y="22" width="10" height="3" fill="#2E3440"></rect><rect class="px-led" x="8" y="3" width="2" height="1" fill="#5CF08A"></rect><rect class="px-led2" x="8" y="8" width="2" height="1" fill="#5CF08A"></rect><rect class="px-led" x="8" y="13" width="2" height="1" fill="#5CF08A"></rect><rect class="px-led2" x="8" y="18" width="2" height="1" fill="#F2C46D"></rect><rect class="px-led" x="8" y="23" width="2" height="1" fill="#5CF08A"></rect></svg>
+<div style="{{zn.room}}">
+<div style="{{zn.wall}}">
+<div style="{{zn.win}}"></div>
+<span style="{{zn.sign}}">{{zn.name}}<sc-if value="{{zn.isNew}}" hint-placeholder-val="{{false}}"><span style="margin-left: 6px; background: #FF5D8F; color: #FFFFFF; padding: 1px 4px; font-family: 'Press Start 2P', monospace; font-size: 7px; vertical-align: middle">NEW</span></sc-if></span>
+<span style="{{zn.status}}">{{zn.statusText}}</span>
 </div>
-<sc-for list="{{offFlows}}" as="fw" hint-placeholder-count="6">
-<svg width="1040" height="660" viewBox="0 0 1040 660" aria-hidden="true" style="position: absolute; left: 0; top: 0; pointer-events: none; overflow: visible"><path d="{{fw.d}}" fill="none" stroke="{{fw.color}}" stroke-width="{{fw.width}}" stroke-dasharray="8 8" opacity="{{fw.opacity}}" class="{{fw.cls}}"></path><polygon points="{{fw.head}}" fill="{{fw.color}}" opacity="{{fw.opacity}}"></polygon></svg>
+</div>
 </sc-for>
-<sc-if value="{{officeNight}}" hint-placeholder-val="{{false}}"><div style="position: absolute; left: 0; right: 0; top: 82px; bottom: 0; background: rgba(12,18,44,.42); pointer-events: none"></div></sc-if>
+<sc-for list="{{offDecor}}" as="dc" hint-placeholder-count="4">
+<div style="{{dc.style}}">
+<sc-if value="{{dc.isPlant}}" hint-placeholder-val="{{true}}"><svg width="42" height="54" viewBox="0 0 14 18" shape-rendering="crispEdges" aria-hidden="true"><rect x="4" y="0" width="6" height="3" fill="#3F8F4E"></rect><rect x="1" y="3" width="12" height="5" fill="#4FA65E"></rect><rect x="3" y="8" width="8" height="2" fill="#3F8F4E"></rect><rect x="3" y="11" width="8" height="7" fill="#9A6A3C"></rect></svg></sc-if>
+<sc-if value="{{dc.isCoffee}}" hint-placeholder-val="{{false}}"><svg width="48" height="72" viewBox="0 0 16 24" shape-rendering="crispEdges" aria-hidden="true"><rect x="2" y="0" width="12" height="24" fill="#5A6575"></rect><rect x="4" y="2" width="8" height="6" fill="#2B2F38"></rect><rect x="5" y="3" width="6" height="2" fill="#E46F3A" class="px-led"></rect><rect x="5" y="11" width="6" height="7" fill="#C8D0DB"></rect><rect x="6" y="13" width="4" height="3" fill="#8B5E34"></rect><rect x="3" y="20" width="10" height="2" fill="#2B2F38"></rect></svg><div style="position: absolute; left: 50%; top: -18px; transform: translateX(-50%); background: #111827; color: #FFD45C; border: 2px solid #8B5E34; padding: 2px 4px; font-family: 'Press Start 2P', monospace; font-size: 7px">COFFEE</div></sc-if>
+<sc-if value="{{dc.isRack}}" hint-placeholder-val="{{false}}"><svg width="36" height="84" viewBox="0 0 12 28" shape-rendering="crispEdges" aria-hidden="true"><rect x="0" y="0" width="12" height="28" fill="#1B1F27"></rect><rect x="1" y="2" width="10" height="3" fill="#2E3440"></rect><rect x="1" y="7" width="10" height="3" fill="#2E3440"></rect><rect x="1" y="12" width="10" height="3" fill="#2E3440"></rect><rect x="1" y="17" width="10" height="3" fill="#2E3440"></rect><rect x="1" y="22" width="10" height="3" fill="#2E3440"></rect><rect class="px-led" x="8" y="3" width="2" height="1" fill="#5CF08A"></rect><rect class="px-led2" x="8" y="8" width="2" height="1" fill="#5CF08A"></rect><rect class="px-led" x="8" y="13" width="2" height="1" fill="#F2C46D"></rect><rect class="px-led2" x="8" y="18" width="2" height="1" fill="#5CF08A"></rect><rect class="px-led" x="8" y="23" width="2" height="1" fill="#5CF08A"></rect></svg></sc-if>
+<sc-if value="{{dc.isMemory}}" hint-placeholder-val="{{false}}"><svg width="66" height="78" viewBox="0 0 22 26" shape-rendering="crispEdges" aria-hidden="true"><rect x="5" y="0" width="12" height="2" fill="#9AA4B2"></rect><rect x="10" y="2" width="2" height="3" fill="#9AA4B2"></rect><rect x="3" y="5" width="16" height="11" fill="#C8D0DB"></rect><rect x="5" y="8" width="4" height="3" fill="#2FB3C8" class="px-led"></rect><rect x="13" y="8" width="4" height="3" fill="#2FB3C8" class="px-led2"></rect><rect x="7" y="13" width="8" height="1" fill="#5A6575"></rect><rect x="5" y="16" width="12" height="8" fill="#9AA4B2"></rect><rect x="7" y="18" width="8" height="4" fill="#3FBF8F" class="px-screen"></rect><rect x="1" y="17" width="4" height="2" fill="#9AA4B2"></rect><rect x="17" y="17" width="4" height="2" fill="#9AA4B2"></rect></svg><div style="position: absolute; left: 50%; top: -18px; transform: translateX(-50%); background: #111827; color: #9FE8FF; border: 2px solid #2FB3C8; padding: 2px 4px; font-family: 'Press Start 2P', monospace; font-size: 7px; white-space: nowrap">MEMORY</div></sc-if>
+</div>
+</sc-for>
+<sc-for list="{{offFlows}}" as="fw" hint-placeholder-count="3">
+<svg width="{{fw.w}}" height="{{fw.h}}" viewBox="{{fw.vb}}" aria-hidden="true" style="position: absolute; left: 0; top: 0; pointer-events: none; overflow: visible; z-index: 7"><path d="{{fw.d}}" fill="none" stroke="{{fw.color}}" stroke-width="3" stroke-dasharray="8 8" class="of-flow"></path><polygon points="{{fw.head}}" fill="{{fw.color}}"></polygon></svg>
+</sc-for>
 <sc-for list="{{offAgents}}" as="oa" hint-placeholder-count="17">
 <div style="{{oa.pos}}">
 <sc-if value="{{oa.hasBubble}}" hint-placeholder-val="{{true}}"><div class="{{oa.bubbleClass}}" style="{{oa.bubbleStyle}}">{{oa.bubble}}</div></sc-if>
-<div style="{{oa.tagStyle}}">{{oa.tag}}</div>
-<sc-if value="{{oa.isNew}}" hint-placeholder-val="{{false}}">
-<div style="position: absolute; left: -58px; top: -46px; background: #FFD45C; color: #8A3B12; border: 2px solid #8A3B12; padding: 3px 5px; font-family: 'Press Start 2P', monospace; font-size: 8px; white-space: nowrap; transform: rotate(-6deg)">NEW HIRE!</div>
-<svg class="of-spark" width="12" height="12" viewBox="0 0 3 3" shape-rendering="crispEdges" aria-hidden="true" style="position: absolute; left: -16px; top: -6px"><rect x="1" y="0" width="1" height="3" fill="#FFD45C"></rect><rect x="0" y="1" width="3" height="1" fill="#FFD45C"></rect></svg>
-<svg class="of-spark" width="9" height="9" viewBox="0 0 3 3" shape-rendering="crispEdges" aria-hidden="true" style="position: absolute; left: 80px; top: 2px; animation-delay: -.45s"><rect x="1" y="0" width="1" height="3" fill="#FFFFFF"></rect><rect x="0" y="1" width="3" height="1" fill="#FFFFFF"></rect></svg>
-</sc-if>
 <div style="{{oa.glow}}" class="{{oa.glowClass}}"></div>
-<svg width="72" height="54" viewBox="0 0 32 24" shape-rendering="crispEdges" role="img" aria-label="{{oa.label}}" style="position: relative">
+<svg width="72" height="54" viewBox="0 0 32 24" shape-rendering="crispEdges" role="img" aria-label="{{oa.label}}" style="{{oa.spriteStyle}}">
 <rect x="3" y="10" width="2" height="10" fill="#353B47"></rect>
 <g class="{{oa.bodyClass}}">
 <rect x="5" y="2" width="8" height="3" fill="{{oa.hair}}"></rect>
@@ -569,15 +562,16 @@ details>summary{list-style:none}details>summary::-webkit-details-marker{display:
 <rect x="21" y="10" width="7" height="1" fill="{{oa.screenLine}}"></rect>
 <rect x="24" y="14" width="3" height="3" fill="#2B2F38"></rect>
 <rect x="16" y="16" width="6" height="1" fill="#C9CDD4"></rect>
-<rect x="0" y="17" width="32" height="2" fill="#8B5E34"></rect>
+<rect x="0" y="17" width="32" height="2" fill="{{oa.desk}}"></rect>
 <rect x="2" y="19" width="2" height="5" fill="#6B4626"></rect>
 <rect x="28" y="19" width="2" height="5" fill="#6B4626"></rect>
 </svg>
+<div style="{{oa.plateStyle}}">{{oa.plate}}</div>
 </div>
 </sc-for>
 <sc-for list="{{offMoving}}" as="mv" hint-placeholder-count="3">
 <div style="{{mv.labelStyle}}">{{mv.label}}</div>
-<div class="of-carry" style="{{mv.carryStyle}}"><svg width="18" height="14" viewBox="0 0 9 7" shape-rendering="crispEdges" aria-hidden="true" style="display: block; margin: -7px 0 0 -9px"><rect x="0" y="0" width="9" height="7" fill="#FFFFFF"></rect><rect x="0" y="0" width="9" height="1" fill="{{mv.color}}"></rect><rect x="1" y="1" width="1" height="1" fill="{{mv.color}}"></rect><rect x="7" y="1" width="1" height="1" fill="{{mv.color}}"></rect><rect x="2" y="2" width="1" height="1" fill="{{mv.color}}"></rect><rect x="6" y="2" width="1" height="1" fill="{{mv.color}}"></rect><rect x="3" y="3" width="3" height="1" fill="{{mv.color}}"></rect><rect x="0" y="6" width="9" height="1" fill="#9AA4B2"></rect></svg></div>
+<div class="of-carry" style="{{mv.carryStyle}}"><svg width="18" height="14" viewBox="0 0 9 7" shape-rendering="crispEdges" aria-hidden="true" style="display: block; margin: -7px 0 0 -9px"><rect x="0" y="0" width="9" height="7" fill="#FFFFFF"></rect><rect x="0" y="0" width="9" height="1" fill="{{mv.color}}"></rect><rect x="1" y="1" width="1" height="1" fill="{{mv.color}}"></rect><rect x="7" y="1" width="1" height="1" fill="{{mv.color}}"></rect><rect x="2" y="2" width="1" height="1" fill="{{mv.color}}"></rect><rect x="6" y="2" width="1" height="1" fill="{{mv.color}}"></rect><rect x="3" y="3" width="3" height="1" fill="{{mv.color}}"></rect></svg></div>
 </sc-for>
 <div class="of-intern" style="{{internStyle}}">
 <div style="margin: -40px 0 0 -18px; position: relative; width: 36px">
@@ -598,7 +592,59 @@ details>summary{list-style:none}details>summary::-webkit-details-marker{display:
 </div>
 </div>
 </div>
-<p style="margin: 0 0 24px; font-size: 13px; color: #6B7280">움직이는 화살표와 봉투는 지금 오가는 업무입니다. 말풍선은 하는 일, 물음표는 다음 일을 기다리며 생각 중, Zz는 퇴근 시간입니다. 시간에 맞춰 실제 예약 작업 일정표대로 움직입니다.</p>
+<p style="margin: 0 0 32px; font-size: 13px; color: #6B7280">불이 켜진 방은 지금 일하는 부서, 말풍선은 하는 일, 봉투는 지금 오가는 업무입니다. 밤에는 쉬는 직원 옆에 Zz가 뜹니다. 실제 예약 작업 일정표대로 움직입니다.</p>
+
+<h3 style="margin: 0 0 4px; font-family: 'Noto Serif KR', serif; font-size: 22px">운영 상황판</h3>
+<p style="margin: 0 0 16px; font-size: 14px; color: #4B5563">부서 카드를 누르면 아래에 그 부서 직원만 보입니다.</p>
+<div style="{{boardGridStyle}}">
+<sc-for list="{{boardCards}}" as="bc" hint-placeholder-count="6">
+<button type="button" onClick="{{bc.pick}}" aria-pressed="{{bc.pressed}}" style="{{bc.style}}">
+<span style="display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; width: 100%"><span style="{{bc.dot}}"></span><b style="{{bc.nameStyle}}">{{bc.name}}</b><span style="{{bc.pill}}">{{bc.count}}</span></span>
+<sc-if value="{{bc.isBusy}}" hint-placeholder-val="{{false}}">
+<span style="{{bc.lineStyle}}">{{bc.line}}</span>
+<span style="display: block; height: 6px; background: #E3E8EE; border-radius: 3px; margin-top: 6px; overflow: hidden; width: 100%"><span style="{{bc.bar}}"></span></span>
+<span style="display: block; margin-top: 4px; font-size: 12px; color: #6B7280; width: 100%">{{bc.sub}}</span>
+</sc-if>
+<sc-if value="{{bc.isIdle}}" hint-placeholder-val="{{true}}">
+<span style="{{bc.lineStyle}}">{{bc.line}}</span>
+</sc-if>
+</button>
+</sc-for>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: 16px; margin-bottom: 32px; align-items: start">
+<div style="background: #0B1F3A; color: #FFFFFF; border-radius: 8px; padding: 20px">
+<div style="font-size: 13px; color: #AEBBD0">다음 작업까지</div>
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 34px; font-weight: 600; line-height: 1.2; color: #FFD45C">{{nextCountdown}}</div>
+<div style="font-size: 14px; color: #C8D2E1; margin-bottom: 14px">{{nextCountdownWho}}</div>
+<ol style="list-style: none; margin: 0; padding: 0; border-top: 1px solid rgba(255,255,255,.15)">
+<sc-for list="{{upcoming}}" as="up" hint-placeholder-count="5">
+<li style="display: grid; grid-template-columns: 74px minmax(0, 1fr); gap: 10px; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,.08); font-size: 14px">
+<span style="font-family: 'IBM Plex Mono', monospace; color: #9FE8FF">{{up.time}}</span>
+<span><b>{{up.who}}</b> <span style="color: #AEBBD0">{{up.job}}</span></span>
+</li>
+</sc-for>
+</ol>
+</div>
+<div style="background: #FFFFFF; border: 1px solid #D9DEE5; border-radius: 8px; padding: 20px; min-width: 0">
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 8px; margin-bottom: 12px"><b style="font-size: 15px">오늘 타임라인</b><span style="font-size: 12px; color: #6B7280">부서별 · 한국 시간</span></div>
+<div style="display: grid; grid-template-columns: 96px minmax(0, 1fr); column-gap: 8px">
+<div>
+<sc-for list="{{tlLanes}}" as="tl" hint-placeholder-count="10">
+<div style="height: 22px; font-size: 11px; line-height: 22px; color: #374151; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{tl.name}}</div>
+</sc-for>
+</div>
+<div style="{{tlBoxStyle}}">
+<sc-for list="{{tlGrid}}" as="tg" hint-placeholder-count="5"><div style="{{tg.style}}"></div></sc-for>
+<sc-for list="{{tlSpans}}" as="ts" hint-placeholder-count="12"><div title="{{ts.title}}" style="{{ts.style}}"></div></sc-for>
+<div style="{{tlNowStyle}}"></div>
+</div>
+<div></div>
+<div style="display: flex; justify-content: space-between; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #9AA4B2; margin-top: 4px"><span>00</span><span>06</span><span>12</span><span>18</span><span>24</span></div>
+</div>
+</div>
+</div>
+
+<div id="team-detail" style="scroll-margin-top: 64px"></div>
 </sc-if>
 
 <div role="group" aria-label="부서 고르기" style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px">
@@ -1121,19 +1167,13 @@ class Component extends DCLogic {
     if (this.state.focus) return this.state.focus.indexOf(a.id) >= 0;
     return this.state.dept === '전체' || this.state.dept === a.dept;
   }
-  office(spec, sched, nowMs, kst) {
+  office(spec, sched, nowMs, kst, W) {
     const night = kst.h >= 19 || kst.h < 6;
     const looks = this._looks = { cs1: ['#2B1D14', '#2FA37A'], cs2: ['#1E1E24', '#3E8F6E'], qa: ['#1E1E24', '#2F8F6A'], scout: ['#3A2A1E', '#3F7F5A'], exe: ['#2B1D14', '#7A4FA0'], desk: ['#3A2A1E', '#1F7F8F'], help: ['#2B1D14', '#D06A92'], pclab: ['#2B1D14', '#C46A1A'], uxr: ['#3A2A1E', '#B5527A'], uxd: ['#1E1E24', '#2E8B8B'], clead: ['#1E1E24', '#C46A12'], cdata: ['#3A2A1E', '#B8862A'], crisk: ['#2B1D14', '#8A5A1C'], dlead: ['#1E1E24', '#4B3F8A'], dops: ['#2B1D14', '#6A5ACD'], ceo: ['#1E1E24', '#1B2A44', '#C9A55A'], lab: ['#2B1D14', '#6B4FA0'], perf: ['#1E1E24', '#0F6E5A'], kr: ['#2B1D14', '#1E3A5F'], us: ['#7A4A28', '#24508A'],
       news: ['#1E1E24', '#0E5E6F'], macro: ['#3A2A1E', '#2F7A8A'], release: ['#7A3B2A', '#3D6E9E'], disclose: ['#1E1E24', '#5E8A3A'],
       risk: ['#2B1D14', '#9A7420'], compliance: ['#55555E', '#8A3B12'], paper: ['#7A4A28', '#5B3A6B'], data: ['#1E1E24', '#5A6575'], it: ['#2B1D14', '#3A4A5A'] };
     const byId = {};
     spec.forEach((a) => { byId[a.id] = a; });
-    const R1 = 128, R2 = 318, R3 = 510, R4 = 700, R5 = 890;
-    const pos = { lab: [30, R1], qa: [120, R1], scout: [210, R1], perf: [300, R1], ceo: [484, R1], uxr: [800, R1], uxd: [910, R1],
-      news: [40, R2], macro: [140, R2], release: [240, R2], disclose: [340, R2], kr: [480, R2], us: [590, R2], risk: [760, R2], compliance: [880, R2],
-      paper: [60, R3], data: [170, R3], pclab: [484, R3], it: [760, R3],
-      exe: [280, R3], desk: [100, R4], help: [800, R4],
-      clead: [380, R4], cdata: [490, R4], crisk: [600, R4], dlead: [380, R5], dops: [490, R5], cs1: [760, R5], cs2: [870, R5] };
     const tags = { ceo: 'CEO', lab: 'LAB_AGENT', perf: 'PERF_AGENT', uxr: 'UX_RESEARCH', uxd: 'UI_DESIGN', news: 'NEWS_AGENT', macro: 'MACRO_AGENT',
       release: 'RELEASE_WATCH', disclose: 'DART_AGENT', kr: 'KR_PM', us: 'US_PM', risk: 'RISK_AGENT', compliance: 'COMPLIANCE',
       paper: 'PAPER_FUND', data: 'DATA_AGENT', it: 'IT_SEC', pclab: 'REMOTE_LAB',
@@ -1148,43 +1188,115 @@ class Component extends DCLogic {
       ['디지털자산팀', ['clead', 'cdata', 'crisk'], '#6B4210', 0],
       ['설계·운영 개선팀', ['dlead', 'dops'], '#3A2E5C', 0],
       ['고객자산관리팀', ['cs1', 'cs2'], '#1F5A46', 0, true],
-      ['외부 의견 데스크(내부용)', ['desk'], '#1E5560', 60], ['상담 데스크', ['help'], '#6B3050', 0]
+      ['외부 의견 데스크(내부용)', ['desk'], '#1E5560', 60], ['상담 데스크', ['help'], '#6B3050', 0],
+      ['휴게실', [], '#5A4630', 0]
     ];
+    this._zones = zoneDefs;
+    const wide = W >= 1000, SLOT = W < 500 ? 80 : 88, PAD = 10, WALL = 40, ROWH = 112, GAP = 40, M = 12, SP = 8;
+    const TOP = wide ? 84 : 92;
+    const cap = Math.max(1, Math.floor((W - 2 * M - 2 * PAD) / SLOT));
+    const rooms = zoneDefs.map((z) => {
+      const n = z[1].length || 2;
+      const cols = Math.min(n, cap), rows = Math.ceil(n / cols);
+      return { z: z, cols: cols, rows: rows, w: cols * SLOT + 2 * PAD + (z[1].length ? 0 : 40), h: WALL + rows * ROWH + 10 };
+    });
+    const lines = [];
+    let cur = [], used = 0;
+    rooms.forEach((r) => {
+      const need = (cur.length ? SP : 0) + r.w;
+      if (cur.length && used + need > W - 2 * M) { lines.push(cur); cur = []; used = 0; }
+      used += (cur.length ? SP : 0) + r.w; cur.push(r);
+    });
+    if (cur.length) lines.push(cur);
+    let y = TOP;
+    const halls = [];
+    lines.forEach((ln, li) => {
+      const inner = W - 2 * M - SP * (ln.length - 1);
+      const sum = ln.reduce((acc, r) => acc + r.w, 0);
+      const h = Math.max.apply(null, ln.map((r) => r.h));
+      let x = M;
+      ln.forEach((r, k) => {
+        const w = k === ln.length - 1 ? (W - M - x) : Math.round(r.w * inner / sum);
+        r.x = x; r.y = y; r.W = w; r.H = h; x += w + SP;
+      });
+      y += h;
+      if (li < lines.length - 1) { halls.push(y + GAP / 2); y += GAP; }
+    });
+    const H = y + 14;
+    const pos = {}, seat = {};
+    rooms.forEach((r) => {
+      const ids = r.z[1];
+      const dy = Math.round((r.H - (WALL + r.rows * ROWH + 10)) / 2);
+      ids.forEach((id, k) => {
+        const c = k % r.cols, row = Math.floor(k / r.cols);
+        const rowN = Math.min(r.cols, ids.length - row * r.cols);
+        const xr = r.x + (r.W - rowN * SLOT) / 2;
+        pos[id] = [Math.round(xr + c * SLOT + SLOT / 2), r.y + dy + WALL + row * ROWH + 38];
+        seat[id] = { room: r, col: c, row: row };
+      });
+    });
     const state = {};
-    const offAgents = spec.filter((a) => pos[a.id]).map((a, idx) => {
+    spec.forEach((a) => { if (pos[a.id]) state[a.id] = !!(a.always || (sched[a.id] && sched[a.id].active)); });
+    const offAgents = spec.filter((a) => pos[a.id]).map((a) => {
       const s = a.always ? null : sched[a.id];
-      const active = !!(a.always || (s && s.active));
-      state[a.id] = active;
+      const active = state[a.id];
       const lk = looks[a.id] || ['#1E1E24', a.color];
       const col = tint[a.dept] || '#FFFFFF';
-      const p = pos[a.id];
+      const p = pos[a.id], st = seat[a.id];
+      const ids = st.room.z[1], k = ids.indexOf(a.id);
+      const nb = [ids[k - 1], ids[k + 1]].filter((id) => id && seat[id].row === st.row && state[id]);
+      const lift = (active && st.col % 2 === 1 && nb.length) ? 30 : 0;
+      const align = p[0] < 86 ? 'left: -8px; ' : (p[0] > W - 86 ? 'right: -8px; ' : 'left: 50%; transform: translateX(-50%); ');
       let bubble = '', bubbleClass = 'px-bubble', hasBubble = true;
-      let bubbleStyle = 'position: absolute; left: 50%; bottom: calc(100% + 24px); transform: translateX(-50%); background: #FFFFFF; color: #0B1F3A; border: 2px solid #0B1F3A; padding: 3px 7px; font-size: 12px; font-weight: 700; white-space: nowrap; box-shadow: 3px 3px 0 rgba(0,0,0,.35); z-index: 3';
+      let bubbleStyle = 'position: absolute; ' + align + 'bottom: calc(100% + ' + (6 + lift) + 'px); width: max-content; max-width: 150px; background: #FFFFFF; color: #0B1F3A; border: 2px solid #0B1F3A; padding: 3px 7px; font-size: 12px; font-weight: 700; line-height: 1.35; text-align: center; white-space: normal; word-break: keep-all; box-shadow: 3px 3px 0 rgba(0,0,0,.35); z-index: 3';
       if (a.always) bubble = a.alwaysTask || '비용·접근 상시 감시';
-      else if (s.active) { const j = s.active.job; bubble = j.tasks[Math.floor(nowMs / 3500) % j.tasks.length]; }
-      else if (night) { bubble = 'Zz'; bubbleClass = 'of-think'; bubbleStyle = 'position: absolute; left: 62px; top: -26px; color: #C8D2E1; font-family: \'Press Start 2P\', monospace; font-size: 10px; z-index: 3'; }
-      else if ((Math.floor(nowMs / 7000) + idx) % 4 === 0) { bubble = '?'; bubbleClass = 'of-think'; bubbleStyle = 'position: absolute; left: 60px; top: -30px; width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; background: #FFFFFF; color: #0B1F3A; border: 2px solid #0B1F3A; border-radius: 50%; font-family: \'Press Start 2P\', monospace; font-size: 10px; z-index: 3'; }
+      else if (s.active) { const jb = s.active.job; bubble = jb.tasks[Math.floor(nowMs / 3500) % jb.tasks.length]; }
+      else if (night) { bubble = 'Zz'; bubbleClass = 'of-think'; bubbleStyle = 'position: absolute; left: 52px; top: -12px; color: #DCE3EE; font-family: \'Press Start 2P\', monospace; font-size: 9px; text-shadow: 1px 1px 0 #1B2436; z-index: 3'; }
       else hasBubble = false;
       let nextTxt = '';
       if (!active && s && s.next) nextTxt = ' · 다음 ' + this.hm(s.next.at);
-      return { pos: 'position: absolute; left: ' + p[0] + 'px; top: ' + p[1] + 'px; width: 72px; height: 54px; z-index: 2',
-        tag: tags[a.id], tagStyle: 'position: absolute; left: 50%; top: -22px; transform: translateX(-50%); background: #111827; color: ' + col + '; border: 2px solid ' + col + '; padding: 3px 5px; font-family: \'Press Start 2P\', monospace; font-size: 8px; white-space: nowrap; box-shadow: 2px 2px 0 rgba(0,0,0,.45); opacity: ' + (active ? 1 : 0.8),
+      return { pos: 'position: absolute; left: ' + (p[0] - 36) + 'px; top: ' + p[1] + 'px; width: 72px; height: 54px; z-index: ' + (active ? 9 : 6),
         hasBubble: hasBubble, bubble: bubble, bubbleClass: bubbleClass, bubbleStyle: bubbleStyle,
-        isNew: ['cs1', 'cs2'].indexOf(a.id) >= 0,
-        glow: active ? 'position: absolute; left: 4px; right: 4px; bottom: -2px; height: 8px; background: rgba(255,212,92,.25)' : 'display: none',
+        plate: a.name, plateStyle: 'position: absolute; left: 50%; top: 57px; transform: translateX(-50%); background: ' + (active ? '#111827' : 'rgba(17,24,39,.72)') + '; color: ' + (active ? col : '#E5E7EB') + '; border: 1px solid ' + (active ? col : 'transparent') + '; padding: 1px 6px; border-radius: 3px; font-size: 11px; font-weight: 700; white-space: nowrap',
+        spriteStyle: 'position: relative; display: block' + (active ? '' : (night ? '; filter: brightness(.72)' : '; filter: saturate(.8)')),
+        glow: active ? 'position: absolute; left: -4px; right: -4px; top: 8px; bottom: -6px; border-radius: 50%; background: radial-gradient(rgba(255,212,92,.55), rgba(255,212,92,0) 70%)' : 'display: none',
         glowClass: active ? 'of-live' : '',
         label: a.name + ' ' + a.role + (active ? ' 작업 중: ' + bubble : ' 대기' + nextTxt),
-        hair: lk[0], shirt: lk[1], tie: lk[2] || lk[1],
+        hair: lk[0], shirt: lk[1], tie: lk[2] || lk[1], desk: a.id === 'ceo' ? '#B8862A' : '#8B5E34',
         bodyClass: active ? 'px-type' : '', screenClass: active ? 'px-screen' : '',
         screen: active ? '#8FE3FF' : '#1C2230', screenLine: active ? '#2A6F8F' : '#262D3C' };
     });
-    const offZones = zoneDefs.map((z) => {
-      const xs = z[1].map((id) => pos[id][0]), y = pos[z[1][0]][1];
-      const x0 = Math.min.apply(null, xs) - 18, x1 = Math.max.apply(null, xs) + 72 + 18 + z[3];
-      const lit = z[1].some((id) => state[id]);
+    const floorDay = '#C9A06A', floorNight = '#6E5638';
+    const offZones = rooms.map((r) => {
+      const z = r.z, n = z[1].filter((id) => state[id]).length, lit = n > 0;
+      const floor = night ? (lit ? '#A9824F' : floorNight) : floorDay;
       return { name: z[0], isNew: !!z[4],
-        rug: 'position: absolute; left: ' + x0 + 'px; top: ' + (y - 42) + 'px; width: ' + (x1 - x0) + 'px; height: 118px; background: ' + z[2] + '; opacity: ' + (lit ? 0.95 : 0.6) + '; border: 3px solid ' + (lit ? '#FFD45C' : 'rgba(0,0,0,.35)') + '; box-sizing: border-box; background-image: repeating-linear-gradient(45deg, rgba(255,255,255,.05) 0 6px, transparent 6px 12px)',
-        chip: 'position: absolute; left: ' + (x0 + 6) + 'px; top: ' + (y + 62) + 'px; background: rgba(17,24,39,.88); color: #FFFFFF; padding: 2px 7px; font-size: 11px; font-weight: 700; white-space: nowrap; z-index: 1' };
+        room: 'position: absolute; left: ' + r.x + 'px; top: ' + r.y + 'px; width: ' + r.W + 'px; height: ' + r.H + 'px; box-sizing: border-box; border: 4px solid #2A1E14; background-color: ' + floor + '; background-image: repeating-linear-gradient(90deg, rgba(0,0,0,.07) 0 2px, transparent 2px 44px), repeating-linear-gradient(0deg, rgba(0,0,0,.05) 0 2px, transparent 2px 22px); z-index: 1' + (lit ? '; box-shadow: 0 0 0 3px #FFD45C, 0 0 22px rgba(255,212,92,.5)' : ''),
+        wall: 'position: absolute; left: 0; right: 0; top: 0; height: ' + (WALL - 4) + 'px; background: ' + z[2] + '; border-bottom: 4px solid rgba(0,0,0,.35); display: flex; align-items: center; gap: 8px; padding: 0 8px; overflow: hidden',
+        win: r.W >= 200 ? 'position: absolute; right: 8px; top: 6px; width: 44px; height: 16px; background: ' + (night ? '#1B2A4A' : '#9FD3F5') + '; border: 3px solid #1B2436; box-shadow: inset 0 -6px 0 ' + (night ? '#14203A' : '#BFE3F8') : 'display: none',
+        sign: 'position: relative; font-size: 12px; font-weight: 700; color: ' + (lit ? '#FFD45C' : '#FFFFFF') + '; white-space: nowrap; text-shadow: 1px 1px 0 rgba(0,0,0,.5)',
+        statusText: '● ' + n + '명',
+        status: (lit && r.W >= 170) ? 'position: relative; font-size: 11px; font-weight: 700; color: #FFD45C; white-space: nowrap' : 'display: none' };
+    });
+    const offDecor = [];
+    const special = { '연구소 · 성과평가': 'isMemory', 'IT·보안실': 'isRack', '트레이딩 · 데이터': 'isRack' };
+    rooms.forEach((r) => {
+      const ids = r.z[1];
+      const base = r.y + r.H - 10;
+      const put = (kind, x, w, h) => {
+        const o = { isPlant: false, isCoffee: false, isRack: false, isMemory: false };
+        o[kind] = true;
+        o.style = 'position: absolute; left: ' + Math.round(x) + 'px; top: ' + Math.round(base - h) + 'px; width: ' + w + 'px; height: ' + h + 'px; z-index: 2';
+        offDecor.push(o);
+      };
+      if (!ids.length) { put('isCoffee', r.x + 22, 48, 72); put('isPlant', r.x + r.W - 58, 42, 54); return; }
+      const rowN = Math.min(r.cols, ids.length);
+      const side = (r.W - rowN * SLOT) / 2 - 8;
+      const kind = special[r.z[0]];
+      if (kind === 'isMemory' && side >= 70) put('isMemory', r.x + r.W - 76, 66, 78);
+      else if (kind === 'isRack' && side >= 46) put('isRack', r.x + r.W - 50, 36, 84);
+      else if (side >= 48) put('isPlant', r.x + r.W - 50, 42, 54);
+      if (side >= 48 && r.W >= 300) put('isPlant', r.x + 8, 42, 54);
     });
     const flowDefs = [
       ['data', 'lab', '자료 전달', '#B8C2CF'], ['news', 'kr', '속보 전달', '#3FD0E4'], ['macro', 'us', '지표 해설', '#3FD0E4'],
@@ -1201,34 +1313,130 @@ class Component extends DCLogic {
     const offFlows = [], offMoving = [];
     const t = nowMs / 1000;
     flowDefs.forEach((f, i) => {
+      if (!state[f[0]] || !pos[f[0]] || !pos[f[1]]) return;
       const a = pos[f[0]], b = pos[f[1]];
-      const ax = a[0] + 36, ay = a[1] + 30, bx = b[0] + 36, by = b[1] + 30;
+      const ax = a[0], ay = a[1] + 24, bx = b[0], by = b[1] + 24;
       const dx = bx - ax, dy = by - ay, L = Math.sqrt(dx * dx + dy * dy) || 1, ux = dx / L, uy = dy / L;
-      const x1 = ax + ux * 38, y1 = ay + uy * 30, x2 = bx - ux * 40, y2 = by - uy * 32;
-      const arc = Math.min(170, L * 0.45) * (i % 2 ? 1 : 0.72);
-      const bend = Math.abs(dy) < 40 ? (ay < 200 ? 1 : -1) * Math.sign(ux) * arc : (i % 2 ? 36 : -36);
+      const x1 = ax + ux * 34, y1 = ay + uy * 28, x2 = bx - ux * 36, y2 = by - uy * 30;
+      const arc = Math.min(150, L * 0.4) * (i % 2 ? 1 : 0.72);
+      const bend = Math.abs(dy) < 40 ? -Math.sign(ux || 1) * arc : (i % 2 ? 40 : -40);
       const cx = (x1 + x2) / 2 - uy * bend, cy = (y1 + y2) / 2 + ux * bend;
-      const on = !!state[f[0]];
       const ex = x2 - cx, ey = y2 - cy, el = Math.sqrt(ex * ex + ey * ey) || 1, vx = ex / el, vy = ey / el;
       const head = [x2, y2, x2 - vx * 12 - vy * 7, y2 - vy * 12 + vx * 7, x2 - vx * 12 + vy * 7, y2 - vy * 12 - vx * 7].map((v) => v.toFixed(1));
       const d = 'M ' + x1.toFixed(0) + ' ' + y1.toFixed(0) + ' Q ' + cx.toFixed(0) + ' ' + cy.toFixed(0) + ' ' + x2.toFixed(0) + ' ' + y2.toFixed(0);
-      offFlows.push({ d: d, color: f[3], width: on ? 3 : 2, opacity: on ? 1 : 0.14,
-        cls: on ? 'of-flow' : '', head: head[0] + ',' + head[1] + ' ' + head[2] + ',' + head[3] + ' ' + head[4] + ',' + head[5] });
-      if (on) {
-        const mx = 0.25 * x1 + 0.5 * cx + 0.25 * x2, my = 0.25 * y1 + 0.5 * cy + 0.25 * y2;
-        offMoving.push({ label: f[2], color: f[3],
-          labelStyle: 'position: absolute; left: ' + mx.toFixed(0) + 'px; top: ' + my.toFixed(0) + 'px; transform: translate(-50%, -150%); background: #111827; color: ' + f[3] + '; border: 2px solid ' + f[3] + '; padding: 2px 6px; font-size: 11px; font-weight: 700; white-space: nowrap; z-index: 4',
-          carryStyle: 'offset-path: path(\'' + d + '\'); animation-delay: -' + ((t + i * 0.37) % 2.4).toFixed(2) + 's; z-index: 4' });
-      }
+      offFlows.push({ d: d, color: f[3], w: W, h: H, vb: '0 0 ' + W + ' ' + H, head: head[0] + ',' + head[1] + ' ' + head[2] + ',' + head[3] + ' ' + head[4] + ',' + head[5] });
+      const mx = 0.25 * x1 + 0.5 * cx + 0.25 * x2, my = 0.25 * y1 + 0.5 * cy + 0.25 * y2;
+      offMoving.push({ label: f[2], color: f[3],
+        labelStyle: 'position: absolute; left: ' + Math.max(50, Math.min(W - 50, mx)).toFixed(0) + 'px; top: ' + my.toFixed(0) + 'px; transform: translate(-50%, -150%); background: #111827; color: ' + f[3] + '; border: 2px solid ' + f[3] + '; border-radius: 4px; padding: 2px 6px; font-size: 11px; font-weight: 700; white-space: nowrap; z-index: 10',
+        carryStyle: 'offset-path: path(\'' + d + '\'); animation-delay: -' + ((t + i * 0.37) % 2.4).toFixed(2) + 's; z-index: 10' });
     });
-    const winColor = night ? '#1B2A4A' : '#9FD3F5';
-    const offWindows = [30, 140, 800, 910].map((x) => ({ style: 'position: absolute; top: 14px; left: ' + x + 'px; width: 90px; height: 50px; background: ' + winColor + '; border: 4px solid #1B2436; box-shadow: inset 0 -12px 0 ' + (night ? '#14203A' : '#BFE3F8') + '; opacity: .9' }));
     this._tags = tags; this._tint = tint;
     const busy = Object.keys(state).filter((k) => state[k]).length;
-    return { offAgents: offAgents, offZones: offZones, offFlows: offFlows, offMoving: offMoving, offWindows: offWindows, officeNight: night,
-      officeLabel: '오피스 그림: 지금 일하는 직원 ' + busy + '명, 오가는 업무 ' + offMoving.map((m) => m.label).join(', '),
-      officeStyle: 'position: relative; overflow: hidden; width: 1040px; height: 1040px; margin: 0 auto; background-color: ' + (night ? '#6E5638' : '#B98A55') + '; background-image: repeating-linear-gradient(0deg, rgba(0,0,0,.12) 0 2px, transparent 2px 34px), repeating-linear-gradient(90deg, rgba(0,0,0,.06) 0 2px, transparent 2px 140px)',
-      internStyle: 'animation-delay: -' + (t % 48).toFixed(2) + 's; z-index: 5' };
+    const hy = (halls.length ? halls[0] : H - 30) + 8;
+    const walk = 'M 26 ' + hy + ' L ' + (W - 26) + ' ' + hy + ' L 26 ' + hy;
+    return { offAgents: offAgents, offZones: offZones, offFlows: offFlows, offMoving: offMoving, offDecor: offDecor, officeNight: night, officeW: W,
+      officeLabel: '오피스 그림: 지금 일하는 직원 ' + busy + '명, 오가는 업무 ' + (offMoving.map((m) => m.label).join(', ') || '없음'),
+      officeTopStyle: 'position: absolute; left: 0; right: 0; top: 0; height: ' + (TOP - 14) + 'px; background: #1B2436; border-bottom: 4px solid #2A1E14',
+      officeTitleSize: wide ? '22px' : '16px', officeSubTop: wide ? '46px' : '40px',
+      officeSub: wide ? 'AI 직원들이 생각하고, 일하고, 함께 일하는 모습 · 실제 운영 일정표대로' : 'AI 직원들이 일하는 모습 · 실제 일정표대로',
+      officeStyle: 'position: relative; overflow: hidden; width: ' + W + 'px; height: ' + H + 'px; margin: 0 auto; background-color: ' + (night ? '#2F3646' : '#8C96A6') + '; background-image: repeating-linear-gradient(0deg, rgba(0,0,0,.08) 0 2px, transparent 2px 24px), repeating-linear-gradient(90deg, rgba(0,0,0,.08) 0 2px, transparent 2px 24px)',
+      internStyle: 'offset-path: path(\'' + walk + '\'); animation-delay: -' + (t % 48).toFixed(2) + 's; z-index: 8' };
+  }
+  dayPlan(nowMs) {
+    const day0 = Math.floor((nowMs + 9 * 3600000) / 86400000) * 1440 - 540;
+    if (this._dayKey === day0 && this._day) return this._day;
+    const spec = this.spec(), byId = {};
+    spec.forEach((a) => { byId[a.id] = a; });
+    const tint = this._tint || {};
+    const lanes = [], spans = [];
+    (this._zones || []).forEach((z) => {
+      if (!z[1].length) return;
+      const li = lanes.length;
+      lanes.push({ name: z[0] });
+      z[1].forEach((id) => {
+        const a = byId[id];
+        if (!a) return;
+        const color = tint[a.dept] || a.color;
+        if (a.always) { spans.push({ li: li, s: 0, e: 1440, color: color, title: a.name + ' · 상시 감시', always: true }); return; }
+        a.jobs.forEach((jb) => {
+          let run = null;
+          for (let m = 0; m < 1440; m++) {
+            if (!this.runs(jb, day0 + m)) continue;
+            if (run && m <= run.e + 10) { run.e = Math.min(1440, m + jb.dur); continue; }
+            if (run) spans.push(run);
+            run = { li: li, s: m, e: Math.min(1440, m + Math.max(jb.dur, 4)), color: color, title: this.hm(day0 + m) + ' ' + a.name + ' · ' + jb.name };
+          }
+          if (run) spans.push(run);
+        });
+      });
+    });
+    this._dayKey = day0; this._day = { day0: day0, lanes: lanes, spans: spans };
+    return this._day;
+  }
+  board(spec, sched, nowMs, nowMin) {
+    const tint = this._tint || {};
+    const byId = {};
+    spec.forEach((a) => { byId[a.id] = a; });
+    const focus = this.state.focus;
+    const slim = (this.state.vw || 1280) < 640;
+    const cards = (this._zones || []).filter((z) => z[1].length).map((z) => {
+      const ids = z[1].filter((id) => byId[id]);
+      const color = tint[(byId[ids[0]] || {}).dept] || '#9AA4B2';
+      const act = [];
+      let soon = null;
+      ids.forEach((id) => {
+        const a = byId[id];
+        if (a.always) { act.push({ a: a, pct: 100, job: a.alwaysTask || '상시 감시', always: true }); return; }
+        const s = sched[id];
+        if (s.active) {
+          const jb = s.active.job;
+          act.push({ a: a, job: jb.name, pct: Math.max(4, Math.min(100, ((nowMs / 60000 - s.active.start) / jb.dur) * 100)), left: Math.max(0, Math.ceil(s.active.start + jb.dur - nowMs / 60000)) });
+        } else if (s.next && (!soon || s.next.at < soon.at)) soon = { at: s.next.at, who: a.name, job: s.next.job.name };
+      });
+      const on = !!(focus && focus.join() === ids.join());
+      const busy = act.length > 0;
+      const top = act.filter((x) => !x.always)[0] || act[0];
+      return { name: z[0], count: busy ? act.length + '/' + ids.length + '명 작업 중' : '대기 ' + ids.length + '명',
+        pressed: on ? 'true' : 'false', isBusy: busy, isIdle: !busy,
+        pick: () => {
+          this.setState(on ? { focus: null, dept: '전체' } : { focus: ids, dept: '전체' });
+          if (!on) setTimeout(() => { const el = document.getElementById('team-detail'); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 60);
+        },
+        nameStyle: slim ? 'flex: 1 0 calc(100% - 22px); min-width: 0; font-size: 14px; word-break: keep-all' : 'flex: 1; min-width: 0; font-size: 15px',
+        lineStyle: (slim && !busy) ? 'display: none' : 'display: block; margin-top: 10px; font-size: 13px; color: ' + (busy ? '#0B1F3A' : '#4B5563') + '; width: 100%',
+        line: busy ? top.a.name + ' · ' + top.job : (soon ? '다음 ' + this.rel(soon.at - nowMin, soon.at) + ' · ' + soon.who + ' — ' + soon.job : '예정 없음'),
+        bar: busy ? 'display: block; height: 100%; width: ' + top.pct.toFixed(1) + '%; background: ' + color + '; border-radius: 3px; transition: width 1s linear' : '',
+        sub: busy ? (top.always ? '상시' : (top.left > 0 ? '약 ' + top.left + '분 남음' : '마무리 중')) + (act.length > 1 ? ' · 외 ' + (act.length - 1) + '명 작업 중' : '') : '',
+        dot: 'width: 10px; height: 10px; border-radius: 50%; flex: none; background: ' + color + (busy ? '; box-shadow: 0 0 0 3px ' + color + '33' : ''),
+        pill: 'font-size: 12px; font-weight: 700; padding: 3px 8px; border-radius: 999px; white-space: nowrap; background: ' + (busy ? '#DDF0EA' : '#EEF1F4') + '; color: ' + (busy ? '#0A4F40' : '#4B5563'),
+        style: 'display: flex; flex-direction: column; align-items: flex-start; text-align: left; font: inherit; color: #0B1F3A; cursor: pointer; background: #FFFFFF; border-radius: 8px; padding: ' + (slim ? '10px 12px' : '14px 16px') + '; min-height: 44px; border: ' + (on ? '2px solid #0B1F3A' : (busy ? '1px solid #0F6E5A' : '1px solid #D9DEE5')) + (busy ? '; box-shadow: 0 2px 10px rgba(11,31,58,.08)' : '') };
+    });
+    cards.sort((x, y) => (y.isBusy ? 1 : 0) - (x.isBusy ? 1 : 0));
+    const ups = [];
+    spec.forEach((a) => { if (!a.always && sched[a.id] && sched[a.id].next) ups.push({ at: sched[a.id].next.at, who: a.name, job: sched[a.id].next.job.name }); });
+    ups.sort((x, y) => x.at - y.at);
+    const first = ups[0];
+    let cd = '-';
+    if (first) {
+      const mins = Math.max(1, Math.ceil(first.at - nowMs / 60000));
+      const hh = Math.floor(mins / 60), mm = mins % 60;
+      cd = hh >= 24 ? Math.floor(hh / 24) + '일 ' + (hh % 24) + '시간' : (hh ? hh + '시간 ' + mm + '분' : mm + '분');
+    }
+    const plan = this.dayPlan(nowMs);
+    const nowOfDay = nowMin - plan.day0;
+    const rowH = 22;
+    const tlSpans = plan.spans.map((sp) => {
+      const long = sp.e - sp.s > 360;
+      const past = sp.e <= nowOfDay, live = sp.s <= nowOfDay && nowOfDay < sp.e && !sp.always && !long;
+      return { title: sp.title, style: 'position: absolute; left: ' + (sp.s / 14.4).toFixed(2) + '%; width: max(3px, ' + ((sp.e - sp.s) / 14.4).toFixed(2) + '%); top: ' + (sp.li * rowH + (sp.always ? 9 : 4)) + 'px; height: ' + (sp.always ? 4 : 14) + 'px; border-radius: 3px; background: ' + sp.color + '; opacity: ' + (sp.always ? 0.45 : (past ? 0.35 : (long ? 0.6 : 1))) + (live ? '; box-shadow: 0 0 0 2px #0B1F3A' : '') };
+    });
+    const tlGrid = [0, 6, 12, 18, 24].map((h) => ({ style: 'position: absolute; top: 0; bottom: 0; left: ' + (h / 24 * 100) + '%; width: 1px; background: #EEF1F4' }));
+    tlGrid.push(...plan.lanes.map((ln, k) => ({ style: 'position: absolute; left: 0; right: 0; top: ' + (k * rowH + rowH - 1) + 'px; height: 1px; background: #F4F6F8' })));
+    return { boardCards: cards, boardGridStyle: 'display: grid; grid-template-columns: repeat(auto-fill, minmax(' + (slim ? '150px' : 'min(250px, 100%)') + ', 1fr)); gap: ' + (slim ? 8 : 12) + 'px; margin-bottom: 20px', upcoming: ups.slice(0, 5).map((u) => ({ time: this.hm(u.at), who: u.who, job: u.job })),
+      nextCountdown: cd, nextCountdownWho: first ? this.hm(first.at) + ' · ' + first.who + ' — ' + first.job : '예정 없음',
+      tlLanes: plan.lanes, tlSpans: tlSpans, tlGrid: tlGrid,
+      tlBoxStyle: 'position: relative; height: ' + (plan.lanes.length * rowH) + 'px; min-width: 0',
+      tlNowStyle: 'position: absolute; top: -4px; bottom: -4px; left: ' + Math.max(0, Math.min(100, nowOfDay / 14.4)).toFixed(2) + '%; width: 2px; background: #E0453A; z-index: 2' };
   }
   extras(spec, kst) {
     const presets = [['base', '기본 40 · 50 · 10', 40, 50, 10], ['long', '장투 위주 60 · 30 · 10', 60, 30, 10],
@@ -1364,12 +1572,14 @@ class Component extends DCLogic {
       if (s.last) feed.push({ at: s.last.at, time: this.hm(s.last.at), who: a.name + ' · ' + a.role, what: s.last.job.done });
     });
     feed.sort((x, y) => y.at - x.at);
-    const of = this.office(spec, sched, nowMs, kst);
-    const ex = this.extras(spec, kst);
     const vw = this.state.vw || 1280;
-    const narrowOffice = vw < 1100;
+    const officeW = vw < 760 ? 400 : (vw < 1100 ? 720 : 1040);
+    const of = this.office(spec, sched, nowMs, kst, officeW);
+    const bd = this.board(spec, sched, nowMs, nowMin);
+    const ex = Object.assign(this.extras(spec, kst), bd);
+    const narrowOffice = (vw - 56) < officeW + 8;
     const fit = this.state.officeFit === null ? narrowOffice : this.state.officeFit;
-    const officeZoom = (narrowOffice && fit) ? Math.max(0.3, Math.min(1, (vw - 56) / 1048)) : 1;
+    const officeZoom = (narrowOffice && fit) ? Math.max(0.3, Math.min(1, (vw - 56) / (officeW + 8))) : 1;
     const narrow = vw < 760;
     const shareUrl = (typeof location !== 'undefined' ? String(location.href).split('#')[0] : '');
     const cmdQ = this._cmdQ || '';
@@ -1389,7 +1599,7 @@ class Component extends DCLogic {
       },
       onCmdAll: (e) => { this._cmdAll = !this._cmdAll; const box = e.target.closest('[data-cmdbox]'); if (box) this._cmdFilter(box); },
       cmdAllLabel: this._cmdAll ? '접기' : '명령어 ' + cmdAll.length + '개 모두 보기',
-      siteUpdated: '2026-11-11',
+      siteUpdated: '2026-11-13',
       isNarrow: narrow,
       teamMore: narrow && ex.team.length > 8, allTeam: this.state.allTeam ? 'true' : 'false',
       teamShown: (narrow && !this.state.allTeam) ? ex.team.slice(0, 8) : ex.team,
@@ -1403,12 +1613,13 @@ class Component extends DCLogic {
       },
       goTop: () => { try { window.scrollTo({ top: 0, behavior: 'smooth' }); } catch (e) { window.scrollTo(0, 0); } },
       isOffice: true,
-      offAgents: of.offAgents, offZones: of.offZones, offFlows: of.offFlows, offMoving: of.offMoving, offWindows: of.offWindows,
+      offAgents: of.offAgents, offZones: of.offZones, offFlows: of.offFlows, offMoving: of.offMoving, offDecor: of.offDecor,
       officeNight: of.officeNight, officeLabel: of.officeLabel, internStyle: of.internStyle,
+      officeTopStyle: of.officeTopStyle, officeTitleSize: of.officeTitleSize, officeSubTop: of.officeSubTop, officeSub: of.officeSub,
       officeStyle: of.officeStyle + (officeZoom < 1 ? '; zoom: ' + officeZoom.toFixed(3) : ''),
       officeNarrow: narrowOffice, officeZoomPressed: officeZoom < 1 ? 'false' : 'true',
       officeFitLabel: officeZoom < 1 ? '🔍 크게 보기' : '↔ 화면에 맞추기',
-      officeFitHint: officeZoom < 1 ? '사무실 전체를 한눈에 — 크게 보면 옆으로 밀어서 봅니다' : '← 옆으로 밀어서 사무실을 둘러보세요 →',
+      officeFitHint: officeZoom < 1 ? '사무실 전체를 한눈에 — 크게 보면 옆으로 밀어서 봅니다' : '← 옆으로 밀어서 둘러보세요 →',
       toggleOfficeFit: () => this.setState({ officeFit: officeZoom < 1 ? false : true }),
       tabs: tabs,
       isOverview: tab === 'overview', isStart: tab === 'start', isAnalysis: tab === 'analysis', isWork: tab === 'work', isStrategy: tab === 'strategy', isResearch: tab === 'research', isSafety: tab === 'safety',
