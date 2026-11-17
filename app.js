@@ -1,11 +1,14 @@
 /* Rema 미니 앱 (11-17) — 보기 전용
  * 숫자는 봇이 보낸 링크의 '#d=' 뒤(zlib + base64url)에만 있다. 서버로 보내지 않고(조각은 요청에 안 실림),
  * 어디에도 연결하지 않으며(CSP connect-src 'none'), 화면에는 textContent로만 넣는다(HTML로 해석 안 함).
+ * 링크마다 든 화면만 탭으로 보인다: 홈·배당·성적 / 종목(관심종목 보드) / 운영(관리자).
  */
 (function () {
   'use strict';
   var $ = function (id) { return document.getElementById(id); };
+  var SVG = 'http://www.w3.org/2000/svg';
   var MAX_STR = 80;
+  var VIEWS = { home: '내 자산 한눈에', div: '💵 내 배당 달력', perf: '📈 성적표', board: '📋 관심종목 보드', ops: '🛠 운영 상태판' };
 
   function el(tag, cls, text) {
     var e = document.createElement(tag);
@@ -18,6 +21,8 @@
   function pct(v) { var n = num(v); return n === null ? 0 : Math.max(0, Math.min(100, n)); }
   function won(v) { var n = num(v); return n === null ? '—' : '₩' + Math.round(n).toLocaleString('ko-KR'); }
   function man(v) { var n = num(v); return n === null ? '—' : Math.round(n / 10000).toLocaleString('ko-KR'); }
+  function signed(v, d) { var n = num(v); return n === null ? '—' : (n > 0 ? '+' : '') + n.toFixed(d === undefined ? 1 : d) + '%'; }
+  function list(v, n) { return Array.isArray(v) ? v.slice(0, n) : []; }
 
   function b64urlBytes(s) {
     s = s.replace(/-/g, '+').replace(/_/g, '/');
@@ -31,65 +36,61 @@
     // 텔레그램은 열 때 '#' 뒤에 실행 정보(tgWebApp…)를 덧붙임 — '&'로든 '#'로든 이어져도 d= 만 골라 읽음
     var m = (location.hash || '').match(/(?:^#|[#&])d=([A-Za-z0-9_-]+)/);
     var token = m ? m[1] : null;
-    if (!token || token.length > 6000 || !/^[A-Za-z0-9_-]+$/.test(token)) return Promise.resolve(null);
+    if (!token || token.length > 6000) return Promise.resolve(null);
     if (typeof DecompressionStream === 'undefined') return Promise.reject(new Error('old'));
     var stream = new Blob([b64urlBytes(token)]).stream().pipeThrough(new DecompressionStream('deflate'));
     return new Response(stream).text().then(function (t) {
       if (t.length > 100000) return null;
       var p = JSON.parse(t);
-      return (p && p.v === 1 && typeof p === 'object') ? p : null;
+      return (p && typeof p === 'object' && p.v === 1) ? p : null;
     });
   }
 
+  function item(mark, title, sub, right, rightCls) {
+    var it = el('div', 'item');
+    if (mark) { var mk = el('span', 'mk', str(mark).slice(0, 4)); mk.setAttribute('aria-hidden', 'true'); it.appendChild(mk); }
+    var tx = el('div', 'txt');
+    tx.appendChild(el('span', 't', title));
+    if (sub) tx.appendChild(el('span', 's', sub));
+    it.appendChild(tx);
+    if (right !== undefined && right !== null) it.appendChild(el('span', rightCls || 'when mono', right));
+    return it;
+  }
+
+  // ── 홈 ──
   function renderHome(h) {
-    h = h || {};
     $('val').textContent = won(h.val);
-    var pl = num(h.pl);
-    $('pl').textContent = pl === null ? '—' : (pl > 0 ? '+' : '') + pl.toFixed(1) + '%';
+    $('pl').textContent = signed(h.pl);
     var box = $('sleeves');
-    (Array.isArray(h.sl) ? h.sl : []).slice(0, 4).forEach(function (r) {
+    list(h.sl, 4).forEach(function (r) {
       if (!Array.isArray(r)) return;
       var now = pct(r[1]), tgt = pct(r[2]), d = Math.round(now - tgt);
-      var wrap = el('div', 'sl');
-      var top = el('div', 'row');
+      var wrap = el('div', 'sl'), top = el('div', 'row');
       top.appendChild(el('span', 'name', str(r[0])));
       var right = el('span', 'mono small', now + '% / ' + tgt + '% · ');
       right.appendChild(el('b', Math.abs(d) >= 4 ? 'warn' : '', (d > 0 ? '+' : d < 0 ? '−' : '±') + Math.abs(d) + '%p'));
       top.appendChild(right);
-      var track = el('div', 'track');
-      var bar = el('div', 'bar'); bar.style.width = now + '%';
-      var mk = el('div', 'tgt'); mk.style.left = 'calc(' + tgt + '% - 1px)';
+      var track = el('div', 'track'), bar = el('div', 'bar'), mk = el('div', 'tgt');
+      bar.style.width = now + '%'; mk.style.left = 'calc(' + tgt + '% - 1px)';
       track.appendChild(bar); track.appendChild(mk);
-      wrap.appendChild(top); wrap.appendChild(track);
-      box.appendChild(wrap);
+      wrap.appendChild(top); wrap.appendChild(track); box.appendChild(wrap);
     });
     var plan = h.plan || {};
     $('plan-total').textContent = num(plan.m) === null ? '—' : '이달 ' + Math.round(plan.m).toLocaleString('ko-KR') + '만원';
-    (Array.isArray(plan.parts) ? plan.parts : []).slice(0, 6).forEach(function (p) {
+    list(plan.parts, 6).forEach(function (p) {
       if (Array.isArray(p)) $('parts').appendChild(el('span', 'part mono', str(p[0]) + ' ' + (num(p[1]) || 0).toLocaleString('ko-KR') + '만'));
     });
     if (num(plan.pool)) $('pool').textContent = '장투 대기 자금 약 ' + Math.round(plan.pool).toLocaleString('ko-KR') + '만원 — 🔔 구간이 올 때만 꺼내 씀';
-    var todos = $('todos');
-    var list = Array.isArray(h.todo) ? h.todo.slice(0, 3) : [];
-    if (!list.length) todos.appendChild(el('p', 'note', '지금 할 일 없음'));
-    list.forEach(function (t) {
-      if (!Array.isArray(t)) return;
-      var it = el('div', 'item');
-      var mk = el('span', 'mk', str(t[0]).slice(0, 4)); mk.setAttribute('aria-hidden', 'true');
-      var tx = el('div', 'txt');
-      tx.appendChild(el('span', 't', str(t[1])));
-      tx.appendChild(el('span', 's', str(t[2])));
-      it.appendChild(mk); it.appendChild(tx);
-      it.appendChild(el('span', 'when mono', str(t[3])));
-      todos.appendChild(it);
-    });
+    var todos = list(h.todo, 3);
+    if (!todos.length) $('todos').appendChild(el('p', 'note', '지금 할 일 없음'));
+    todos.forEach(function (t) { if (Array.isArray(t)) $('todos').appendChild(item(t[0], str(t[1]), str(t[2]), str(t[3]))); });
   }
 
+  // ── 배당 ──
   function renderDiv(d) {
-    d = d || {};
     $('dg').textContent = won(d.g);
     $('dn').textContent = won(d.n);
-    var months = Array.isArray(d.m) ? d.m.slice(0, 12) : [];
+    var months = list(d.m, 12);
     var max = Math.max.apply(null, months.map(function (v) { return num(v) || 0; }).concat([1]));
     var bars = $('bars'), label = [];
     for (var i = 0; i < 12; i++) {
@@ -107,41 +108,138 @@
     $('fin').textContent = man(g) + '만 / ' + man(lim) + '만';
     $('fin-fill').style.width = Math.min(100, g / lim * 100) + '%';
     $('fin-mark').style.left = 'calc(' + Math.min(100, warn / lim * 100) + '% - 1px)';
-    var rows = $('drows');
-    var list = Array.isArray(d.r) ? d.r.slice(0, 6) : [];
-    if (!list.length) rows.appendChild(el('p', 'note', '보유 종목이 없거나 배당 자료를 못 받았습니다 — /holding 으로 등록'));
-    list.forEach(function (r) {
+    var rows = list(d.r, 6);
+    if (!rows.length) $('drows').appendChild(el('p', 'note', '보유 종목이 없거나 배당 자료를 못 받았습니다 — /holding 으로 등록'));
+    rows.forEach(function (r) {
       if (!Array.isArray(r)) return;
-      var it = el('div', 'item');
-      var tx = el('div', 'txt');
-      tx.appendChild(el('span', 't', str(r[0])));
       var mo = str(r[3]);
-      tx.appendChild(el('span', 's', (mo ? mo + '월 · ' : '') + '수익률 ' + (num(r[2]) || 0).toFixed(1) + '%'));
-      it.appendChild(tx);
-      it.appendChild(el('span', 'amt mono', won(r[1])));
-      rows.appendChild(it);
+      $('drows').appendChild(item(null, str(r[0]), (mo ? mo + '월 · ' : '') + '수익률 ' + (num(r[2]) || 0).toFixed(1) + '%', won(r[1]), 'amt mono'));
     });
   }
 
-  function show(view) {
-    var home = view === 'home';
-    $('view-home').hidden = !home; $('home-chip').hidden = !home;
-    $('view-div').hidden = home; $('div-chip').hidden = home;
-    $('title').textContent = home ? '내 자산 한눈에' : '💵 내 배당 달력';
-    $('tab-home').setAttribute('aria-current', home ? 'page' : 'false');
-    $('tab-div').setAttribute('aria-current', home ? 'false' : 'page');
+  // ── 성적 ──
+  function line(svg, vals, lo, hi, color, width) {
+    if (vals.length < 2) return;
+    var pts = vals.map(function (v, i) {
+      var x = 4 + i * (332 / (vals.length - 1));
+      var y = 8 + (hi - v) / ((hi - lo) || 1) * 124;
+      return x.toFixed(1) + ',' + y.toFixed(1);
+    }).join(' ');
+    var pl = document.createElementNS(SVG, 'polyline');
+    pl.setAttribute('points', pts); pl.setAttribute('fill', 'none');
+    pl.setAttribute('stroke', color); pl.setAttribute('stroke-width', String(width));
+    pl.setAttribute('stroke-linejoin', 'round'); pl.setAttribute('stroke-linecap', 'round');
+    svg.appendChild(pl);
+  }
+  function series(c, k) { return list(c[k], 60).map(function (v) { return (num(v) || 0) / 10; }); }
+
+  function renderPerf(p) {
+    var c = p.c;
+    if (c && typeof c === 'object') {
+      var e = series(c, 'e'), k = series(c, 'k'), n = series(c, 'n');
+      var all = e.concat(k, n, [0]);
+      var lo = Math.min.apply(null, all), hi = Math.max.apply(null, all);
+      var svg = document.createElementNS(SVG, 'svg');
+      svg.setAttribute('viewBox', '0 0 340 140'); svg.setAttribute('preserveAspectRatio', 'none'); svg.setAttribute('aria-hidden', 'true');
+      var zero = document.createElementNS(SVG, 'line');
+      var zy = (8 + hi / ((hi - lo) || 1) * 124).toFixed(1);
+      zero.setAttribute('x1', '0'); zero.setAttribute('x2', '340'); zero.setAttribute('y1', zy); zero.setAttribute('y2', zy);
+      zero.setAttribute('stroke', '#D9DEE5'); zero.setAttribute('stroke-dasharray', '3 3');
+      svg.appendChild(zero);
+      line(svg, k, lo, hi, '#C9A55A', 1.6); line(svg, n, lo, hi, '#2962FF', 1.6); line(svg, e, lo, hi, '#0B1F3A', 2.6);
+      $('pchart').appendChild(svg);
+      $('pc-range').textContent = str(c.from) + ' → ' + str(c.to);
+      $('pc-e').textContent = signed(e[e.length - 1]); $('pc-k').textContent = signed(k[k.length - 1]); $('pc-n').textContent = signed(n[n.length - 1]);
+      $('pchart').setAttribute('aria-label', '누적 수익: 지수 엔진 ' + signed(e[e.length - 1]) + ', 코스피 ' + signed(k[k.length - 1]) + ', 나스닥 ' + signed(n[n.length - 1]));
+    } else {
+      $('pchart').appendChild(el('p', 'note', '실전 곡선을 못 받았습니다 — /track'));
+    }
+    var papers = list(p.papers, 4);
+    if (!papers.length) $('papers').appendChild(el('p', 'note', '종이 펀드 기록을 못 읽었습니다'));
+    papers.forEach(function (r) { if (Array.isArray(r)) $('papers').appendChild(item(null, str(r[0]), str(r[1]), str(r[2]), 'when')); });
+    var j = p.j || {};
+    $('j-period').textContent = j.period ? str(j.period) : '기록 없음';
+    var kv = $('journal');
+    if (!j.period) { kv.appendChild(el('p', 'note', '지난달 매매 기록이 없습니다 — 사고팔 때 "매수 …"·"매도 …"로 남기면 여기에 모입니다')); return; }
+    [['산 횟수', (num(j.buys) || 0) + '번'], ['판 횟수', (num(j.sells) || 0) + '번'],
+     ['실현 손익', won(j.pnl)], ['이긴 비율', num(j.win) === null ? '—' : num(j.win) + '%']].forEach(function (x) {
+      var d = el('div'); d.appendChild(el('span', 'k', x[0])); d.appendChild(el('span', 'v mono', x[1])); kv.appendChild(d);
+    });
   }
 
+  // ── 관심종목 보드 ──
+  function renderBoard(w, bot) {
+    var rows = list(w, 20);
+    var okBot = typeof bot === 'string' && /^[A-Za-z0-9_]{3,40}$/.test(bot);
+    if (!rows.length) $('board').appendChild(el('p', 'note', '관심종목이 없습니다 — 종목 이름을 채팅으로 보내 분석한 뒤 ➕로 담아 주세요'));
+    rows.forEach(function (r) {
+      if (!Array.isArray(r)) return;
+      var param = str(r[3]);
+      var row = item(str(r[1]), str(r[0]), str(r[2]));
+      if (okBot && /^ch_[A-Za-z0-9_]{1,60}$/.test(param)) {
+        var a = el('a', 'item');
+        a.href = 'https://t.me/' + bot + '?start=' + param;
+        while (row.firstChild) a.appendChild(row.firstChild);
+        var go = el('span', 'go', '›'); go.setAttribute('aria-hidden', 'true'); a.appendChild(go);
+        $('board').appendChild(a);
+      } else {
+        $('board').appendChild(row);
+      }
+    });
+  }
+
+  // ── 운영 상태판(관리자 링크에만 있음) ──
+  function renderOps(o) {
+    $('rm-at').textContent = o.rm_at ? str(o.rm_at) + ' 평가' : '—';
+    var total = 0, n = 0;
+    list(o.rm, 7).forEach(function (a) {
+      if (!Array.isArray(a)) return;
+      var v = pct(a[1]); total += v; n++;
+      var wrap = el('div', 'rm'), top = el('div', 'row');
+      top.appendChild(el('span', 'name', str(a[0])));
+      top.appendChild(el('span', 'mono small', v + '%'));
+      var track = el('div', 'track'), bar = el('div', 'bar'); bar.style.width = v + '%';
+      track.appendChild(bar);
+      wrap.appendChild(top); wrap.appendChild(track); wrap.appendChild(el('span', 'note', str(a[2])));
+      $('roadmap').appendChild(wrap);
+    });
+    if (n) $('roadmap').appendChild(el('p', 'note', '평균 ' + Math.round(total / n) + '% · 기준은 설계서 1-1장 달성 판단'));
+    list(o.live, 6).forEach(function (x) { if (Array.isArray(x)) $('live').appendChild(item(null, str(x[0]), null, str(x[1]))); });
+    var jobs = o.jobs || {}, meet = o.meet || {}, ver = o.ver || {};
+    var bad = list(jobs.bad, 4);
+    $('opsrows').appendChild(item(null, '정기 작업', bad.length ? bad.map(str).join(' / ') : '문제 없음',
+      (num(jobs.ok) || 0) + '/' + (num(jobs.all) || 0) + ' 정상', bad.length ? 'when mono warn' : 'when mono ok'));
+    var agenda = list(meet.agenda, 6).map(str).filter(Boolean);
+    $('opsrows').appendChild(item(null, '다음 투자위원회', (agenda.length ? '안건 미리 보기: ' + agenda.join(' · ') : '') +
+      (meet.sent ? (agenda.length ? ' / ' : '') + '지난 자료 ' + str(meet.sent) : ''), str(meet.next)));
+    var same = ver.head && ver.green && ver.head === ver.green;
+    $('opsrows').appendChild(item(null, '배포된 코드', same ? '자동 검증을 통과한 커밋과 같음' : '자동 검증 통과본과 다르거나 확인 못 함',
+      str(ver.head) || '—', same ? 'when mono ok' : 'when mono warn'));
+  }
+
+  // ── 탭 ──
+  var present = [];
+  function show(view) {
+    present.forEach(function (v) { $('view-' + v).hidden = v !== view; });
+    $('home-chip').hidden = view !== 'home';
+    $('div-chip').hidden = view !== 'div';
+    $('title').textContent = VIEWS[view] || '';
+    Array.prototype.forEach.call(document.querySelectorAll('#tabs button'), function (b) {
+      b.setAttribute('aria-current', b.getAttribute('data-view') === view ? 'page' : 'false');
+    });
+  }
+  Array.prototype.forEach.call(document.querySelectorAll('#tabs button'), function (b) {
+    b.addEventListener('click', function () { show(b.getAttribute('data-view')); });
+  });
+
   function empty(msg) {
-    $('view-home').hidden = true; $('view-div').hidden = true; $('home-chip').hidden = true;
+    ['home', 'div', 'perf', 'board', 'ops'].forEach(function (v) { $('view-' + v).hidden = true; });
+    $('home-chip').hidden = true; $('tabs').hidden = true;
     $('view-empty').hidden = false;
     if (msg) $('view-empty').querySelector('.note').textContent = msg;
   }
 
   var inTelegram = /[#&]tgWebAppVersion=/.test(location.hash || '');   // replaceState 전에 확인
-  $('tab-home').addEventListener('click', function () { show('home'); });
-  $('tab-div').addEventListener('click', function () { show('div'); });
-
   readPayload().then(function (p) {
     if (!p) { empty(); return; }
     try { history.replaceState(null, '', location.pathname); } catch (e) { /* 주소창에서 숫자 지우기 — 실패해도 화면은 그대로 */ }
@@ -150,9 +248,17 @@
     $('asof').textContent = t ? t.slice(5) + ' 기준' : '—';
     var ts = Date.parse(t.replace(' ', 'T') + ':00+09:00');
     if (isFinite(ts) && Date.now() - ts > 24 * 3600 * 1000) $('stale').hidden = false;
-    renderHome(p.h);
-    renderDiv(p.d);
-    show(location.search.indexOf('tab=div') >= 0 ? 'div' : 'home');
+    var parts = [['home', 'h', renderHome], ['div', 'd', renderDiv], ['perf', 'p', renderPerf], ['ops', 'o', renderOps]];
+    parts.forEach(function (x) {
+      if (p[x[1]] && typeof p[x[1]] === 'object') { present.push(x[0]); x[2](p[x[1]]); }
+    });
+    if (Array.isArray(p.w)) { present.push('board'); renderBoard(p.w, p.b); }
+    if (!present.length) { empty(); return; }
+    Array.prototype.forEach.call(document.querySelectorAll('#tabs button'), function (b) {
+      b.hidden = present.indexOf(b.getAttribute('data-view')) < 0;
+    });
+    if (present.length < 2) $('tabs').hidden = true;
+    show(present[0]);
   }).catch(function () {
     empty('이 화면을 열 수 없습니다 — 텔레그램 앱을 최신으로 업데이트한 뒤 /app 을 다시 보내 주세요.');
   });
