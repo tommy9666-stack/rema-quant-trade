@@ -1,0 +1,60 @@
+/* Rema 미니 앱 — DESIGN.md 색 (11-17). 글꼴은 기기 글꼴: 개인 숫자 화면이라 외부 글꼴 서버를 부르지 않음(DESIGN.md 4절) */
+*{box-sizing:border-box;word-break:keep-all}
+body{margin:0;background:#F5F6F8;color:#374151;font-family:system-ui,-apple-system,'Apple SD Gothic Neo','Noto Sans KR','Malgun Gothic',sans-serif;font-size:15px;line-height:1.5}
+.app{max-width:480px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column}
+.mono{font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;font-variant-numeric:tabular-nums}
+.head{background:#0B1F3A;padding:18px 20px 20px;display:flex;flex-direction:column;gap:6px}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.row.base{align-items:baseline}
+.dim{font-size:12px;font-weight:500;color:#AEBBD0;letter-spacing:.04em}
+h1{margin:4px 0 0;font-family:'Apple SD Gothic Neo','Noto Serif KR',serif;font-size:24px;font-weight:700;color:#FFFFFF}
+.sub{margin:0;font-size:13px;color:#FFD45C}
+.chip{margin-top:10px;background:#17345E;border-radius:8px;padding:12px 14px;display:flex;justify-content:space-between;align-items:flex-end;gap:8px}
+.chip.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+.chip div{display:flex;flex-direction:column;gap:2px}
+.chip .right{align-items:flex-end}
+.chip .sep{border-left:1px solid #24406A;padding-left:12px}
+.lbl{font-size:13px;color:#C8D2E1}
+.big{font-size:22px;font-weight:600;color:#FFFFFF}
+.chip .strong{font-size:14px;font-weight:600;color:#FFFFFF}
+main{flex:1;padding:14px 16px 12px;display:flex;flex-direction:column}
+main section{display:flex;flex-direction:column;gap:12px}
+.card{background:#FFFFFF;border:1px solid #D9DEE5;border-radius:8px;padding:14px;display:flex;flex-direction:column;gap:10px}
+.card.list{gap:0}
+h2{margin:0;font-size:15px;font-weight:700;color:#0B1F3A}
+.small{font-size:12px;color:#4B5563}
+.strong{font-weight:600;color:#0B1F3A}
+.gold{color:#7A5A12;font-weight:600}
+.warn{color:#8A3B12}
+.note{margin:0;font-size:12px;color:#4B5563}
+.sl{display:flex;flex-direction:column;gap:5px}
+.sl .row{font-size:13px}
+.sl .name{color:#0B1F3A;font-weight:600}
+.track{position:relative;height:8px;background:#E5E9EE;border-radius:999px}
+.track .bar{position:absolute;left:0;top:0;height:8px;border-radius:999px;background:#0F6E5A}
+.track .tgt{position:absolute;top:-3px;width:3px;height:14px;border-radius:2px;background:#7A5A12}
+.parts{display:flex;flex-wrap:wrap;gap:6px}
+.part{background:#F5F6F8;border:1px solid #E5E9EE;border-radius:6px;padding:6px 10px;font-size:13px;color:#0B1F3A}
+.item{display:flex;align-items:center;gap:12px;padding:10px 0;border-top:1px solid #E5E9EE}
+.card.list h2{margin-bottom:4px}
+.mk{width:32px;height:32px;flex:none;display:flex;align-items:center;justify-content:center;background:#F5F6F8;border-radius:6px;font-size:16px}
+.txt{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px}
+.txt .t{font-size:14px;font-weight:600;color:#0B1F3A}
+.txt .s{font-size:12px;color:#4B5563}
+.when{font-size:12px;font-weight:600;color:#4B5563;flex:none}
+.amt{font-size:13px;font-weight:600;color:#0B1F3A;flex:none}
+.bars{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:4px;align-items:end;height:132px}
+.col{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:3px;height:132px}
+.col .v{font-size:10px;font-weight:600;color:#374151;min-height:14px}
+.col .b{width:100%;border-radius:3px 3px 0 0;background:#17345E}
+.col .b.zero{background:#E5E9EE}
+.col .m{font-size:11px;color:#4B5563}
+.gauge{position:relative;height:10px;background:#E5E9EE;border-radius:999px}
+.gauge .fill{position:absolute;left:0;top:0;height:10px;border-radius:999px;background:#0F6E5A;width:0}
+.gauge .mark{position:absolute;top:-4px;width:2px;height:18px;background:#7A5A12}
+.tabs{position:sticky;bottom:0;height:60px;background:#FFFFFF;border-top:1px solid #D9DEE5;display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
+.tabs button{appearance:none;background:none;border:0;border-top:2px solid transparent;font:inherit;font-size:13px;font-weight:600;color:#4B5563;min-height:48px;cursor:pointer}
+.tabs button[aria-current="page"]{color:#0B1F3A;font-weight:700;border-top-color:#0B1F3A}
+.tabs .off{display:flex;flex-direction:column;align-items:center;justify-content:center;color:#6B7280;font-size:13px;line-height:1.2}
+.tabs .off small{font-family:ui-monospace,monospace;font-size:10px}
+[hidden]{display:none !important}
