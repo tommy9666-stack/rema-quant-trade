@@ -154,6 +154,7 @@
     } else {
       $('pchart').appendChild(el('p', 'note', '실전 곡선을 못 받았습니다 — /track'));
     }
+    renderAccount(p.a);
     var papers = list(p.papers, 4);
     if (!papers.length) $('papers').appendChild(el('p', 'note', '종이 펀드 기록을 못 읽었습니다'));
     papers.forEach(function (r) { if (Array.isArray(r)) $('papers').appendChild(item(null, str(r[0]), str(r[1]), str(r[2]), 'when')); });
@@ -167,30 +168,89 @@
     });
   }
 
+  // ── 내 계좌 곡선 ──
+  function renderAccount(a) {
+    var box = $('achart'), leg = $('ac-legend');
+    if (!a || typeof a !== 'object') {
+      box.appendChild(el('p', 'note', '기록이 2번 쌓이면 보입니다 — /app을 다른 날 다시 열거나 매주 월요일 보유종목 점검 뒤'));
+      return;
+    }
+    var v = series(a, 'v');
+    if (v.length < 2) { box.appendChild(el('p', 'note', '기록이 아직 적습니다')); return; }
+    var lo = Math.min.apply(null, v.concat([0])), hi = Math.max.apply(null, v.concat([0]));
+    var svg = document.createElementNS(SVG, 'svg');
+    svg.setAttribute('viewBox', '0 0 340 140'); svg.setAttribute('preserveAspectRatio', 'none'); svg.setAttribute('aria-hidden', 'true');
+    var zero = document.createElementNS(SVG, 'line'), zy = (8 + hi / ((hi - lo) || 1) * 124).toFixed(1);
+    zero.setAttribute('x1', '0'); zero.setAttribute('x2', '340'); zero.setAttribute('y1', zy); zero.setAttribute('y2', zy);
+    zero.setAttribute('stroke', '#D9DEE5'); zero.setAttribute('stroke-dasharray', '3 3');
+    svg.appendChild(zero);
+    line(svg, v, lo, hi, '#0B1F3A', 2.6);
+    box.appendChild(svg);
+    $('ac-range').textContent = str(a.from) + ' → ' + str(a.to) + ' · 기록 ' + (num(a.n) || 0) + '번';
+    var last = v[v.length - 1], parts = [['e', '내 계좌', last]];
+    if (num(a.e) !== null) parts.push(['n', '같은 기간 지수 엔진', num(a.e) / 10]);
+    if (num(a.k) !== null) parts.push(['k', '코스피', num(a.k) / 10]);
+    parts.forEach(function (x) {
+      var s = el('span'), i = el('i', 'sw ' + x[0]); s.appendChild(i); s.appendChild(document.createTextNode(x[1] + ' '));
+      s.appendChild(el('b', 'mono', signed(x[2]))); leg.appendChild(s);
+    });
+    box.setAttribute('aria-label', '내 계좌 누적 수익 ' + signed(last));
+  }
+
   // ── 관심종목 보드 ──
+  var boardState = { f: 'all', s: 'as' };
   function renderBoard(w, bot) {
-    var rows = list(w, 20);
+    var rows = list(w, 20).filter(Array.isArray);
     var okBot = typeof bot === 'string' && /^[A-Za-z0-9_]{3,40}$/.test(bot);
-    if (!rows.length) $('board').appendChild(el('p', 'note', '관심종목이 없습니다 — 종목 이름을 채팅으로 보내 분석한 뒤 ➕로 담아 주세요'));
-    rows.forEach(function (r) {
-      if (!Array.isArray(r)) return;
-      var param = str(r[3]);
+    var box = $('board');
+    while (box.firstChild) box.removeChild(box.firstChild);
+    if (!rows.length) { box.appendChild(el('p', 'note', '관심종목이 없습니다 — 종목 이름을 채팅으로 보내 분석한 뒤 ➕로 담아 주세요')); return; }
+    if (rows.length >= 3) $('board-ctl').hidden = false;
+    var shown = rows.map(function (r, i) { return { r: r, i: i }; }).filter(function (x) {
+      return boardState.f === 'all' || str(x.r[1]) === boardState.f;
+    });
+    if (boardState.s === 'near') {
+      shown.sort(function (a, b) {
+        var ga = num(a.r[4]), gb = num(b.r[4]);
+        if (ga === null && gb === null) return a.i - b.i;
+        if (ga === null) return 1;
+        if (gb === null) return -1;
+        return ga - gb || a.i - b.i;
+      });
+    }
+    if (!shown.length) box.appendChild(el('p', 'note', '이 조건에 맞는 종목이 없습니다'));
+    shown.forEach(function (x) {
+      var r = x.r, param = str(r[3]);
       var row = item(str(r[1]), str(r[0]), str(r[2]));
       if (okBot && /^ch_[A-Za-z0-9_]{1,60}$/.test(param)) {
         var a = el('a', 'item');
         a.href = 'https://t.me/' + bot + '?start=' + param;
         while (row.firstChild) a.appendChild(row.firstChild);
         var go = el('span', 'go', '›'); go.setAttribute('aria-hidden', 'true'); a.appendChild(go);
-        $('board').appendChild(a);
+        box.appendChild(a);
       } else {
-        $('board').appendChild(row);
+        box.appendChild(row);
       }
+    });
+  }
+  function wireBoard(w, bot) {
+    Array.prototype.forEach.call(document.querySelectorAll('#board-ctl button'), function (b) {
+      b.addEventListener('click', function () {
+        var f = b.getAttribute('data-f'), s = b.getAttribute('data-s');
+        if (f) boardState.f = f;
+        if (s) boardState.s = s;
+        Array.prototype.forEach.call(document.querySelectorAll('#board-ctl button'), function (o) {
+          var on = o.getAttribute('data-f') ? o.getAttribute('data-f') === boardState.f : o.getAttribute('data-s') === boardState.s;
+          o.setAttribute('aria-pressed', on ? 'true' : 'false');
+        });
+        renderBoard(w, bot);
+      });
     });
   }
 
   // ── 운영 상태판(관리자 링크에만 있음) ──
   function renderOps(o) {
-    $('rm-at').textContent = o.rm_at ? str(o.rm_at) + ' 평가' : '—';
+    $('rm-at').textContent = o.rm_at ? str(o.rm_at) : '—';
     var total = 0, n = 0;
     list(o.rm, 7).forEach(function (a) {
       if (!Array.isArray(a)) return;
@@ -200,10 +260,10 @@
       top.appendChild(el('span', 'mono small', v + '%'));
       var track = el('div', 'track'), bar = el('div', 'bar'); bar.style.width = v + '%';
       track.appendChild(bar);
-      wrap.appendChild(top); wrap.appendChild(track); wrap.appendChild(el('span', 'note', str(a[2])));
+      wrap.appendChild(top); wrap.appendChild(track); wrap.appendChild(el('span', 'note', a[2] === '채움' ? '모든 항목 채움' : '다음: ' + str(a[2])));
       $('roadmap').appendChild(wrap);
     });
-    if (n) $('roadmap').appendChild(el('p', 'note', '평균 ' + Math.round(total / n) + '% · 기준은 설계서 1-1장 달성 판단'));
+    if (n) $('roadmap').appendChild(el('p', 'note', '평균 ' + Math.round(total / n) + '% · 영역마다 항목 점수의 합 — 서버 기록으로 자동 계산, 회의 판정 항목만 손으로(ops/roadmap.json)'));
     list(o.live, 6).forEach(function (x) { if (Array.isArray(x)) $('live').appendChild(item(null, str(x[0]), null, str(x[1]))); });
     var jobs = o.jobs || {}, meet = o.meet || {}, ver = o.ver || {};
     var bad = list(jobs.bad, 4);
@@ -252,7 +312,7 @@
     parts.forEach(function (x) {
       if (p[x[1]] && typeof p[x[1]] === 'object') { present.push(x[0]); x[2](p[x[1]]); }
     });
-    if (Array.isArray(p.w)) { present.push('board'); renderBoard(p.w, p.b); }
+    if (Array.isArray(p.w)) { present.push('board'); renderBoard(p.w, p.b); wireBoard(p.w, p.b); }
     if (!present.length) { empty(); return; }
     Array.prototype.forEach.call(document.querySelectorAll('#tabs button'), function (b) {
       b.hidden = present.indexOf(b.getAttribute('data-view')) < 0;

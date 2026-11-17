@@ -75,6 +75,12 @@
         <div class="legend small"><span><i class="sw e"></i>지수 엔진 <b class="mono" id="pc-e">—</b></span><span><i class="sw k"></i>코스피 <b class="mono" id="pc-k">—</b></span><span><i class="sw n"></i>나스닥 <b class="mono" id="pc-n">—</b></span></div>
         <p class="note">규칙을 고정한 날 이후 실제 시장 성적(백테스트 아님) · 짧은 기간은 운이 커서 판단하지 않음</p>
       </div>
+      <div class="card">
+        <div class="row base"><h2>내 계좌</h2><span class="mono small" id="ac-range">—</span></div>
+        <div class="chart" id="achart" role="img" aria-label="내 계좌 누적 수익"></div>
+        <div class="legend small" id="ac-legend"></div>
+        <p class="note" id="ac-note">평가할 때마다(/app·/risk·매주 월요일 점검) 한 점씩 쌓고, 사고판 돈은 빼고 이어 붙인 수익(시간 가중) · 기록이 드물면 거칠게 나옴</p>
+      </div>
       <div class="card list">
         <h2>종이 펀드 A~D</h2>
         <div id="papers"></div>
@@ -88,6 +94,10 @@
     <section id="view-board" hidden>
       <div class="card list">
         <div class="row base"><h2>관심종목 보드</h2><span class="small">누르면 이 대화로 차트</span></div>
+        <div class="seg" id="board-ctl" hidden>
+          <span class="grp"><button type="button" data-f="all" aria-pressed="true">전체</button><button type="button" data-f="🪜" aria-pressed="false">🪜 장투</button><button type="button" data-f="⚡" aria-pressed="false">⚡ 단타</button></span>
+          <span class="grp"><button type="button" data-s="as" aria-pressed="true">담은 순</button><button type="button" data-s="near" aria-pressed="false">다음 구간 가까운 순</button></span>
+        </div>
         <div id="board"></div>
         <p class="note">🪜 장투 = 고점 대비 위치와 다음 나눠 사기 구간 · ⚡ 단타 = 최근 판정. 매수·매도 권유가 아닙니다.</p>
       </div>
