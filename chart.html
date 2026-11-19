@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
+<meta name="robots" content="noindex">
+<title>Rema 움직이는 차트</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<!-- 보기 전용(11-19). 숫자는 봇이 만든 링크의 '#' 뒤에만 있고 서버로 가지 않는다(chart_app.py).
+     차트 라이브러리는 같은 사이트의 vendor/ 파일(TradingView Lightweight Charts 5.3.0, Apache-2.0) — 바깥 연결 없음 -->
+<div class="app">
+  <header class="head">
+    <div class="row">
+      <span class="mono dim">REMA QUANT TRADE</span>
+      <span class="mono dim" id="asof">—</span>
+    </div>
+    <div class="row base"><h1 id="title">움직이는 차트</h1><span class="big mono" id="px"></span></div>
+    <div class="row base"><span class="dim" id="tf"></span><span class="mono chg" id="chg"></span></div>
+    <p class="sub" id="outside" hidden>텔레그램 밖에서 열린 화면입니다 — 숫자를 검증할 수 없습니다. 봇이 보낸 [📈] 버튼으로만 여세요</p>
+    <p class="sub" id="stale" hidden>이 화면은 오래됐습니다 — 텔레그램에서 /chart 를 다시 눌러 주세요</p>
+  </header>
+  <main>
+    <section id="view-chart">
+      <div class="card">
+        <div class="row"><span class="small">두 손가락 확대 · 끌어서 이동 · 누르고 움직이면 그날 값</span></div>
+        <div class="layers" id="layers" role="group" aria-label="겹쳐 볼 것">
+          <button type="button" data-l="buy" aria-pressed="true"><i class="sw buy"></i>매수 참고 타점</button>
+          <button type="button" data-l="down" aria-pressed="true"><i class="sw down"></i>하락 시나리오</button>
+          <button type="button" data-l="fib" aria-pressed="false"><i class="sw fib"></i>Fibonacci</button>
+          <button type="button" data-l="ma" aria-pressed="true"><i class="sw ma"></i><span id="ma-label">이동평균</span></button>
+        </div>
+        <div class="lwc" id="chart"><div class="lwc-legend mono" id="legend"></div></div>
+        <p class="note">아래 칸 = RSI 14(30·70 점선)</p>
+      </div>
+      <div class="card">
+        <h2>우리 분석 <span class="small" id="verdict"></span></h2>
+        <div class="kv2" id="kv"></div>
+        <p class="note warn" id="warn"></p>
+      </div>
+      <p class="note credit">차트: <a href="https://www.tradingview.com/" rel="noopener noreferrer">TradingView Lightweight Charts™</a> · Copyright (c) 2025 TradingView, Inc. · Apache-2.0</p>
+    </section>
+    <section id="empty" hidden>
+      <div class="card"><p class="note" id="empty-msg">표시할 숫자가 없습니다 — 텔레그램에서 /chart 종목 을 보내고 [📈] 버튼을 눌러 주세요.</p></div>
+    </section>
+  </main>
+</div>
+<script src="vendor/lightweight-charts-5.3.0.js"></script>
+<script src="chart.js"></script>
+</body>
+</html>

@@ -78,3 +78,21 @@ a.item .go{color:#0F6E5A;font-size:18px;flex:none}
 .seg button{appearance:none;background:#fff;border:0;border-right:1px solid #D9DEE5;font:inherit;font-size:12px;color:#4B5563;min-height:36px;padding:0 10px;cursor:pointer}
 .seg button:last-child{border-right:0}
 .seg button[aria-pressed="true"]{background:#0B1F3A;color:#fff;font-weight:600}
+/* 움직이는 차트 chart.html (11-19) — 라이브러리 로고 대신 아래 credit 줄로 출처 표시(로고는 <style>을 넣어 CSP에 걸림) */
+.layers{display:flex;flex-wrap:wrap;gap:6px}
+.layers button{appearance:none;font:inherit;font-size:12px;border-radius:999px;border:1px solid #D9DEE5;background:#fff;color:#4B5563;min-height:32px;padding:0 12px;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.layers button[aria-pressed="true"]{border-color:#0B1F3A;color:#0B1F3A;font-weight:600;background:#EEF2F7}
+.layers .sw{width:12px;height:3px;border-radius:2px}
+.sw.buy{background:#0F6E5A}.sw.down{background:#E65100}.sw.fib{background:#9CA3AF}.sw.ma{background:#2962FF}
+.lwc{position:relative;width:100%;height:420px}
+.lwc-legend{position:absolute;left:6px;top:4px;z-index:4;font-size:10px;white-space:nowrap;color:#374151;background:rgba(255,255,255,.85);border-radius:4px;padding:2px 6px;pointer-events:none}
+.kv2{display:flex;flex-direction:column}
+.kv2 .item{justify-content:space-between;padding:8px 0;font-size:13px}
+.kv2 .k{color:#4B5563}
+.kv2 .v{color:#0B1F3A;font-weight:600;text-align:right}
+.kv2 .why{display:block;font-size:11px;font-weight:400;color:#6B7280}
+.tag{display:inline-block;font-size:11px;font-weight:600;border-radius:4px;padding:1px 6px;margin-right:4px}
+.tag.buy{background:#E6F4F1;color:#0F6E5A}.tag.down{background:#FDEEE3;color:#9A3D0A}
+.credit{text-align:center;padding:4px 0 8px}
+.credit a{color:#4B5563}
+.head .chg{font-size:14px;font-weight:600}.head .chg.up{color:#4FD1B5}.head .chg.dn{color:#FF8A94}
