@@ -1621,7 +1621,7 @@ class Component extends DCLogic {
       },
       onCmdAll: (e) => { this._cmdAll = !this._cmdAll; const box = e.target.closest('[data-cmdbox]'); if (box) this._cmdFilter(box); },
       cmdAllLabel: this._cmdAll ? '접기' : '명령어 ' + cmdAll.length + '개 모두 보기',
-      siteUpdated: '2026-11-19',
+      siteUpdated: '2026-11-20',
       isNarrow: narrow,
       teamMore: narrow && ex.team.length > 8, allTeam: this.state.allTeam ? 'true' : 'false',
       teamShown: (narrow && !this.state.allTeam) ? ex.team.slice(0, 8) : ex.team,

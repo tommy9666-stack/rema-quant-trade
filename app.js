@@ -199,6 +199,17 @@
 
   // ── 관심종목 보드 ──
   var boardState = { f: 'all', s: 'as' };
+  // 11-20 규칙 신호판: r[5] 칸(x 정리·c 주의·b 살 때·w 기다릴 때), r[6] 칸 설명, r[7] 참고(회색) — 점수 아님
+  var LV = { x: ['🔴', '정리'], c: ['🟠', '주의'], b: ['🟢', '살 때'], w: ['⚪', '기다릴 때'] };
+  var LV_ORDER = { x: 0, c: 1, b: 2, w: 3 };
+  function lvOf(r) { var k = str(r[5]); return LV[k] ? k : 'w'; }
+  function renderBoardHead(s) {
+    var box = $('board-head');
+    if (!box) return;
+    while (box.firstChild) box.removeChild(box.firstChild);
+    list(s, 4).forEach(function (t) { box.appendChild(el('p', 'bhead', str(t).slice(0, 160))); });
+    box.hidden = !box.firstChild;
+  }
   function renderBoard(w, bot) {
     var rows = list(w, 20).filter(Array.isArray);
     var okBot = typeof bot === 'string' && /^[A-Za-z0-9_]{3,40}$/.test(bot);
@@ -209,6 +220,9 @@
     var shown = rows.map(function (r, i) { return { r: r, i: i }; }).filter(function (x) {
       return boardState.f === 'all' || str(x.r[1]) === boardState.f;
     });
+    if (boardState.s === 'lv') {
+      shown.sort(function (a, b) { return LV_ORDER[lvOf(a.r)] - LV_ORDER[lvOf(b.r)] || a.i - b.i; });
+    }
     if (boardState.s === 'near') {
       shown.sort(function (a, b) {
         var ga = num(a.r[4]), gb = num(b.r[4]);
@@ -220,8 +234,13 @@
     }
     if (!shown.length) box.appendChild(el('p', 'note', '이 조건에 맞는 종목이 없습니다'));
     shown.forEach(function (x) {
-      var r = x.r, param = str(r[3]);
-      var row = item(str(r[1]), str(r[0]), str(r[2]));
+      var r = x.r, param = str(r[3]), lv = lvOf(r);
+      var row = item(LV[lv][0], str(r[1]) + ' ' + str(r[0]), str(r[2]));
+      var tx = row.querySelector('.txt');
+      var sig = el('span', 'sig lv-' + lv, LV[lv][1] + (str(r[6]) ? ' · ' + str(r[6]).slice(0, 80) : ''));
+      tx.insertBefore(sig, tx.children[1] || null);
+      if (str(r[7])) tx.appendChild(el('span', 'ref', '참고: ' + str(r[7]).slice(0, 120)));
+      row.setAttribute('aria-label', str(r[0]) + ' ' + LV[lv][1]);
       if (okBot && /^ch_[A-Za-z0-9_]{1,60}$/.test(param)) {
         var a = el('a', 'item');
         a.href = 'https://t.me/' + bot + '?start=' + param;
@@ -312,7 +331,7 @@
     parts.forEach(function (x) {
       if (p[x[1]] && typeof p[x[1]] === 'object') { present.push(x[0]); x[2](p[x[1]]); }
     });
-    if (Array.isArray(p.w)) { present.push('board'); renderBoard(p.w, p.b); wireBoard(p.w, p.b); }
+    if (Array.isArray(p.w)) { present.push('board'); renderBoardHead(p.s); renderBoard(p.w, p.b); wireBoard(p.w, p.b); }
     if (!present.length) { empty(); return; }
     Array.prototype.forEach.call(document.querySelectorAll('#tabs button'), function (b) {
       b.hidden = present.indexOf(b.getAttribute('data-view')) < 0;

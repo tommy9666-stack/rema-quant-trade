@@ -96,3 +96,9 @@ a.item .go{color:#0F6E5A;font-size:18px;flex:none}
 .credit{text-align:center;padding:4px 0 8px}
 .credit a{color:#4B5563}
 .head .chg{font-size:14px;font-weight:600}.head .chg.up{color:#4FD1B5}.head .chg.dn{color:#FF8A94}
+/* 11-20 규칙 신호판 — 색은 DESIGN.md: 살 때 link 초록 · 주의 warn-ink · 정리 chart-stop · 기다릴 때 ink-3 */
+.item .sig{font-size:12px;font-weight:600}
+.lv-b{color:#0F6E5A}.lv-c{color:#8A3B12}.lv-x{color:#C0392B}.lv-w{color:#6B7280}
+.item .ref{font-size:12px;color:#6B7280}
+#board-head{margin-top:8px;padding:8px 12px;background:#F7F8FA;border-radius:6px}
+.bhead{margin:0;font-size:12px;color:#374151;line-height:1.6}
