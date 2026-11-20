@@ -102,3 +102,21 @@ a.item .go{color:#0F6E5A;font-size:18px;flex:none}
 .item .ref{font-size:12px;color:#6B7280}
 #board-head{margin-top:8px;padding:8px 12px;background:#F7F8FA;border-radius:6px}
 .bhead{margin:0;font-size:12px;color:#374151;line-height:1.6}
+
+/* 11-20 결재: 텔레그램 다크 테마(tg.js가 html.dark를 붙임) — 밤 색은 DESIGN.md night 계열, 글자 대비 4.5:1 이상 */
+html.dark body{background:#0B1220;color:#D6DEEA}
+html.dark .card,html.dark .tabs,html.dark .seg button,html.dark .layers button{background:#111A2B;border-color:#24406A}
+html.dark h2,html.dark .strong,html.dark .txt .t,html.dark .amt,html.dark .sl .name,html.dark .kv .v,html.dark .kv2 .v,html.dark .part{color:#F1F5FB}
+html.dark .small,html.dark .note,html.dark .txt .s,html.dark .when,html.dark .kv .k,html.dark .kv2 .k,html.dark .col .m,html.dark .tabs button,html.dark .seg button{color:#AEBBD0}
+html.dark .item{border-top-color:#24406A}
+html.dark .mk,html.dark .part,html.dark .kv div,html.dark #board-head{background:#17223A;border-color:#24406A}
+html.dark .track,html.dark .gauge,html.dark .col .b.zero{background:#24406A}
+html.dark .tabs button[aria-current="page"]{color:#FFFFFF;border-top-color:#C9A55A}
+html.dark .seg button[aria-pressed="true"]{background:#C9A55A;color:#0B1F3A}
+html.dark .gold{color:#E3C27A}html.dark .warn,html.dark .lv-c{color:#F4A27A}
+html.dark .ok,html.dark .lv-b,html.dark a.item .go{color:#4FD1B5}html.dark .lv-x{color:#FF8A94}
+html.dark .lv-w,html.dark .item .ref,html.dark .kv2 .why{color:#9CA3AF}html.dark .bhead,html.dark .col .v{color:#C8D2E1}
+html.dark .col .b{background:#4F79B5}html.dark .sw.e{background:#C8D2E1}
+html.dark .lwc-legend{color:#0B1F3A}
+html.dark .track .tgt,html.dark .gauge .mark{background:#E3C27A}
+html.dark .layers button[aria-pressed="true"]{background:#17345E;color:#FFFFFF;border-color:#C9A55A}html.dark .layers button{color:#AEBBD0}html.dark .credit a{color:#AEBBD0}

@@ -303,6 +303,7 @@
     $('home-chip').hidden = view !== 'home';
     $('div-chip').hidden = view !== 'div';
     $('title').textContent = VIEWS[view] || '';
+    if (window.RemaTG) window.RemaTG.setBack(view !== present[0] ? function () { show(present[0]); } : null);   // 11-20: 텔레그램 뒤로 버튼 = 첫 탭
     Array.prototype.forEach.call(document.querySelectorAll('#tabs button'), function (b) {
       b.setAttribute('aria-current', b.getAttribute('data-view') === view ? 'page' : 'false');
     });

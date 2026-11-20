@@ -101,13 +101,16 @@
     $('chg').textContent = (chg >= 0 ? '+' : '') + chg.toFixed(2) + '%';
     $('chg').className = 'mono chg ' + (chg >= 0 ? 'up' : 'dn');
 
+    var dark = document.documentElement.classList.contains('dark');   // 11-20: 텔레그램 다크 테마(tg.js)
+    var C = dark ? { bg: '#111A2B', text: '#AEBBD0', line: '#24406A', grid: '#1A2740' }
+                 : { bg: '#FFFFFF', text: '#4B5563', line: '#E5E9EE', grid: '#F1F3F6' };
     var chart = LW.createChart($('chart'), {
       autoSize: true,
-      layout: { background: { color: '#FFFFFF' }, textColor: '#4B5563', fontSize: 11, attributionLogo: false,
-                fontFamily: "system-ui,-apple-system,'Apple SD Gothic Neo','Noto Sans KR',sans-serif", panes: { separatorColor: '#E5E9EE' } },
-      grid: { vertLines: { color: '#F1F3F6' }, horzLines: { color: '#F1F3F6' } },
-      rightPriceScale: { borderColor: '#E5E9EE' },
-      timeScale: { borderColor: '#E5E9EE', rightOffset: 4, timeVisible: tf === '4h', secondsVisible: false },
+      layout: { background: { color: C.bg }, textColor: C.text, fontSize: 11, attributionLogo: false,
+                fontFamily: "system-ui,-apple-system,'Apple SD Gothic Neo','Noto Sans KR',sans-serif", panes: { separatorColor: C.line } },
+      grid: { vertLines: { color: C.grid }, horzLines: { color: C.grid } },
+      rightPriceScale: { borderColor: C.line },
+      timeScale: { borderColor: C.line, rightOffset: 4, timeVisible: tf === '4h', secondsVisible: false },
       crosshair: { mode: LW.CrosshairMode.Normal },
       localization: { locale: 'ko-KR', priceFormatter: f,
                       timeFormatter: function (t) { var d = new Date(t * 1000); return d.getUTCFullYear() + '-' + when(t, tf); } }
