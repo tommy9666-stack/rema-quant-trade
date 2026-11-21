@@ -207,7 +207,7 @@
     var box = $('board-head');
     if (!box) return;
     while (box.firstChild) box.removeChild(box.firstChild);
-    list(s, 4).forEach(function (t) { box.appendChild(el('p', 'bhead', str(t).slice(0, 160))); });
+    list(s, 5).forEach(function (t) { box.appendChild(el('p', 'bhead', str(t).slice(0, 160))); });
     box.hidden = !box.firstChild;
   }
   function renderBoard(w, bot) {
@@ -332,7 +332,13 @@
     parts.forEach(function (x) {
       if (p[x[1]] && typeof p[x[1]] === 'object') { present.push(x[0]); x[2](p[x[1]]); }
     });
-    if (Array.isArray(p.w)) { present.push('board'); renderBoardHead(p.s); renderBoard(p.w, p.b); wireBoard(p.w, p.b); }
+    if (Array.isArray(p.w)) {
+      present.push('board');
+      var head = list(p.s, 4);
+      var total = Number(p.n) || 0;   // 11-21: 링크에 다 못 담은 관심종목이 있으면 알림
+      if (total > p.w.length) head = head.concat(['관심종목 ' + total + '개 중 ' + p.w.length + '개만 담겼습니다(버튼 링크 길이). 나머지는 /plan · /card 에서']);
+      renderBoardHead(head); renderBoard(p.w, p.b); wireBoard(p.w, p.b);
+    }
     if (!present.length) { empty(); return; }
     Array.prototype.forEach.call(document.querySelectorAll('#tabs button'), function (b) {
       b.hidden = present.indexOf(b.getAttribute('data-view')) < 0;
